@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Termite
+Comment=Use the command line
+Exec=termite
+Icon=utilities-terminal
+Path=
+Terminal=false
+StartupNotify=true
+X-XFCE-Source=file:///home/abhirup/Desktop/Termite.desktop

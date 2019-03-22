@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Discord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+Exec=/opt/discord/Discord
+Icon=discord
+Path=
+Terminal=false
+StartupNotify=false
+X-XFCE-Source=file:///home/abhirup/Desktop/Discord.desktop

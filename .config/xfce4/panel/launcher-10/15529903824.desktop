@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Thunar File Manager
+Comment=Browse the filesystem with the file manager
+Exec=thunar %F
+Icon=Thunar
+Path=
+Terminal=false
+StartupNotify=true
+X-XFCE-Source=file:///home/abhirup/Desktop/Thunar%20File%20Manager.desktop

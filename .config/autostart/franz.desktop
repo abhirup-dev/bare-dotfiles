@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=franz
+Comment=franz Startup Script
+Exec="/usr/lib/franz/franz"
+StartupNotify=false
+Terminal=false
+X-Deepin-CreatedBy=com.deepin.SessionManager
+X-Deepin-AppID=franz
+Hidden=true
+

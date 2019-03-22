@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Htop
+Comment=Show System Processes
+Exec=htop
+Icon=htop
+Path=
+Terminal=true
+StartupNotify=false
+X-XFCE-Source=file:///home/abhirup/Desktop/Htop.desktop

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Visual Studio Code
+Comment=Editor for building and debugging modern web and cloud applications
+Exec=/opt/visual-studio-code/code %f
+Icon=visual-studio-code
+Path=
+Terminal=false
+StartupNotify=true
+X-XFCE-Source=file:///home/abhirup/Desktop/Visual%20Studio%20Code.desktop

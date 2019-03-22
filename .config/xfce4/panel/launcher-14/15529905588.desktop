@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Whatsie
+Comment=A simple &amp; beautiful desktop client for WhatsApp Web.
+Exec=/opt/whatsie/whatsie %U
+Icon=whatsie
+Path=
+Terminal=false
+StartupNotify=true
+X-XFCE-Source=file:///home/abhirup/Desktop/Whatsie.desktop
