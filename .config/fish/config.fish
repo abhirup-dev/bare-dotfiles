@@ -55,12 +55,10 @@ function mkcd --description  'Create directory and cd into it'
     mkdir $argv[1] ; cd $argv[1]
 end    
 #alias search="albert &> /dev/null"
-#alias ded="deepin-editor &> /dev/null"
-#alias dfm="dde-file-manager &> /dev/null"
-#alias ged="gedit &> /dev/null"
 alias grep="grep --color"
 alias open="xdg-open"
 alias vi="nvim"
+
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
 
 # Configuring bare repository
