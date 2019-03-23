@@ -1,8 +1,7 @@
 set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
 set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
-alias ded="dedit > /dev/null 2>&1"
-alias ged="geddit > /dev/null 2>&1"
+alias med="medit > /dev/null 2>&1"
 
 function parse_vcf
     if test -d $argv[2]
@@ -41,6 +40,20 @@ function git_productivity
 		    }\
 		  }'
 end	
+
+# Prefix current command with "sudo"
+function .runsudo --description 'Run current command line as root'
+    set cursor_pos (echo (commandline -C) + 5 | bc)
+    commandline -C 0
+    commandline -i 'sudo '
+    commandline -C "$cursor_pos"
+end
+bind \es ".runsudo"
+
+# Create directory and cd into it
+function mkcd --description  'Create directory and cd into it' 
+    mkdir $argv[1] ; cd $argv[1]
+end    
 #alias search="albert &> /dev/null"
 #alias ded="deepin-editor &> /dev/null"
 #alias dfm="dde-file-manager &> /dev/null"
@@ -49,10 +62,25 @@ alias grep="grep --color"
 alias open="xdg-open"
 alias vi="nvim"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
-alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
+
+# Configuring bare repository
+set -x bare_dir $HOME/mydotfiles/
+set -x bare_includes $bare_dir/.includes 
+alias baredot="git --git-dir=$bare_dir --work-tree=$HOME"
+function bare_include_file
+    realpath $argv[1] >> $bare_includes
+end
+function bare_add_all
+    cat $bare_includes | xargs -I{} fish -c "baredot add {}"
+end
+
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
          && sudo reflector --verbose --latest 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias logoff="kill -9 -1"
 
 #env NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
+#VIM mode in fish
+fish_vi_key_bindings
+#Swap CapsLock and Escape
+chcaps

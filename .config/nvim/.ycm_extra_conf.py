@@ -26,9 +26,9 @@ flags = [
     '-isystem', '/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1',
     '-isystem','/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/x86_64-pc-linux-gnu',
     '-isystem', '/usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/8.2.1/../../../../include/c++/8.2.1/backward',
-    '-I', '/usr/local/include',
-    '-I', '/usr/lib/clang/7.0.1/include',
-    '-I', '/usr/include',
+    '-isystem', '/usr/local/include',
+    '-isystem', '/usr/lib/clang/7.0.1/include',
+    '-isystem', '/usr/include',
 ]
 
 # Set this to the absolute path to the folder (NOT the file!) containing the

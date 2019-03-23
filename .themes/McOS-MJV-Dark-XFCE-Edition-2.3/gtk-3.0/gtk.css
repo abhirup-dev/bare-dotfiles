@@ -56,7 +56,7 @@
 @define-color wm_bg #dedcdf;
 @define-color wm_bg_unfocused #eff0f2;
 @define-color wm_highlight #eff0f2;
-@define-color wm_shadow alpha(black, 0.8);
+@define-color wm_shadow alpha(black, 0.35);
 @define-color wm_button_close_bg #f46067;
 @define-color wm_button_close_hover_bg #f68086;
 @define-color wm_button_close_active_bg #f13039;
@@ -12102,7 +12102,7 @@ background-image: linear-gradient(to bottom,#5c5d5d,#5c5d5d 0.8px,#7a7b7c 0.8px,
 
   background-image: image(#000000); }
 
-
 VteTerminal, vte-terminal {
     padding: 10px;
 }
+

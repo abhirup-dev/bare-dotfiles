@@ -13,6 +13,7 @@ Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
 Plug 'ayu-theme/ayu-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
+Plug 'tpope/vim-surround'
 call plug#end()
 
 set backspace=indent,eol,start                            " Fixes backspace
@@ -53,14 +54,16 @@ imap <Down> <Esc>:throw 'you are beat DOWN' <CR>
 imap <Left> <Esc>:throw 'you suck LEFT' <CR>
 imap <Right> <Esc>:throw 'you suck RIGHt' <CR>
 nmap <Up> <Esc>:throw 'you are fucked UP' <CR>
-nmap <Down> <Esc>:throw 'you are beat DOWN' <CR
+nmap <Down> <Esc>:throw 'you are beat DOWN' <CR>
 nmap <Left> <Esc>:throw 'you suck LEFT' <CR>
 nmap <Right> <Esc>:throw 'you suck RIGHt' <CR>
 
+autocmd VimEnter * :silent !chcaps
+" autocmd VimLeave * :silent !chback
 let g:ycm_server_python_interpretor = "/usr/bin/python2.7" " Configuring You Complete Me
 let g:python3_host_prog = "/usr/bin/python"
 
-" let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments = 1 " turn on completion in comments
 let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
 let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
@@ -69,6 +72,8 @@ let g:ycm_min_num_of_chars_for_completion=3
 let g:ycm_cache_omnifunc = 0
 let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
 
+" Shorcut for Ycm FixIt feature
+map <F2> :YcmCompleter FixIt<CR> 
 
 let g:tex_flavor = 'latex'
 let g:tex_conceal = ''
@@ -81,3 +86,6 @@ endif
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 
+" Move lines around
+nmap <M-j> ddp 
+nmap <M-k> kddpk
