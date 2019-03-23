@@ -1,3 +1,6 @@
+function noerr --description 'Redirects error of command to /dev/null'
+    $argv > /dev/null 2>&1
+end
 set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
 set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
