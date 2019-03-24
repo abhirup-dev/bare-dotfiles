@@ -2,7 +2,8 @@
 "	exe 'source' f
 "endfor
 " Enable syntax highlighting
-
+" Set Leader key
+:let mapleader = " "
 " Load Plugins 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
@@ -14,6 +15,10 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'Shougo/unite.vim'
+Plug 'Quramy/vison'
+Plug 'dcharbon/vim-flatbuffers'
 call plug#end()
 
 set backspace=indent,eol,start                            " Fixes backspace
@@ -29,9 +34,10 @@ set shiftwidth=4
 set expandtab                                             " set sta
 set sts=4                                                 " softtabstop, makes spaces feel like tabs when deleting
 set mouse=a mousemodel=popup                              " enable mouse support
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
-" autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
-
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
+autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
+autocmd BufRead,BufNewFile package.json Vison
+autocmd BufRead,BufNewFile .bowerrc Vison bowerrc.json
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\ 
 " :set list
@@ -89,3 +95,21 @@ let g:vimtex_view_method = "zathura"
 " Move lines around
 nmap <M-j> ddp 
 nmap <M-k> kddpk
+" Moving between split windows
+nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+" Resizing split windows
+" nmap <Leader>k :resize +3<cr>
+" nmap <Leader>j :resize -3<cr>
+nmap <leader>k <C-w>2+
+nmap <leader>j <C-w>2-
+nmap <leader>h <C-w>2<
+nmap <leader>l <C-w>2>
+
+" Assist during hot-reloading vimrc
+" augroup myvimrchooks
+"     au!
+"     autocmd bufwritepost .vimrc source ~/.vimrc
+" augroup END

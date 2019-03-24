@@ -77,6 +77,7 @@
         <value type="string" value="thunar"/>
         <value type="string" value="steam"/>
         <value type="string" value="docky"/>
+        <value type="string" value="gitter"/>
         <value type="string" value="discord"/>
         <value type="string" value="task manager"/>
         <value type="string" value="blueman-applet"/>
