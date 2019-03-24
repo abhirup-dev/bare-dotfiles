@@ -4,6 +4,18 @@
 " Enable syntax highlighting
 " Set Leader key
 :let mapleader = " "
+
+
+"  ██▓███   ██▓    █    ██   ▄████  ██▓ ███▄    █   ██████ 
+" ▓██░  ██▒▓██▒    ██  ▓██▒ ██▒ ▀█▒▓██▒ ██ ▀█   █ ▒██    ▒ 
+" ▓██░ ██▓▒▒██░   ▓██  ▒██░▒██░▄▄▄░▒██▒▓██  ▀█ ██▒░ ▓██▄   
+" ▒██▄█▓▒ ▒▒██░   ▓▓█  ░██░░▓█  ██▓░██░▓██▒  ▐▌██▒  ▒   ██▒
+" ▒██▒ ░  ░░██████▒▒█████▓ ░▒▓███▀▒░██░▒██░   ▓██░▒██████▒▒
+" ▒▓▒░ ░  ░░ ▒░▓  ░▒▓▒ ▒ ▒  ░▒   ▒ ░▓  ░ ▒░   ▒ ▒ ▒ ▒▓▒ ▒ ░
+" ░▒ ░     ░ ░ ▒  ░░▒░ ░ ░   ░   ░  ▒ ░░ ░░   ░ ▒░░ ░▒  ░ ░
+" ░░         ░ ░   ░░░ ░ ░ ░ ░   ░  ▒ ░   ░   ░ ░ ░  ░  ░  
+"              ░  ░  ░           ░  ░           ░       ░  
+                                                         
 " Load Plugins 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
@@ -11,14 +23,19 @@ Plug 'godlygeek/tabular'
 Plug 'lervag/vimtex'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
-Plug 'ayu-theme/ayu-vim'
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'Shougo/unite.vim'
-Plug 'Quramy/vison'
+Plug 'ctrlpvim/ctrlp.vim'
+" Theming
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ayu-theme/ayu-vim'
+" Vim Syntax Highlight support 
+Plug 'elzr/vim-json'
 Plug 'dcharbon/vim-flatbuffers'
+Plug 'dag/vim-fish' 
 call plug#end()
 
 set backspace=indent,eol,start                            " Fixes backspace
@@ -36,8 +53,7 @@ set sts=4                                                 " softtabstop, makes s
 set mouse=a mousemodel=popup                              " enable mouse support
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
 autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
-autocmd BufRead,BufNewFile package.json Vison
-autocmd BufRead,BufNewFile .bowerrc Vison bowerrc.json
+
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\ 
 " :set list
@@ -54,6 +70,32 @@ let ayucolor="dark"   " for dark version of theme
 colorscheme ayu
 
 
+ " ▄▄▄       ██▓ ██▀███   ██▓     ██▓ ███▄    █▓█████ 
+" ▒████▄    ▓██▒▓██ ▒ ██▒▓██▒    ▓██▒ ██ ▀█   █▓█   ▀ 
+" ▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒██░    ▒██▒▓██  ▀█ ██▒███   
+" ░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒██░    ░██░▓██▒  ▐▌██▒▓█  ▄ 
+ " ▓█   ▓██▒░██░░██▓ ▒██▒░██████▒░██░▒██░   ▓██░▒████▒
+ " ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░ ▒░▓  ░░▓  ░ ▒░   ▒ ▒░░ ▒░ ░
+ "  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░░ ░ ▒  ░ ▒ ░░ ░░   ░ ▒░░ ░  ░
+ "  ░   ▒    ▒ ░  ░░   ░   ░ ░    ▒ ░   ░   ░ ░   ░   
+ "      ░  ░ ░     ░         ░  ░ ░           ░   ░  ░
+                                                    
+" Configuring Airline
+let g:airline_theme='luna'
+" let g:airline_left_sep='>>'
+" let g:airline_right_sep='<<'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''    "" Causing lot of errors
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = '☰'
+" let g:airline_symbols.maxlinenr = ''
+
+
 " Disabling arrow keys
 imap <Up> <Esc>:throw 'you are fucked UP' <CR>
 imap <Down> <Esc>:throw 'you are beat DOWN' <CR>
@@ -66,7 +108,20 @@ nmap <Right> <Esc>:throw 'you suck RIGHt' <CR>
 
 autocmd VimEnter * :silent !chcaps
 " autocmd VimLeave * :silent !chback
-let g:ycm_server_python_interpretor = "/usr/bin/python2.7" " Configuring You Complete Me
+
+
+" ▓██   ██▓ ▄████▄   ███▄ ▄███▓
+"  ▒██  ██▒▒██▀ ▀█  ▓██▒▀█▀ ██▒
+"   ▒██ ██░▒▓█    ▄ ▓██    ▓██░
+"   ░ ▐██▓░▒▓▓▄ ▄██▒▒██    ▒██ 
+"   ░ ██▒▓░▒ ▓███▀ ░▒██▒   ░██▒
+"    ██▒▒▒ ░ ░▒ ▒  ░░ ▒░   ░  ░
+"  ▓██ ░▒░   ░  ▒   ░  ░      ░
+"  ▒ ▒ ░░  ░        ░      ░   
+"  ░ ░     ░ ░             ░   
+"  ░ ░     ░                   
+" Configuring You Complete Me
+let g:ycm_server_python_interpretor = "/usr/bin/python2.7" 
 let g:python3_host_prog = "/usr/bin/python"
 
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
@@ -81,6 +136,7 @@ let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
 " Shorcut for Ycm FixIt feature
 map <F2> :YcmCompleter FixIt<CR> 
 
+" VimTex extension configurations
 let g:tex_flavor = 'latex'
 let g:tex_conceal = ''
 let g:vimtex_fold_manual = 1
@@ -95,6 +151,17 @@ let g:vimtex_view_method = "zathura"
 " Move lines around
 nmap <M-j> ddp 
 nmap <M-k> kddpk
+
+  " ██████  ██▓███   ██▓     ██▓▄▄▄█████▓
+" ▒██    ▒ ▓██░  ██▒▓██▒    ▓██▒▓  ██▒ ▓▒
+" ░ ▓██▄   ▓██░ ██▓▒▒██░    ▒██▒▒ ▓██░ ▒░
+  " ▒   ██▒▒██▄█▓▒ ▒▒██░    ░██░░ ▓██▓ ░ 
+" ▒██████▒▒▒██▒ ░  ░░██████▒░██░  ▒██▒ ░ 
+" ▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░░ ▒░▓  ░░▓    ▒ ░░   
+" ░ ░▒  ░ ░░▒ ░     ░ ░ ▒  ░ ▒ ░    ░    
+" ░  ░  ░  ░░         ░ ░    ▒ ░  ░      
+  "     ░               ░  ░ ░           
+                                       
 " Moving between split windows
 nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
@@ -107,7 +174,7 @@ nmap <leader>k <C-w>2+
 nmap <leader>j <C-w>2-
 nmap <leader>h <C-w>2<
 nmap <leader>l <C-w>2>
-
+nmap <leader>s= <C-w>=
 " Assist during hot-reloading vimrc
 " augroup myvimrchooks
 "     au!

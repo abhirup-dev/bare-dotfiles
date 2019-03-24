@@ -82,6 +82,7 @@ alias logoff="kill -9 -1"
 #env NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 #VIM mode in fish
-fish_vi_key_bindings
+# fish_vi_key_bindings
+fish_default_key_bindings
 #Swap CapsLock and Escape
 chcaps
