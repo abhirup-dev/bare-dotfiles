@@ -8,7 +8,3 @@ Icon=dropbox
 Terminal=false
 StartupNotify=false
 Categories=Network;
-X-Deepin-CreatedBy=com.deepin.SessionManager
-X-Deepin-AppID=dropbox
-Hidden=true
-

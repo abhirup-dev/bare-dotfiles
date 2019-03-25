@@ -19,6 +19,7 @@
 " Load Plugins 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'lervag/vimtex'
 " Plug 'ludovicchabant/vim-gutentags'
@@ -28,10 +29,17 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+" Smooth scrolling
+Plug 'yuttie/comfortable-motion.vim'
+" Plug 'tpope/vim-vinegar'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Theming
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ayu-theme/ayu-vim'
+" Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox' 
+Plug 'ryanoasis/vim-devicons' 
 " Vim Syntax Highlight support 
 Plug 'elzr/vim-json'
 Plug 'dcharbon/vim-flatbuffers'
@@ -57,6 +65,8 @@ autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\ 
 " :set list
+set list          " Display unprintable characters f12 - switches
+set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 
 set number
 set relativenumber
@@ -66,22 +76,12 @@ set relativenumber
 set termguicolors     " enable true colors support
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+" let ayucolor="dark"   " for dark version of theme
+let g:gruvbox_italic=1
+colorscheme gruvbox
 
-
- " ▄▄▄       ██▓ ██▀███   ██▓     ██▓ ███▄    █▓█████ 
-" ▒████▄    ▓██▒▓██ ▒ ██▒▓██▒    ▓██▒ ██ ▀█   █▓█   ▀ 
-" ▒██  ▀█▄  ▒██▒▓██ ░▄█ ▒▒██░    ▒██▒▓██  ▀█ ██▒███   
-" ░██▄▄▄▄██ ░██░▒██▀▀█▄  ▒██░    ░██░▓██▒  ▐▌██▒▓█  ▄ 
- " ▓█   ▓██▒░██░░██▓ ▒██▒░██████▒░██░▒██░   ▓██░▒████▒
- " ▒▒   ▓▒█░░▓  ░ ▒▓ ░▒▓░░ ▒░▓  ░░▓  ░ ▒░   ▒ ▒░░ ▒░ ░
- "  ▒   ▒▒ ░ ▒ ░  ░▒ ░ ▒░░ ░ ▒  ░ ▒ ░░ ░░   ░ ▒░░ ░  ░
- "  ░   ▒    ▒ ░  ░░   ░   ░ ░    ▒ ░   ░   ░ ░   ░   
- "      ░  ░ ░     ░         ░  ░ ░           ░   ░  ░
-                                                    
 " Configuring Airline
-let g:airline_theme='luna'
+" let g:airline_theme='luna'
 " let g:airline_left_sep='>>'
 " let g:airline_right_sep='<<'
 
@@ -95,6 +95,10 @@ let g:airline_right_alt_sep = ''
 " let g:airline_symbols.linenr = '☰'
 " let g:airline_symbols.maxlinenr = ''
 
+" Palenight + Lightline
+set background=dark
+
+set noshowmode " Already handled well by powerline/airline/lightline 
 
 " Disabling arrow keys
 imap <Up> <Esc>:throw 'you are fucked UP' <CR>
@@ -148,6 +152,19 @@ endif
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 
+
+ " ▄████▄  ▄▄▄█████▓ ██▀███   ██▓        ██▓███  
+" ▒██▀ ▀█  ▓  ██▒ ▓▒▓██ ▒ ██▒▓██▒       ▓██░  ██▒
+" ▒▓█    ▄ ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██░       ▓██░ ██▓▒
+" ▒▓▓▄ ▄██▒░ ▓██▓ ░ ▒██▀▀█▄  ▒██░       ▒██▄█▓▒ ▒
+" ▒ ▓███▀ ░  ▒██▒ ░ ░██▓ ▒██▒░██████▒   ▒██▒ ░  ░
+" ░ ░▒ ▒  ░  ▒ ░░   ░ ▒▓ ░▒▓░░ ▒░▓  ░   ▒▓▒░ ░  ░
+ "  ░  ▒       ░      ░▒ ░ ▒░░ ░ ▒  ░   ░▒ ░     
+" ░          ░        ░░   ░   ░ ░      ░░       
+" ░ ░                  ░         ░  ░            
+" ░                                              
+
+
 " Move lines around
 nmap <M-j> ddp 
 nmap <M-k> kddpk
@@ -170,13 +187,45 @@ nmap <C-l> <C-w>l
 " Resizing split windows
 " nmap <Leader>k :resize +3<cr>
 " nmap <Leader>j :resize -3<cr>
-nmap <leader>k <C-w>2+
-nmap <leader>j <C-w>2-
-nmap <leader>h <C-w>2<
-nmap <leader>l <C-w>2>
+nmap <leader>k <C-w>5+
+nmap <leader>j <C-w>5-
+nmap <leader>h <C-w>5<
+nmap <leader>l <C-w>5>
 nmap <leader>s= <C-w>=
 " Assist during hot-reloading vimrc
 " augroup myvimrchooks
 "     au!
 "     autocmd bufwritepost .vimrc source ~/.vimrc
 " augroup END
+
+
+nmap <leader>nt :NERDTree<CR>
+nmap <leader>Nt :NERDTree
+nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer 
+nmap <F8> :TagbarToggle<CR>
+
+"Smooth Scrolling
+nnoremap <silent> <C-n> :call comfortable_motion#flick(75)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-75)<CR>
+noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
+noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
+
+
+"  ▄████▄   █    ██   ██████ ▄▄▄█████▓ ▒█████   ███▄ ▄███▓
+" ▒██▀ ▀█   ██  ▓██▒▒██    ▒ ▓  ██▒ ▓▒▒██▒  ██▒▓██▒▀█▀ ██▒
+" ▒▓█    ▄ ▓██  ▒██░░ ▓██▄   ▒ ▓██░ ▒░▒██░  ██▒▓██    ▓██░
+" ▒▓▓▄ ▄██▒▓▓█  ░██░  ▒   ██▒░ ▓██▓ ░ ▒██   ██░▒██    ▒██ 
+" ▒ ▓███▀ ░▒▒█████▓ ▒██████▒▒  ▒██▒ ░ ░ ████▓▒░▒██▒   ░██▒
+" ░ ░▒ ▒  ░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒░▒░▒░ ░ ▒░   ░  ░
+"   ░  ▒   ░░▒░ ░ ░ ░ ░▒  ░ ░    ░      ░ ▒ ▒░ ░  ░      ░
+" ░         ░░░ ░ ░ ░  ░  ░    ░      ░ ░ ░ ▒  ░      ░   
+" ░ ░         ░           ░               ░ ░         ░   
+" ░                                                       
+nmap <leader>cp :let @" = expand("%:p")<CR>
+
+" Custom Hacks for everyday easedds n trailing spacesdds n trailing spaces
+" Had to add <bs>l because https://vi.stackexchange.com/a/1878  
+" Adds n trailing spaces
+nmap <leader>il a<space><esc><bs>l
+" Adds n leading spaces
+nmap <leader>ij i<space><esc>
