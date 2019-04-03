@@ -60,14 +60,16 @@ alias chcaps="setxkbmap -option \"caps:swapescape\""
 alias chback="setxkbmap -option "
 
 
-if not set -q abbrs_initialized
-  set -U abbrs_initialized
-  echo -n 'Setting abbreviations...' 
+# if not set -q abbrs_initialized
+#   set -U abbrs_initialized
+#   echo -n 'Setting abbreviations...' 
 
   abbr rs 'reset'
+  abbr cf 'nvim ~/.config/fish/config.fish'
+  abbr cnv 'nvim ~/.config/nvim/init.vim'
 
-  echo -n 'Done'
-end
+  # echo -n 'Done'
+# end
   # _____                           
 # _/ ____\_ __  ____   ____   ______
 # \   __\  |  \/    \_/ ___\ /  ___/
