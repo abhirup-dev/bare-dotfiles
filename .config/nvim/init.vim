@@ -27,9 +27,12 @@ Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
+Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 " Smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 " Plug 'tpope/vim-vinegar'
@@ -97,18 +100,19 @@ let g:airline_right_alt_sep = ''
 
 " Palenight + Lightline
 set background=dark
+" hi Normal guibg=NONE ctermbg=NONE
 
-set noshowmode " Already handled well by powerline/airline/lightline 
+" set noshowmode " Already handled well by powerline/airline/lightline 
 
 " Disabling arrow keys
-imap <Up> <Esc>:throw 'you are fucked UP' <CR>
-imap <Down> <Esc>:throw 'you are beat DOWN' <CR>
-imap <Left> <Esc>:throw 'you suck LEFT' <CR>
-imap <Right> <Esc>:throw 'you suck RIGHt' <CR>
-nmap <Up> <Esc>:throw 'you are fucked UP' <CR>
-nmap <Down> <Esc>:throw 'you are beat DOWN' <CR>
-nmap <Left> <Esc>:throw 'you suck LEFT' <CR>
-nmap <Right> <Esc>:throw 'you suck RIGHt' <CR>
+" imap <Up> <Esc>:throw 'you are fucked UP' <CR>
+" imap <Down> <Esc>:throw 'you are beat DOWN' <CR>
+" imap <Left> <Esc>:throw 'you suck LEFT' <CR>
+" imap <Right> <Esc>:throw 'you suck RIGHt' <CR>
+" nmap <Up> <Esc>:throw 'you are fucked UP' <CR>
+" nmap <Down> <Esc>:throw 'you are beat DOWN' <CR>
+" nmap <Left> <Esc>:throw 'you suck LEFT' <CR>
+" nmap <Right> <Esc>:throw 'you suck RIGHt' <CR>
 
 autocmd VimEnter * :silent !chcaps
 " autocmd VimLeave * :silent !chback
@@ -127,7 +131,7 @@ autocmd VimEnter * :silent !chcaps
 " Configuring You Complete Me
 let g:ycm_server_python_interpretor = "/usr/bin/python2.7" 
 let g:python3_host_prog = "/usr/bin/python"
-
+    
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 let g:ycm_complete_in_comments = 1 " turn on completion in comments
 let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
@@ -199,10 +203,15 @@ nmap <leader>s= <C-w>=
 " augroup END
 
 
-nmap <leader>nt :NERDTree<CR>
+nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>Nt :NERDTree
 nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer 
 nmap <F8> :TagbarToggle<CR>
+nmap <leader>go :Goyo<CR>
+nmap <Leader>ll <Plug>(Limelight)
+xmap <Leader>ll <Plug>(Limelight)
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 "Smooth Scrolling
 nnoremap <silent> <C-n> :call comfortable_motion#flick(75)<CR>
@@ -221,6 +230,7 @@ noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 " ░         ░░░ ░ ░ ░  ░  ░    ░      ░ ░ ░ ▒  ░      ░   
 " ░ ░         ░           ░               ░ ░         ░   
 " ░                                                       
+
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
 " Custom Hacks for everyday easedds n trailing spacesdds n trailing spaces

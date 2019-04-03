@@ -5,7 +5,7 @@
   <property name="panels" type="array">
     <value type="int" value="1"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=9;x=962;y=17"/>
+      <property name="position" type="string" value="p=6;x=960;y=15"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="size" type="uint" value="30"/>
@@ -78,6 +78,7 @@
         <value type="string" value="steam"/>
         <value type="string" value="docky"/>
         <value type="string" value="gitter"/>
+        <value type="string" value="openbcihub"/>
         <value type="string" value="discord"/>
         <value type="string" value="task manager"/>
         <value type="string" value="blueman-applet"/>

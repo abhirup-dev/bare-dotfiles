@@ -8786,8 +8786,9 @@ button.circular-button label {
 .gedit-document-panel row:active {
 
   color: #ffffff;
-  background-color: #3273c4; }
-
+  background-color: #cacaca;
+  /* background-color: #3273c4;  */
+}
 .gedit-document-panel row:active button {
 
   color: #ffffff; }
@@ -8795,8 +8796,9 @@ button.circular-button label {
 .gedit-document-panel row:selected, .gedit-document-panel row:selected:hover {
 
   color: #ffffff;
-  background-color: #3273c4; }
-
+  background-color: #cacaca;
+  /* background-color: #3273c4;  */
+}
 .gedit-document-panel row:hover:not(:selected) button:active {
 
   color: #ffffff; }

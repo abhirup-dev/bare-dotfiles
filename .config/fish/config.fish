@@ -60,6 +60,14 @@ alias chcaps="setxkbmap -option \"caps:swapescape\""
 alias chback="setxkbmap -option "
 
 
+if not set -q abbrs_initialized
+  set -U abbrs_initialized
+  echo -n 'Setting abbreviations...' 
+
+  abbr rs 'reset'
+
+  echo -n 'Done'
+end
   # _____                           
 # _/ ____\_ __  ____   ____   ______
 # \   __\  |  \/    \_/ ___\ /  ___/

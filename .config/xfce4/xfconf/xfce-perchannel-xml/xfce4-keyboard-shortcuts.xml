@@ -139,7 +139,6 @@
       <property name="&lt;Alt&gt;F12" type="string" value="above_key"/>
       <property name="&lt;Alt&gt;F9" type="string" value="hide_window_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Down" type="string" value="down_workspace_key"/>
-      <property name="&lt;Alt&gt;F8" type="string" value="resize_window_key"/>
       <property name="&lt;Super&gt;Tab" type="string" value="switch_window_key"/>
       <property name="Escape" type="string" value="cancel_key"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;End" type="string" value="move_window_next_workspace_key"/>
@@ -171,6 +170,7 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;KP_5" type="string" value="move_window_workspace_5_key"/>
       <property name="override" type="bool" value="true"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;T" type="string" value="exo-open --launch TerminalEmulator"/>
+      <property name="&lt;Super&gt;r" type="string" value="resize_window_key"/>
     </property>
   </property>
   <property name="providers" type="array">
