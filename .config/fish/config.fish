@@ -1,7 +1,7 @@
 set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
 set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
-
+set -gx vinit $HOME/.config/nvim/init.vim
   # ________  .___  ___________
  # /  _____/  |   | \__    ___/
 # /   \  ___  |   |   |    |   
@@ -51,6 +51,7 @@ end
 alias grep="grep --color"
 alias open="xdg-open"
 alias vi="nvim"
+alias svi="sudo nvim"
 alias med="medit > /dev/null 2>&1"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
@@ -59,12 +60,18 @@ alias logoff="kill -9 -1"
 alias chcaps="setxkbmap -option \"caps:swapescape\""
 alias chback="setxkbmap -option "
 
-
+# Abbreviations
 # if not set -q abbrs_initialized
 #   set -U abbrs_initialized
 #   echo -n 'Setting abbreviations...' 
 
   abbr rs 'reset'
+  abbr ssn 'shutdown now'
+  abbr ne 'noerr'
+  abbr dwn ' ~/Downloads'
+  abbr mus ' ~/Music'
+  abbr dcs ' ~/Documents'
+
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
 

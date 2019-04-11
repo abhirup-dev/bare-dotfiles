@@ -5,23 +5,15 @@
 " Set Leader key
 :let mapleader = " "
 
-
-"  ██▓███   ██▓    █    ██   ▄████  ██▓ ███▄    █   ██████ 
-" ▓██░  ██▒▓██▒    ██  ▓██▒ ██▒ ▀█▒▓██▒ ██ ▀█   █ ▒██    ▒ 
-" ▓██░ ██▓▒▒██░   ▓██  ▒██░▒██░▄▄▄░▒██▒▓██  ▀█ ██▒░ ▓██▄   
-" ▒██▄█▓▒ ▒▒██░   ▓▓█  ░██░░▓█  ██▓░██░▓██▒  ▐▌██▒  ▒   ██▒
-" ▒██▒ ░  ░░██████▒▒█████▓ ░▒▓███▀▒░██░▒██░   ▓██░▒██████▒▒
-" ▒▓▒░ ░  ░░ ▒░▓  ░▒▓▒ ▒ ▒  ░▒   ▒ ░▓  ░ ▒░   ▒ ▒ ▒ ▒▓▒ ▒ ░
-" ░▒ ░     ░ ░ ▒  ░░▒░ ░ ░   ░   ░  ▒ ░░ ░░   ░ ▒░░ ░▒  ░ ░
-" ░░         ░ ░   ░░░ ░ ░ ░ ░   ░  ▒ ░   ░   ░ ░ ░  ░  ░  
-"              ░  ░  ░           ░  ░           ░       ░  
-                                                         
 " Load Plugins 
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'lervag/vimtex'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'unblevable/quick-scope'
 " Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
 Plug 'Yggdroot/indentLine'
@@ -40,12 +32,13 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Theming
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'ayu-theme/ayu-vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox' 
-Plug 'ryanoasis/vim-devicons' 
+" Plug 'ryanoasis/vim-devicons' 
 " Vim Syntax Highlight support 
 Plug 'elzr/vim-json'
-Plug 'dcharbon/vim-flatbuffers'
+" Plug 'dcharbon/vim-flatbuffers'
+Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'dag/vim-fish' 
 call plug#end()
 
@@ -62,8 +55,8 @@ set shiftwidth=4
 set expandtab                                             " set sta
 set sts=4                                                 " softtabstop, makes spaces feel like tabs when deleting
 set mouse=a mousemodel=popup                              " enable mouse support
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
-autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
+" autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\ 
@@ -82,17 +75,22 @@ set termguicolors     " enable true colors support
 " let ayucolor="dark"   " for dark version of theme
 let g:gruvbox_italic=1
 colorscheme gruvbox
-
-" Configuring Airline
-" let g:airline_theme='luna'
+" autocmd BufEnter *.tex :colorscheme Tomorrow-Night
+" autocmd BufEnter *.tex :let g:airline_theme='luna'
+" autocmd BufEnter *.tex :let g:airline_left_sep='||'
+" autocmd BufEnter *.tex :let g:airline_right_sep='||'
+" autocmd BufEnter *.tex :let g:airline_left_alt_sep = '|'
+" autocmd BufEnter *.tex :let g:airline_right_alt_sep = '|'
+" " Configuring Airline
+let g:airline_theme='luna'
 " let g:airline_left_sep='>>'
 " let g:airline_right_sep='<<'
 
 " powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_alt_sep = ''
 " let g:airline_symbols.branch = ''    "" Causing lot of errors
 " let g:airline_symbols.readonly = ''
 " let g:airline_symbols.linenr = '☰'
@@ -117,18 +115,7 @@ set background=dark
 autocmd VimEnter * :silent !chcaps
 " autocmd VimLeave * :silent !chback
 
-
-" ▓██   ██▓ ▄████▄   ███▄ ▄███▓
-"  ▒██  ██▒▒██▀ ▀█  ▓██▒▀█▀ ██▒
-"   ▒██ ██░▒▓█    ▄ ▓██    ▓██░
-"   ░ ▐██▓░▒▓▓▄ ▄██▒▒██    ▒██ 
-"   ░ ██▒▓░▒ ▓███▀ ░▒██▒   ░██▒
-"    ██▒▒▒ ░ ░▒ ▒  ░░ ▒░   ░  ░
-"  ▓██ ░▒░   ░  ▒   ░  ░      ░
-"  ▒ ▒ ░░  ░        ░      ░   
-"  ░ ░     ░ ░             ░   
-"  ░ ░     ░                   
-" Configuring You Complete Me
+" Configuring You Complete Me (YCM)
 let g:ycm_server_python_interpretor = "/usr/bin/python2.7" 
 let g:python3_host_prog = "/usr/bin/python"
     
@@ -146,9 +133,11 @@ map <F2> :YcmCompleter FixIt<CR>
 
 " VimTex extension configurations
 let g:tex_flavor = 'latex'
-let g:tex_conceal = ''
+" set conceallevel=1
+" let g:tex_conceal = 'abdmg'
 let g:vimtex_fold_manual = 1
 let g:vimtex_latexmk_continuous = 1
+let g:vimtex_quickfix_mode=1
 let g:vimtex_compiler_progname = 'nvr'
 if has("nvim")
   let g:vimtex_latexmk_progname = 'nvr'
@@ -156,33 +145,27 @@ endif
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<cr>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
- " ▄████▄  ▄▄▄█████▓ ██▀███   ██▓        ██▓███  
-" ▒██▀ ▀█  ▓  ██▒ ▓▒▓██ ▒ ██▒▓██▒       ▓██░  ██▒
-" ▒▓█    ▄ ▒ ▓██░ ▒░▓██ ░▄█ ▒▒██░       ▓██░ ██▓▒
-" ▒▓▓▄ ▄██▒░ ▓██▓ ░ ▒██▀▀█▄  ▒██░       ▒██▄█▓▒ ▒
-" ▒ ▓███▀ ░  ▒██▒ ░ ░██▓ ▒██▒░██████▒   ▒██▒ ░  ░
-" ░ ░▒ ▒  ░  ▒ ░░   ░ ▒▓ ░▒▓░░ ▒░▓  ░   ▒▓▒░ ░  ░
- "  ░  ▒       ░      ░▒ ░ ▒░░ ░ ▒  ░   ░▒ ░     
-" ░          ░        ░░   ░   ░ ░      ░░       
-" ░ ░                  ░         ░  ░            
-" ░                                              
+
+" snippet sign "Signature"
+" Yours sincerely,
+" Abhirup Das
+" endsnippet
+
+
+
 
 
 " Move lines around
 nmap <M-j> ddp 
 nmap <M-k> kddpk
 
-  " ██████  ██▓███   ██▓     ██▓▄▄▄█████▓
-" ▒██    ▒ ▓██░  ██▒▓██▒    ▓██▒▓  ██▒ ▓▒
-" ░ ▓██▄   ▓██░ ██▓▒▒██░    ▒██▒▒ ▓██░ ▒░
-  " ▒   ██▒▒██▄█▓▒ ▒▒██░    ░██░░ ▓██▓ ░ 
-" ▒██████▒▒▒██▒ ░  ░░██████▒░██░  ▒██▒ ░ 
-" ▒ ▒▓▒ ▒ ░▒▓▒░ ░  ░░ ▒░▓  ░░▓    ▒ ░░   
-" ░ ░▒  ░ ░░▒ ░     ░ ░ ▒  ░ ▒ ░    ░    
-" ░  ░  ░  ░░         ░ ░    ▒ ░  ░      
-  "     ░               ░  ░ ░           
-                                       
+
+
 " Moving between split windows
 nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
@@ -202,35 +185,30 @@ nmap <leader>s= <C-w>=
 "     autocmd bufwritepost .vimrc source ~/.vimrc
 " augroup END
 
-
+" NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>Nt :NERDTree
 nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer 
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
-nmap <Leader>ll <Plug>(Limelight)
-xmap <Leader>ll <Plug>(Limelight)
+" nmap <Leader>ll <Plug>(Limelight)
+" xmap <Leader>ll <Plug>(Limelight)
+" Goyo and Limelight
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
-"Smooth Scrolling
+"smooth scrolling
 nnoremap <silent> <C-n> :call comfortable_motion#flick(75)<CR>
 nnoremap <silent> <C-u> :call comfortable_motion#flick(-75)<CR>
 noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
 noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 
+" Vim markdown preview
+let vim_markdown_preview_toggle=2
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Google Chrome'
 
-"  ▄████▄   █    ██   ██████ ▄▄▄█████▓ ▒█████   ███▄ ▄███▓
-" ▒██▀ ▀█   ██  ▓██▒▒██    ▒ ▓  ██▒ ▓▒▒██▒  ██▒▓██▒▀█▀ ██▒
-" ▒▓█    ▄ ▓██  ▒██░░ ▓██▄   ▒ ▓██░ ▒░▒██░  ██▒▓██    ▓██░
-" ▒▓▓▄ ▄██▒▓▓█  ░██░  ▒   ██▒░ ▓██▓ ░ ▒██   ██░▒██    ▒██ 
-" ▒ ▓███▀ ░▒▒█████▓ ▒██████▒▒  ▒██▒ ░ ░ ████▓▒░▒██▒   ░██▒
-" ░ ░▒ ▒  ░░▒▓▒ ▒ ▒ ▒ ▒▓▒ ▒ ░  ▒ ░░   ░ ▒░▒░▒░ ░ ▒░   ░  ░
-"   ░  ▒   ░░▒░ ░ ░ ░ ░▒  ░ ░    ░      ░ ▒ ▒░ ░  ░      ░
-" ░         ░░░ ░ ░ ░  ░  ░    ░      ░ ░ ░ ▒  ░      ░   
-" ░ ░         ░           ░               ░ ░         ░   
-" ░                                                       
-
+" unresolved!
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
 " Custom Hacks for everyday easedds n trailing spacesdds n trailing spaces
@@ -239,3 +217,12 @@ nmap <leader>cp :let @" = expand("%:p")<CR>
 nmap <leader>il a<space><esc><bs>l
 " Adds n leading spaces
 nmap <leader>ij i<space><esc>
+
+" Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+let g:qs_lazy_highlight = 1
