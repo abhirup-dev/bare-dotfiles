@@ -1,7 +1,6 @@
 /home/abhirup/.config/nvim/init.vim
 /home/abhirup/.config/nvim/.ycm_extra_conf.py
 /home/abhirup/.config/nvim/config
-/home/abhirup/.config/xfce4
 /home/abhirup/.config/fish/config.fish
 /home/abhirup/.config/autostart
 /home/abhirup/gtkrc-2.0
@@ -10,3 +9,5 @@
 /home/abhirup/mydotfiles/.includes
 /home/abhirup/.config/zathura
 /home/abhirup/.config/compton.conf
+/home/abhirup/.Xresources
+/home/abhirup/.config/compton.conf.bak

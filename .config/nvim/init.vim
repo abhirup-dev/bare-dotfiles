@@ -22,13 +22,13 @@ Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 " Smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 " Plug 'tpope/vim-vinegar'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Theming
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -40,6 +40,7 @@ Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'dag/vim-fish' 
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 set backspace=indent,eol,start                            " Fixes backspace

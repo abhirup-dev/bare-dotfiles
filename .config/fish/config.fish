@@ -74,7 +74,8 @@ alias chback="setxkbmap -option "
 
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
-
+  abbr ccm 'nvim ~/.config/compton.conf'
+  abbr ytd 'youtube-dl'
   # echo -n 'Done'
 # end
   # _____                           
