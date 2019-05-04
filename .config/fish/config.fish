@@ -1,3 +1,6 @@
+set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
+set -gx MANPAGER less
+
 set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
 set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
@@ -72,6 +75,8 @@ alias chback="setxkbmap -option "
   abbr mus ' ~/Music'
   abbr dcs ' ~/Documents'
 
+  abbr clipb 'xclip -selection clipboard'
+
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
   abbr ccm 'nvim ~/.config/compton.conf'
@@ -113,7 +118,11 @@ function parse_vcf
         echo entered name=$argv[2]
         awk '/BEGIN:VCARD/ {flag=1;next} /(VERSION:2.1|N.*;;;)/{next} /END:VCARD/ {flag=0;print"--"} flag' $argv[1]  | awk '/PHOTO;ENCODING=.*/{flag=0;}/X-GROUP:/{flag=1;next}flag' | awk -v pat="FN:$argv[2]" '$0~pat {flag=1;} /--/ {flag=0;next}flag'
     end
+end
 
+# Generating metadata from video
+function ffmcreate
+    ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
 end
 
 function sample 
@@ -133,3 +142,29 @@ fish_default_key_bindings
 #Swap CapsLock and Escape
 chcaps
 
+
+# Colors
+set default (tput sgr0)
+set red (tput setaf 1)
+set green (tput setaf 2)
+set purple (tput setaf 5)
+set orange (tput setaf 9)
+
+# "Less" colors for man pages
+set -gx PAGER less
+# Begin blinking
+set -gx LESS_TERMCAP_mb $red
+# Begin bold
+set -gx LESS_TERMCAP_md $orange
+# End mode
+set -gx LESS_TERMCAP_me $default
+# End standout-mode
+set -gx LESS_TERMCAP_se $default
+# Begin standout-mode - nfo box
+set -gx LESS_TERMCAP_so $purple
+# End underline
+set -gx LESS_TERMCAP_ue $default
+# Begin underline
+set -gx LESS_TERMCAP_us $green
+
+# set -gx COMP_WORDBREAKS " /"'><;|&("

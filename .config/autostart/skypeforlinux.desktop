@@ -7,5 +7,3 @@ Terminal=false
 Type=Application
 StartupNotify=false
 X-GNOME-Autostart-enabled=true
-Hidden=true
-

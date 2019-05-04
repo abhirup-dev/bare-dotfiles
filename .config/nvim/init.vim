@@ -5,9 +5,15 @@
 " Set Leader key
 :let mapleader = " "
 
-" Load Plugins 
+" Load Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'Rip-Rip/clang_complete'
+Plug 'davidhalter/jedi-vim'
+Plug 'w0rp/ale'
+Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'lervag/vimtex'
@@ -21,7 +27,7 @@ Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -33,16 +39,17 @@ Plug 'yuttie/comfortable-motion.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ayu-theme/ayu-vim'
-Plug 'morhetz/gruvbox' 
-" Plug 'ryanoasis/vim-devicons' 
-" Vim Syntax Highlight support 
+Plug 'morhetz/gruvbox'
+" Plug 'ryanoasis/vim-devicons'
+" Vim Syntax Highlight support
 Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
 Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'dag/vim-fish' 
-Plug 'tpope/vim-fugitive'
+Plug 'dag/vim-fish'
+" Plug 'tpope/vim-fugitive'
 call plug#end()
 
+set autochdir
 set backspace=indent,eol,start                            " Fixes backspace
 set ruler                                                 " Enable line/column info at bottom
 set history=100
@@ -50,7 +57,7 @@ set cursorline                                            " highlights current l
 set scrolloff=10
 set ai                                                    " Autoindentation
 filetype indent plugin on
-set clipboard+=unnamedplus                                " Copies using system clipboard
+" set clipboard+=unnamedplus                                " Copies using system clipboard
 set tabstop=4                                             " Tab = 4 spaces
 set shiftwidth=4
 set expandtab                                             " set sta
@@ -60,7 +67,7 @@ set mouse=a mousemodel=popup                              " enable mouse support
 " autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 
 " Enabling vertical indentation guides
-" :set listchars=tab:\|\ 
+" :set listchars=tab:\|\
 " :set list
 set list          " Display unprintable characters f12 - switches
 set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
@@ -68,9 +75,9 @@ set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars map
 set number
 set relativenumber
 
-
 " Configuring theme
 set termguicolors     " enable true colors support
+
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
@@ -84,6 +91,7 @@ colorscheme gruvbox
 " autocmd BufEnter *.tex :let g:airline_right_alt_sep = '|'
 " " Configuring Airline
 let g:airline_theme='luna'
+let g:airline#extensions#ale#enabled = 0
 " let g:airline_left_sep='>>'
 " let g:airline_right_sep='<<'
 
@@ -101,36 +109,69 @@ let g:airline_theme='luna'
 set background=dark
 " hi Normal guibg=NONE ctermbg=NONE
 
-" set noshowmode " Already handled well by powerline/airline/lightline 
-
-" Disabling arrow keys
-" imap <Up> <Esc>:throw 'you are fucked UP' <CR>
-" imap <Down> <Esc>:throw 'you are beat DOWN' <CR>
-" imap <Left> <Esc>:throw 'you suck LEFT' <CR>
-" imap <Right> <Esc>:throw 'you suck RIGHt' <CR>
-" nmap <Up> <Esc>:throw 'you are fucked UP' <CR>
-" nmap <Down> <Esc>:throw 'you are beat DOWN' <CR>
-" nmap <Left> <Esc>:throw 'you suck LEFT' <CR>
-" nmap <Right> <Esc>:throw 'you suck RIGHt' <CR>
+" set noshowmode " Already handled well by powerline/airline/lightline
 
 autocmd VimEnter * :silent !chcaps
 " autocmd VimLeave * :silent !chback
 
 " Configuring You Complete Me (YCM)
-let g:ycm_server_python_interpretor = "/usr/bin/python2.7" 
-let g:python3_host_prog = "/usr/bin/python"
-    
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-let g:ycm_complete_in_comments = 1 " turn on completion in comments
-let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
-let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
+" let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
+" let g:python3_host_prog = "/usr/bin/python"
+" let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+" let g:ycm_complete_in_comments = 1 " turn on completion in comments
+" let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
+" let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
 " set completeopt- = preview " start completion from first character
-let g:ycm_min_num_of_chars_for_completion=3
-let g:ycm_cache_omnifunc = 0
-let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
-
+" let g:ycm_min_num_of_chars_for_completion=3
+" let g:ycm_cache_omnifunc = 0
+" let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
 " Shorcut for Ycm FixIt feature
-map <F2> :YcmCompleter FixIt<CR> 
+" map <F2> :YcmCompleter FixIt<CR>
+
+" Configuring deoplete
+let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
+call deoplete#custom#var('omni', 'input_patterns', {
+      \ 'tex': g:vimtex#re#deoplete
+      \})
+
+" Configuring jedi-vim
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#show_call_signatures = "1" 
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>a"
+let g:jedi#goto_definitions_command = "<leader>f"
+let g:jedi#documentation_command = "<leader>d"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
+" You can also use deoplete-jedi for completions, which uses Jedi, but does completions asynchronously (requires Neovim). It makes sense to use both jedi-vim and deoplete-jedi, but you should disable jedi-vim's completions then:
+let g:jedi#completions_enabled = 0
+
+let g:ale_completion_enabled = 1
+
+" Configuring ale
+let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_linters = {
+\   'python': ['flake8', 'pycodestyle'],
+\}
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+" Configuring Neoformat
+let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
+" Enable alignment
+let g:neoformat_basic_format_align = 1
+" Enable tab to spaces conversion
+let g:neoformat_basic_format_retab = 1
+" Enable trimmming of trailing whitespace
+let g:neoformat_basic_format_trim = 1
 
 " VimTex extension configurations
 let g:tex_flavor = 'latex'
@@ -151,21 +192,12 @@ let g:UltiSnipsExpandTrigger="<cr>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-
 " snippet sign "Signature"
 " Yours sincerely,
 " Abhirup Das
 " endsnippet
-
-
-
-
-
-" Move lines around
-nmap <M-j> ddp 
+nmap <M-j> ddp
 nmap <M-k> kddpk
-
-
 
 " Moving between split windows
 nmap <C-k> <C-w>k
@@ -189,7 +221,7 @@ nmap <leader>s= <C-w>=
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
 nmap <leader>Nt :NERDTree
-nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer 
+nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
 " nmap <Leader>ll <Plug>(Limelight)
@@ -199,8 +231,8 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 "smooth scrolling
-nnoremap <silent> <C-n> :call comfortable_motion#flick(75)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-75)<CR>
+" nnoremap <silent> <C-u> :call comfortable_motion#flick(75)<CR>
+" nnoremap <silent> <C-U> :call comfortable_motion#flick(-75)<CR>
 noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
 noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 
@@ -212,12 +244,14 @@ let vim_markdown_preview_browser='Google Chrome'
 " unresolved!
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
-" Custom Hacks for everyday easedds n trailing spacesdds n trailing spaces
-" Had to add <bs>l because https://vi.stackexchange.com/a/1878  
+" Custom | Personal Hacks for everyday easedds n trailing spacesdds n trailing spaces
+" Had to add <bs>l because https://vi.stackexchange.com/a/1878
 " Adds n trailing spaces
 nmap <leader>il a<space><esc><bs>l
 " Adds n leading spaces
-nmap <leader>ij i<space><esc>
+nmap <leader>ih i<space><esc>
+" Adds newline in insert mode
+" imap <leader><cr> <esc>o
 
 " Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
