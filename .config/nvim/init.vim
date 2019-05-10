@@ -16,11 +16,13 @@ Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'zhimsel/vim-stay'
 Plug 'lervag/vimtex'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'unblevable/quick-scope'
-" Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
 Plug 'Yggdroot/indentLine'
 Plug 'ap/vim-css-color'
@@ -35,13 +37,12 @@ Plug 'junegunn/limelight.vim'
 Plug 'yuttie/comfortable-motion.vim'
 " Plug 'tpope/vim-vinegar'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" Theming
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ayu-theme/ayu-vim'
+" Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
 " Plug 'ryanoasis/vim-devicons'
-" Vim Syntax Highlight support
+" Plug 'Konfekt/FastFold'
 Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
 Plug 'JamshedVesuna/vim-markdown-preview'
@@ -50,6 +51,8 @@ Plug 'dag/vim-fish'
 call plug#end()
 
 set autochdir
+syntax on
+set foldmethod=syntax
 set backspace=indent,eol,start                            " Fixes backspace
 set ruler                                                 " Enable line/column info at bottom
 set history=100
@@ -77,34 +80,12 @@ set relativenumber
 
 " Configuring theme
 set termguicolors     " enable true colors support
-
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
 let g:gruvbox_italic=1
 colorscheme gruvbox
-" autocmd BufEnter *.tex :colorscheme Tomorrow-Night
-" autocmd BufEnter *.tex :let g:airline_theme='luna'
-" autocmd BufEnter *.tex :let g:airline_left_sep='||'
-" autocmd BufEnter *.tex :let g:airline_right_sep='||'
-" autocmd BufEnter *.tex :let g:airline_left_alt_sep = '|'
-" autocmd BufEnter *.tex :let g:airline_right_alt_sep = '|'
+
 " " Configuring Airline
 let g:airline_theme='luna'
 let g:airline#extensions#ale#enabled = 0
-" let g:airline_left_sep='>>'
-" let g:airline_right_sep='<<'
-
-" powerline symbols
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''    "" Causing lot of errors
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = '☰'
-" let g:airline_symbols.maxlinenr = ''
-
 " Palenight + Lightline
 set background=dark
 " hi Normal guibg=NONE ctermbg=NONE
@@ -113,20 +94,6 @@ set background=dark
 
 autocmd VimEnter * :silent !chcaps
 " autocmd VimLeave * :silent !chback
-
-" Configuring You Complete Me (YCM)
-" let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
-" let g:python3_host_prog = "/usr/bin/python"
-" let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-" let g:ycm_complete_in_comments = 1 " turn on completion in comments
-" let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
-" let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
-" set completeopt- = preview " start completion from first character
-" let g:ycm_min_num_of_chars_for_completion=3
-" let g:ycm_cache_omnifunc = 0
-" let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
-" Shorcut for Ycm FixIt feature
-" map <F2> :YcmCompleter FixIt<CR>
 
 " Configuring deoplete
 let g:deoplete#enable_at_startup = 1
@@ -137,7 +104,7 @@ call deoplete#custom#var('omni', 'input_patterns', {
 
 " Configuring jedi-vim
 let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#show_call_signatures = "1" 
+let g:jedi#show_call_signatures = "1"
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>a"
 let g:jedi#goto_definitions_command = "<leader>f"
@@ -148,9 +115,47 @@ let g:jedi#rename_command = "<leader>r"
 " You can also use deoplete-jedi for completions, which uses Jedi, but does completions asynchronously (requires Neovim). It makes sense to use both jedi-vim and deoplete-jedi, but you should disable jedi-vim's completions then:
 let g:jedi#completions_enabled = 0
 
-let g:ale_completion_enabled = 1
+" Configuring vim-markdown
+let g:vim_markdown_folding_level = 3
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_conceal = 1
+set conceallevel=2
+let g:vim_markdown_strikethrough = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_json_frontmatter = 1
+
+" Configuring vim-stay
+set viewoptions=cursor,folds,slash,unix
+
+" nmap zuz <Plug>(FastFoldUpdate)
+" let g:fastfold_savehook = 1
+" let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+" let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
+" let g:markdown_folding = 1
+" let g:tex_fold_enabled = 1
+" let g:vimsyn_folding = 'af'
+" let g:xml_syntax_folding = 1
+" let g:javaScript_fold = 1
+" let g:sh_fold_enabled= 7
+" let g:ruby_fold = 1
+" let g:perl_fold = 1
+" let g:perl_fold_blocks = 1
+" let g:r_syntax_folding = 1
+" let g:rust_fold = 1
+" let g:php_folding = 1
+
+" Configuring gutentags
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_ctags_tagfile = '.tags'
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 " Configuring ale
+let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
@@ -192,10 +197,6 @@ let g:UltiSnipsExpandTrigger="<cr>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" snippet sign "Signature"
-" Yours sincerely,
-" Abhirup Das
-" endsnippet
 nmap <M-j> ddp
 nmap <M-k> kddpk
 
@@ -244,7 +245,7 @@ let vim_markdown_preview_browser='Google Chrome'
 " unresolved!
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
-" Custom | Personal Hacks for everyday easedds n trailing spacesdds n trailing spaces
+" Custom | Personal Hacks for everyday ease
 " Had to add <bs>l because https://vi.stackexchange.com/a/1878
 " Adds n trailing spaces
 nmap <leader>il a<space><esc><bs>l
@@ -261,3 +262,41 @@ augroup qs_colors
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 let g:qs_lazy_highlight = 1
+
+
+
+
+
+
+
+" Optional Support
+
+" Configuring You Complete Me (YCM)
+" let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
+let g:python3_host_prog = "/usr/bin/python"
+" let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
+" let g:ycm_complete_in_comments = 1 " turn on completion in comments
+" let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
+" let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
+" set completeopt- = preview " start completion from first character
+" let g:ycm_min_num_of_chars_for_completion=3
+" let g:ycm_cache_omnifunc = 0
+" let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
+" Shorcut for Ycm FixIt feature
+" map <F2> :YcmCompleter FixIt<CR>
+
+" LaTeX specific theme
+" autocmd BufEnter *.tex :colorscheme Tomorrow-Night
+" autocmd BufEnter *.tex :let g:airline_theme='luna'
+" let g:airline_left_sep='>>'
+" let g:airline_right_sep='<<'
+
+" powerline symbols
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''    "" Causing lot of errors
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = '☰'
+" let g:airline_symbols.maxlinenr = ''

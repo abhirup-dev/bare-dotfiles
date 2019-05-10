@@ -77,6 +77,12 @@ alias chback="setxkbmap -option "
 
   abbr clipb 'xclip -selection clipboard'
 
+  abbr gs 'git status'
+  abbr gA 'git add .'
+  abbr ga 'git add '
+  abbr gP 'git push -u origin master'
+  abbr gp 'git push '
+  abbr gc 'git commit -m "'
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
   abbr ccm 'nvim ~/.config/compton.conf'
