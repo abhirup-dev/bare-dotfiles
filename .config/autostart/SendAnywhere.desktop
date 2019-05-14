@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.0
-Name=SendAnywhere
-Comment=SendAnywherestartup script
-Exec=/opt/SendAnywhere/SendAnywhere --hidden
-StartupNotify=false
-Terminal=false

@@ -1,5 +1,5 @@
 "for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
-"	exe 'source' f
+"   exe 'source' f
 "endfor
 " Enable syntax highlighting
 " Set Leader key
@@ -30,7 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 " Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 " Smooth scrolling
@@ -99,8 +99,8 @@ autocmd VimEnter * :silent !chcaps
 let g:deoplete#enable_at_startup = 1
 " let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
 call deoplete#custom#var('omni', 'input_patterns', {
-      \ 'tex': g:vimtex#re#deoplete
-      \})
+            \ 'tex': g:vimtex#re#deoplete
+            \})
 
 " Configuring jedi-vim
 let g:jedi#use_splits_not_buffers = "left"
@@ -159,11 +159,14 @@ let g:ale_completion_enabled = 1
 let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\}
+            \ '*': [
+            \ 'trim_whitespace'
+            \]}
+            " \ , 'ale#fixers#generic_python#BreakUpLongLines'
+            " \ 'yapf']
 let g:ale_linters = {
-\   'python': ['flake8', 'pycodestyle'],
-\}
+            \   'python': ['flake8', 'pycodestyle']
+            \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -187,7 +190,7 @@ let g:vimtex_latexmk_continuous = 1
 let g:vimtex_quickfix_mode=1
 let g:vimtex_compiler_progname = 'nvr'
 if has("nvim")
-  let g:vimtex_latexmk_progname = 'nvr'
+    let g:vimtex_latexmk_progname = 'nvr'
 endif
 let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
@@ -257,9 +260,9 @@ nmap <leader>ih i<space><esc>
 " Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 augroup qs_colors
-  autocmd!
-  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+    autocmd!
+    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 let g:qs_lazy_highlight = 1
 
