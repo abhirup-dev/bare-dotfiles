@@ -1,10 +1,13 @@
+set -gx TERMINAL /usr/bin/termite
+set -gx WALLPAPERS ~/Pictures/Wallpapers
+set -gx TESTBENCH ~/Dev/Testbench
+set -gx SCRIPTS ~/.config/scripts
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
-
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 # set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
 # set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
-set -gx PATH $PATH /home/abhirup/Software/mybinaries 
+# set -gx PATH $PATH /home/abhirup/Software/mybinaries 
 set -gx megadir $HOME/MEGAsync
 set -gx vinit $HOME/.config/nvim/init.vim
   # ________  .___  ___________
@@ -73,10 +76,16 @@ alias chback="setxkbmap -option "
   abbr rs 'reset'
   abbr ssn 'shutdown now'
   abbr ne 'noerr'
-  abbr dwn ' ~/Downloads'
-  abbr mus ' ~/Music'
-  abbr dcs ' ~/Documents'
+  abbr dwn '~/Downloads'
+  abbr mus '~/Music'
+  abbr dcs '~/Documents'
 
+  abbr pi 'sudo pacman -S'
+  abbr pu 'pacman -Syy'
+  abbr pq 'pacman -Qs'
+  abbr pr 'sudo pacman -Rns'
+
+  abbr sct 'sudo systemctl'
   abbr bt 'baredot'
   abbr clipb 'xclip -selection clipboard'
   abbr cap 'capture'
@@ -91,6 +100,7 @@ alias chback="setxkbmap -option "
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
   abbr ccm 'nvim ~/.config/compton.conf'
+  abbr ci3 'nvim ~/.config/i3/config'
   abbr ytd 'youtube-dl'
   # echo -n 'Done'
 # end
@@ -138,9 +148,16 @@ function parse_vcf
 end
 
 # Generating metadata from video
-function ffmcreate
-    ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
-end
+# function ffmcreate
+#     ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
+# end
+
+# function -e fish_preexec _run_fasd
+#     fasd --proc (fasd --sanitize "$argv") > "/dev/null" 2>&1
+# end
+# function j
+#     cd (fasd -d -e 'printf %s' "argv")
+# end
 
 function sample
     echo $argv[1]:$argv[2] | awk -F: -v name=$argv[3] '{print $1 " " name " " $2}'

@@ -34,14 +34,14 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 " Smooth scrolling
-Plug 'yuttie/comfortable-motion.vim'
+" Plug 'yuttie/comfortable-motion.vim'
 " Plug 'tpope/vim-vinegar'
 " Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Plug 'ayu-theme/ayu-vim'
 Plug 'morhetz/gruvbox'
-" Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 " Plug 'Konfekt/FastFold'
 Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
@@ -203,6 +203,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nmap <M-j> ddp
 nmap <M-k> kddpk
 
+noremap <leader>q :q<CR>
+noremap <leader>w :w<CR>
+noremap <leader>W :wq<CR>
 " Moving between split windows
 nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
@@ -237,8 +240,8 @@ autocmd! User GoyoLeave Limelight!
 "smooth scrolling
 " nnoremap <silent> <C-u> :call comfortable_motion#flick(75)<CR>
 " nnoremap <silent> <C-U> :call comfortable_motion#flick(-75)<CR>
-noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
-noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
+" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
+" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 
 " Vim markdown preview
 let vim_markdown_preview_toggle=2
@@ -295,11 +298,12 @@ let g:python3_host_prog = "/usr/bin/python"
 " let g:airline_right_sep='<<'
 
 " powerline symbols
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols.branch = ''    "" Causing lot of errors
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = '☰'
-" let g:airline_symbols.maxlinenr = ''
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols = {}
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
