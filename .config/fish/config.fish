@@ -1,13 +1,13 @@
 set -gx TERMINAL /usr/bin/termite
 set -gx WALLPAPERS ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
-set -gx SCRIPTS ~/.config/scripts
+set -gx CONFIGS ~/.config
+set -gx SCRIPTS $CONFIGS/scripts
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 # set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
-# set -gx PATH $PATH $ANDROID_HOME $ANDROID_HOME/platform-tools $FLUTTER_BIN /home/abhirup/.local/bin
-# set -gx PATH $PATH /home/abhirup/Software/mybinaries 
+set -gx PATH $PATH $SCRIPTS
 set -gx megadir $HOME/MEGAsync
 set -gx vinit $HOME/.config/nvim/init.vim
   # ________  .___  ___________
@@ -18,12 +18,22 @@ set -gx vinit $HOME/.config/nvim/init.vim
  #        \/
 
 # Configuring bare repository
-set -x bare_dir $HOME/mydotfiles/
+set -x bare_dir $HOME/mydotfiles
 set -x bare_includes $bare_dir/.includes
 alias baredot="git --git-dir=$bare_dir --work-tree=$HOME"
+
 function bare_include_file
-    realpath $argv[1] >> $bare_includes
+    set lines (cat $bare_includes)
+    set key (realpath $argv)
+    for line in $lines
+        if [ $key = $line ]
+            echo "$key already exists in $bare_includes"
+            return
+        end
+    end
+    echo $key >> $bare_includes
 end
+
 function bare_add_all
     cat $bare_includes | xargs -I{} fish -c "baredot add {}"
 end
@@ -97,6 +107,7 @@ alias chback="setxkbmap -option "
   abbr gP 'git push -u origin master'
   abbr gp 'git push'
   abbr gc 'git commit -m "'
+
   abbr cf 'nvim ~/.config/fish/config.fish'
   abbr cnv 'nvim ~/.config/nvim/init.vim'
   abbr ccm 'nvim ~/.config/compton.conf'
@@ -120,6 +131,11 @@ function capture --description 'Stores output of given command in $pop'
     set -gx pop (eval $argv)
     echo $pop
     echo "Captured output to pop"
+end
+
+# Run bash commands from fish
+function fbash
+    exec bash -c "$argv"
 end
 
 # Prefix current command with "sudo"

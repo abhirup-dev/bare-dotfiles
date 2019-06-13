@@ -27,7 +27,7 @@ if [[ ${EUID} == 0 ]] ; then
 		# show root@ when we don't have colors
 		PS1='\[$yellow\][[\u:\W]]\[$reset\]\[$green\] '
 	else
-		PS1='\[$bold\][[ \u@\h:\w ]]\[$reset\] '
+		PS1='\[$bold\]\[$yellow\][[ \[$yellow\]\[$red\]\u:\[$green\]\w\[$yellow\] ]]\[$reset\] '
 	fi
 #PS1='[\u@\h \W]\$ '
 #PS1='\[$red\]\[$bold\]\u\[$reset\]\[$bold\]@\[$green\]\[$bold\]\h\[$reset\]:\[$blue\]\[$bold\]\w\[$reset\]\$ '
@@ -49,18 +49,10 @@ scip() {
 	fi		
 }
 PATH=$PATH:/home/abhirup/.local/bin
-alias search="albert &> /dev/null"
-alias ded="deepin-editor &> /dev/null"
-alias dfm="dde-file-manager &> /dev/null"
-alias ged="gedit &> /dev/null"
 alias grep="grep --color"
-# alias shortprompt="export PS1='\[$red\][[ \u@\h:\[$magenta\]${PWD##*/}\[$rmundl\] \[$red\]]]\[$reset\] '"
-# alias longprompt="export PS1='\[$red\][[ \u@\h:\[$magenta\]\w\[$rmundl\] \[$red\]]]\[$reset\] '"
 alias open="xdg-open"
 
 
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
          && sudo reflector --verbose --latest 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias logoff="kill -9 -1"
-alias intelpython=". ~/Software/intelpython3/bin/activate"
-alias py35=". ~/Software/intelpython3/bin/activate && . activate py35"

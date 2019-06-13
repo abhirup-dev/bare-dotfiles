@@ -24,7 +24,7 @@ Plug 'honza/vim-snippets'
 Plug 'unblevable/quick-scope'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine' " Why important?
 Plug 'ap/vim-css-color'
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
@@ -45,7 +45,8 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'Konfekt/FastFold'
 Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'dag/vim-fish'
 " Plug 'tpope/vim-fugitive'
 call plug#end()
@@ -59,6 +60,7 @@ set history=100
 set cursorline                                            " highlights current line
 set scrolloff=10
 set ai                                                    " Autoindentation
+filetype plugin on
 filetype indent plugin on
 " set clipboard+=unnamedplus                                " Copies using system clipboard
 set tabstop=4                                             " Tab = 4 spaces
@@ -66,8 +68,8 @@ set shiftwidth=4
 set expandtab                                             " set sta
 set sts=4                                                 " softtabstop, makes spaces feel like tabs when deleting
 set mouse=a mousemodel=popup                              " enable mouse support
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
-" autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
+autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\
@@ -118,8 +120,9 @@ let g:jedi#completions_enabled = 0
 " Configuring vim-markdown
 let g:vim_markdown_folding_level = 3
 let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_conceal = 1
-set conceallevel=2
+let g:vim_markdown_conceal = 0
+autocmd Filetype markdown set conceallevel=0
+autocmd Filetype markdown normal zR
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_json_frontmatter = 1
@@ -196,9 +199,9 @@ let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<cr>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<C-space>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 nmap <M-j> ddp
 nmap <M-k> kddpk
@@ -244,9 +247,9 @@ autocmd! User GoyoLeave Limelight!
 " noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 
 " Vim markdown preview
-let vim_markdown_preview_toggle=2
-let vim_markdown_preview_hotkey='<C-m>'
-let vim_markdown_preview_browser='Google Chrome'
+" let vim_markdown_preview_toggle=2
+" let vim_markdown_preview_hotkey='<C-m>'
+" let vim_markdown_preview_browser='Google Chrome'
 
 " unresolved!
 nmap <leader>cp :let @" = expand("%:p")<CR>
@@ -307,3 +310,39 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
+
+" Live markdown preview
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 1
+let g:mkdp_browser = 'firefox'
+let g:mkdp_browserfunc = ''
+" options for markdown render
+" mkit: markdown-it options for render
+" katex: katex options for math
+" uml: markdown-it-plantuml options
+" maid: mermaid options
+" disable_sync_scroll: if disable sync scroll, default 0
+" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
+"   middle: mean the cursor position alway show at the middle of the preview page
+"   top: mean the vim top viewport alway show at the top of the preview page
+"   relative: mean the cursor position alway show at the relative positon of the preview page
+" hide_yaml_meta: if hide yaml metadata, default is 1
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1
+    \ }
+" use a custom markdown style must be absolute path
+let g:mkdp_markdown_css = ''
+" use a custom highlight style must absolute path
+let g:mkdp_highlight_css = ''
+" use a custom port to start server or random for empty
+let g:mkdp_port = ''
+" preview page title
+" ${name} will be replace with the file name
+let g:mkdp_page_title = '「${name}」'
