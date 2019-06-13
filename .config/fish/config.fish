@@ -67,6 +67,7 @@ end
      # \/             \/     \/
 
 alias grep="grep --color"
+alias diff="diff --color"
 alias open="xdg-open"
 alias vi="nvim"
 alias svi="sudo nvim"
@@ -95,6 +96,7 @@ alias chback="setxkbmap -option "
   abbr pq 'pacman -Qs'
   abbr pr 'sudo pacman -Rns'
 
+  abbr sup 'sudo updatedb'
   abbr sct 'sudo systemctl'
   abbr bt 'baredot'
   abbr clipb 'xclip -selection clipboard'
