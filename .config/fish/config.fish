@@ -66,6 +66,8 @@ end
 # (____  /____/__(____  /____  >
      # \/             \/     \/
 
+alias la="ls -a"
+alias ll="ls -l"
 alias grep="grep --color"
 alias diff="diff --color"
 alias open="xdg-open"

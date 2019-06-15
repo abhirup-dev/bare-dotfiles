@@ -1,3 +1,18 @@
+/* rofi.lines: 5 */
+/* rofi.eh: 2 */
+/* rofi.padding: 200 */
+/* rofi.fullscreen: true */
+/* rofi.bw: 0 */
+/* rofi.separator-style: none */
+/* rofi.hide-scrollbar: true */
+
+/* !                  'background', 'border', 'separator' */
+/* rofi.color-window: argb:c82d303b, #7c8389, #1d1f21 */
+/* ! State:           'bg',     'fg',     'bgalt',  'hlbg',   'hlfg' */
+/* rofi.color-normal: argb:31d1f21, #f3f4f5, argb:31d1f21, argb:31d1f21, #9575cd */ 
+/* rofi.font: System San Francisco Display 18 */
+
+
 /* URxvt*termName:          rxvt-256colours */
 URxvt*buffered:          true
 URxvt*perl-ext:          default,matcher,resize-font
@@ -12,24 +27,6 @@ URxvt*background:       [70]#2b2b2b
 URxvt*foreground:       #efefef 
 URxvt*cursorColor:      #aaaaaa
 URxvt*colorUL:          #366060
-URxvt*underlineColor:   #dcdccc
-/* URxvt.color0:           #2b2b2b */
-/* /1* URxvt.color0:           #2b2b2b *1/ */
-/* URxvt.color1:           #cc9393 */
-/* URxvt.color2:           #7f9f7f */
-/* URxvt.color3:           #d0bf8f */
-/* URxvt.color4:           #6ca0a3 */
-/* URxvt.color5:           #dc8cc3 */
-/* URxvt.color6:           #93e0e3 */
-/* URxvt.color7:           #dcdccc */
-/* URxvt.color8:           #000000 */
-/* URxvt.color9:           #dca3a3 */
-/* URxvt.color10:          #bfebbf */
-/* URxvt.color11:          #f0dfaf */
-/* URxvt.color12:          #8cd0d3 */
-/* URxvt.color13:          #dc8cc3 */
-/* URxvt.color14:          #93e0e3 */
-/* URxvt.color15:          #ffffff */
 URxvt*color0:            #2b2b2b
 URxvt*color1:            #cc9393
 URxvt*color2:            #7f9f7f

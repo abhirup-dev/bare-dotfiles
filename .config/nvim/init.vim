@@ -84,12 +84,11 @@ set relativenumber
 set termguicolors     " enable true colors support
 let g:gruvbox_italic=1
 colorscheme gruvbox
+set background=dark
 
 " " Configuring Airline
 let g:airline_theme='luna'
 let g:airline#extensions#ale#enabled = 0
-" Palenight + Lightline
-set background=dark
 " hi Normal guibg=NONE ctermbg=NONE
 
 " set noshowmode " Already handled well by powerline/airline/lightline
@@ -129,23 +128,6 @@ let g:vim_markdown_json_frontmatter = 1
 
 " Configuring vim-stay
 set viewoptions=cursor,folds,slash,unix
-
-" nmap zuz <Plug>(FastFoldUpdate)
-" let g:fastfold_savehook = 1
-" let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-" let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
-" let g:markdown_folding = 1
-" let g:tex_fold_enabled = 1
-" let g:vimsyn_folding = 'af'
-" let g:xml_syntax_folding = 1
-" let g:javaScript_fold = 1
-" let g:sh_fold_enabled= 7
-" let g:ruby_fold = 1
-" let g:perl_fold = 1
-" let g:perl_fold_blocks = 1
-" let g:r_syntax_folding = 1
-" let g:rust_fold = 1
-" let g:php_folding = 1
 
 " Configuring gutentags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
@@ -222,11 +204,6 @@ nmap <leader>j <C-w>5-
 nmap <leader>h <C-w>5<
 nmap <leader>l <C-w>5>
 nmap <leader>s= <C-w>=
-" Assist during hot-reloading vimrc
-" augroup myvimrchooks
-"     au!
-"     autocmd bufwritepost .vimrc source ~/.vimrc
-" augroup END
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -246,12 +223,6 @@ autocmd! User GoyoLeave Limelight!
 " noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
 " noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
 
-" Vim markdown preview
-" let vim_markdown_preview_toggle=2
-" let vim_markdown_preview_hotkey='<C-m>'
-" let vim_markdown_preview_browser='Google Chrome'
-
-" unresolved!
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
 " Custom | Personal Hacks for everyday ease
@@ -267,7 +238,7 @@ nmap <leader>ih i<space><esc>
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 augroup qs_colors
     autocmd!
-    autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+    autocmd ColorScheme * highlight QuickScopePrimary guifg="#afff5f" gui=underline ctermfg=155 cterm=underline
     autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 let g:qs_lazy_highlight = 1
