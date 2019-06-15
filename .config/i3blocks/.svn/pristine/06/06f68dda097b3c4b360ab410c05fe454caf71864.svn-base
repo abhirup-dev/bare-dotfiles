@@ -1,0 +1,81 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# background
+# border
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/local/libexec/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+
+[Current GPU]
+
+command=optimus-manager --print-mode | grep -w 'intel\|nvidia'
+separator=true
+interval=30
+color=#e56b37
+
+[memory]
+label=MEM
+separator=true
+interval=3
+separator=true
+color=#04efc0
+
+[memory]
+label=SWAP
+instance=swap
+separator=true
+interval=3
+separator=true
+color=#04efc0
+
+[cpu_usage]
+label=CPU
+interval=10
+min_width=CPU: 100.00%
+separator=true
+color=#04efc0
+
+[battery]
+label=BAT
+label=⚡
+#instance=1
+interval=30
+separator=true
+
+[date]
+command=date +"%d %B %Y"
+interval=5
+separator=true
+color=#9609e2
+
+[time]
+#command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%H:%M:%S'
+interval=5
+separator=true
+color=#f4dc02
