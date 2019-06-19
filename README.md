@@ -18,7 +18,7 @@
         - Create alias:
             alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 		- Checkout + Backup:
-			baredot checkout 2>&1 | egrep "\s+\." | awk "{print $$$1}" | \
+			baredot checkout 2>&1 | egrep "\s+\." | awk "{print $1}" | \
                                  xargs -I{} mv {} {}.bak
 	* Install packages given in [required-after-install.md](mydotfiles/required-after-install.md)
 
