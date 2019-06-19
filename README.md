@@ -20,6 +20,6 @@
 		- Checkout + Backup:
 			baredot checkout 2>&1 | egrep "\s+\." | awk "{print $$$1}" | \
                                  xargs -I{} mv {} {}.bak
-	* Install packages given in [required-after-install.md](./mydotfiles/required-after-install.md)
+	* Install packages given in [required-after-install.md](mydotfiles/required-after-install.md)
 
 
