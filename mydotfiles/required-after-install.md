@@ -6,6 +6,7 @@
 * pamixer - volume control vol{up,down}.sh
 * dunst(ify) - All-in-one notification
 * rofi
+* volnoti - to get volume notifications
 * light - to control brightness easily
 * imagemagick - for svg support for feh
 * i3-lock-color deps:
