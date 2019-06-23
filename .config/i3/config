@@ -195,7 +195,8 @@ bindsym XF86AudioMute exec --no-startup-id $SCRIPTS/mutetoggle.sh
 bindsym XF86MonBrightnessUp exec light -A 5;
 bindsym XF86MonBrightnessDown exec light -U 5;
 
-exec --no-startup-id volnoti -a 0.3
+exec --no-startup-id volnoti &
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
 exec --no-startup-id feh --bg-scale $WALLPAPERS/lofi-sunglasses_books_beach.jpg
 exec --no-startup-id "compton -cbf"
+exec --no-startup-id alsactl restore

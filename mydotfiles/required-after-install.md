@@ -31,4 +31,8 @@
         - gst-plugins-good
         - gst-plugins-ugly
         - gst-plugin-libde265 [AUR]
+* ranger + optional-deps:
+    - w3m : image previews
+    - ffmpegthumnailer
+* fd - Simple, fast ,user-friendly alternative to find
  

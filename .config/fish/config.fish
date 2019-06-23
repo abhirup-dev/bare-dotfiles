@@ -3,6 +3,8 @@ set -gx WALLPAPERS ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
+set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
+export QT_SCALE_FACTOR=1.25
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk

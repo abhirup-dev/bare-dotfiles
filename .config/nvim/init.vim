@@ -68,6 +68,8 @@ set shiftwidth=4
 set expandtab                                             " set sta
 set sts=4                                                 " softtabstop, makes spaces feel like tabs when deleting
 set mouse=a mousemodel=popup                              " enable mouse support
+set synmaxcol=200
+autocmd BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
 autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 
