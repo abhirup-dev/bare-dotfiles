@@ -6,7 +6,7 @@ bold_is_bright = true
 #cell_width_scale = 1.0
 #clickable_url = true
 dynamic_title = true
-font = Monospace 11
+font = RobotoMono Nerd Font 9
 # fullscreen = true
 icon_name = terminal
 #mouse_autohide = false
@@ -27,7 +27,7 @@ search_wrap = true
 foreground      = #f4fef7
 foreground_bold = #f4fef7
 cursor          = #c5c8c6
-background = rgba(20, 20, 20, 0.80)
+background = rgba(20, 20, 20, 0.65)
 
 # black
 color0  = #2822ee

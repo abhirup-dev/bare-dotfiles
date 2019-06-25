@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -41,7 +41,7 @@ bindsym $mod+d exec  rofi  -show drun
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+x exec --no-startup-id j4-dmenu-desktop
+bindsym $mod+x exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -168,14 +168,15 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
     font pango:monospace 10
-    status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
+    status_command i3status
+    # status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
 }
 
 
 # Title bars
 for_window [class="^.*"] border pixel 3
-gaps inner 10
-gaps outer 5
+# gaps inner 10
+# gaps outer 5
 
 # polkit
 exec --no-startup-id bash -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &"

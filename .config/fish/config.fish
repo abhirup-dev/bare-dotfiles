@@ -1,4 +1,11 @@
-set -gx TERMINAL /usr/bin/termite
+# Path to Oh My Fish install.
+set -q XDG_DATA_HOME
+  and set -gx OMF_PATH "$XDG_DATA_HOME/omf"
+  or set -gx OMF_PATH "$HOME/.local/share/omf"
+
+# Load Oh My Fish configuration.
+source $OMF_PATH/init.fish
+set -gx TERMINAL /usr/local/bin/termite
 set -gx WALLPAPERS ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
@@ -35,7 +42,7 @@ function bare_include_file
 end
 
 function bare_add_all
-    cat $bare_includes | xargs -I{} fish -c "baredot add {}"
+    cat $bare_includes | xargs -I {} fish -c "baredot add {}"
 end
 
 function git_productivity
@@ -75,8 +82,8 @@ alias vi="nvim"
 alias svi="sudo nvim"
 alias med="medit > /dev/null 2>&1"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
-alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
-         && sudo reflector --verbose --latest 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
+# alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
+         # && sudo reflector --verbose --latest 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias logoff="kill -9 -1"
 alias chcaps="setxkbmap -option \"caps:swapescape\""
 alias chback="setxkbmap -option "
@@ -93,10 +100,10 @@ alias chback="setxkbmap -option "
   abbr mus '~/Music'
   abbr dcs '~/Documents'
 
-  abbr pi 'sudo pacman -S'
-  abbr pu 'pacman -Syy'
-  abbr pq 'pacman -Qs'
-  abbr pr 'sudo pacman -Rns'
+  # abbr pi 'sudo pacman -S'
+  # abbr pu 'pacman -Syy'
+  # abbr pq 'pacman -Qs'
+  # abbr pr 'sudo pacman -Rns'
 
   abbr sup 'sudo updatedb'
   abbr sct 'sudo systemctl'
