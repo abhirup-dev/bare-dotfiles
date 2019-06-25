@@ -13,6 +13,24 @@
 /* rofi.font: System San Francisco Display 18 */
 
 
+/* rofi.display-run:     */
+/* rofi.display-drun:    */
+/* rofi.display-window:  */
+
+/* #                  background     border         separator */
+/* rofi.color-window: argb:cc14161a, argb:00000000, argb:00000000 */
+/* #                  bg             fg             alt-bg         hl-bg          hl-fg */
+/* rofi.color-normal: argb:0000000,  argb:ff878d94, argb:00000000, argb:00000000, argb:ff4978B3 */
+/* rofi.color-active: argb:0000000,  argb:ffced4db, argb:00000000, argb:00000000, argb:ff4978B3 */
+/* rofi.color-urgent: argb:0000000,  argb:ff623e3e, argb:00000000, argb:00000000, argb:ff4978B3 */
+
+/* rofi.fake-transparency: true */
+/* rofi.fake-background:   background */
+
+/* rofi.separator-style: none */
+/* rofi.scroll-method:   0 */
+/* rofi.hide-scrollbar:  true */
+
 /* URxvt*termName:          rxvt-256colours */
 URxvt*buffered:          true
 URxvt*perl-ext:          default,matcher,resize-font
