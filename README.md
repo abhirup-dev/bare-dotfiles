@@ -1,3 +1,24 @@
+## TODO:
+* [ ] Automating Saving and Loading layouts using i3-layout-manager
+* [ ] Layouts for Latex, Mpv-Ytdl-Jupyter
+* [ ] Mod+Shift+Enter to launch terminal in `$PWD` directory
+* [ ] Refresh/reset all terminal instances in current workspace
+
+## Useful snippets / codes
+* youtube-dl
+    - to download playlist bestvideo + bestaudio:
+        ```sh
+            youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
+        ```
+    - to download only playlist info
+        ```sh
+            youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
+        ```
+    - configure names of saved videos
+        ```sh
+            youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
+        ```
+
 ## Setup details:
 * vim-plug:
     curl -fLo ~/.config/nvim/autoload/plug.vim  --create-dirs \
