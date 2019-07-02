@@ -12,14 +12,14 @@
 
 ## Useful snippets / codes
 * youtube-dl
-        ```sh
-            #- to download playlist bestvideo + bestaudio:
-            youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
-            #- to download only playlist info
-            youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
-            #- configure names of saved videos
-            youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
-        ```
+    ```sh
+        #- to download playlist bestvideo + bestaudio:
+        youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
+        #- to download only playlist info
+        youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
+        #- configure names of saved videos
+        youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
+    ```
 
 ## Setup details:
 * vim-plug:
