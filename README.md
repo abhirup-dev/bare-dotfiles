@@ -4,7 +4,7 @@
     * [x] weather script (used `curl  "wttr.in/Kolkata?format=%t"`)
     * [ ] i3-blocks (make allowances for gapless config)
     * [ ] pomodoro
-* [ ] Automating Saving and Loading layouts using i3-layout-manager
+* [x] Automating Saving and Loading layouts using i3-layout-manager
 * Layouts
     * [ ] for Latex, Mpv(Ytdl)-Jupyter-terminal
 * [x] Mod+Shift+Enter to launch terminal in `$PWD` directory
@@ -13,12 +13,12 @@
 ## Useful snippets / codes
 * youtube-dl
     ```sh
-        #- to download playlist bestvideo + bestaudio:
-        youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
-        #- to download only playlist info
-        youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
-        #- configure names of saved videos
-        youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
+    #- to download playlist bestvideo + bestaudio:
+    youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
+    #- to download only playlist info
+    youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
+    #- configure names of saved videos
+    youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
     ```
 
 ## Setup details:
@@ -40,12 +40,10 @@
     ```
 
 * Backup for bare-repository:
-    - Create alias:
-        ```
-        alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
-        ```
-	- Checkout + Backup:
-        ```
-		baredot checkout 2>&1 | egrep "\s+\." | awk "{print $1}" | xargs -I{} mv {} {}.bak
-        ```
+    ```sh
+    # - Create alias:
+    alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
+    # - Checkout + Backup:
+    baredot checkout 2>&1 | egrep "\s+\." | awk "{print $1}" | xargs -I{} mv {} {}.bak
+    ```
 * Install packages given in [required-after-install.md](mydotfiles/required-after-install.md)
