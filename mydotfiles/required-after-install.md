@@ -13,6 +13,8 @@
     - scrot
 * acpi - battery client
 * i3blocks-gaps - clone (not AUR)
+* xtitle - show window titles ( i3blocks )
+* pacman-contrib - for checkupdates package ( i3blocks )
 * gnome-polkit
 * gvfs, gvfs-mtp - for automounting of removable drives
 * thunar + plugins:

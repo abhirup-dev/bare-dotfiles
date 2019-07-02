@@ -70,11 +70,11 @@ end
 
 alias la="ls -a"
 alias ll="ls -l"
+alias rrf="rm -rf"
 alias grep="grep --color"
 alias diff="diff --color"
 alias open="xdg-open"
 alias vi="nvim"
-alias svi="sudo nvim"
 alias med="medit > /dev/null 2>&1"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
@@ -158,17 +158,6 @@ function mkcd --description  'Create directory and cd into it'
     mkdir $argv[1] ; cd $argv[1]
 end
 
-# Parsing VCARD file
-function parse_vcf
-    if test -d $argv[2]
-        echo "just parse"
-        awk '/BEGIN:VCARD/ {flag=1;next} /(VERSION:2.1|N.*;;;)/{next} /END:VCARD/ {flag=0;print"--"} flag' $argv[1]  | awk '/PHOTO;ENCODING=.*/{flag=0;}/X-GROUP:/{flag=1;next}flag'
-    else
-        echo entered name=$argv[2]
-        awk '/BEGIN:VCARD/ {flag=1;next} /(VERSION:2.1|N.*;;;)/{next} /END:VCARD/ {flag=0;print"--"} flag' $argv[1]  | awk '/PHOTO;ENCODING=.*/{flag=0;}/X-GROUP:/{flag=1;next}flag' | awk -v pat="FN:$argv[2]" '$0~pat {flag=1;} /--/ {flag=0;next}flag'
-    end
-end
-
 # Generating metadata from video
 # function ffmcreate
 #     ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
@@ -198,6 +187,11 @@ fish_default_key_bindings
 #Swap CapsLock and Escape
 chcaps
 
+# Event listener functions
+function dostuff --on-event fish_prompt
+    pwd > /tmp/whereami
+end
+
 
 # Colors
 set default (tput sgr0)
@@ -205,7 +199,6 @@ set red (tput setaf 1)
 set green (tput setaf 2)
 set purple (tput setaf 5)
 set orange (tput setaf 9)
-
 # "Less" colors for man pages
 set -gx PAGER less
 # Begin blinking
@@ -222,5 +215,3 @@ set -gx LESS_TERMCAP_so $purple
 set -gx LESS_TERMCAP_ue $default
 # Begin underline
 set -gx LESS_TERMCAP_us $green
-
-# set -gx COMP_WORDBREAKS " /"'><;|&("

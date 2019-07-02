@@ -1,0 +1,3 @@
+[submodule ".config/scripts/pomodoro"]
+	path = .config/scripts/pomodoro
+	url = https://github.com/wilsonchaney/pomodoro

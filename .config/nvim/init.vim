@@ -1,8 +1,6 @@
 "for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
 "   exe 'source' f
 "endfor
-" Enable syntax highlighting
-" Set Leader key
 :let mapleader = " "
 
 " Load Plugins
@@ -45,8 +43,8 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'Konfekt/FastFold'
 Plug 'elzr/vim-json'
 " Plug 'dcharbon/vim-flatbuffers'
-" Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'SidOfc/mkdx'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 Plug 'dag/vim-fish'
 " Plug 'tpope/vim-fugitive'
 call plug#end()
@@ -70,7 +68,7 @@ set sts=4                                                 " softtabstop, makes s
 set mouse=a mousemodel=popup                              " enable mouse support
 set synmaxcol=200
 autocmd BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown" markdown file recognition
 autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 
 " Enabling vertical indentation guides
@@ -119,7 +117,7 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#completions_enabled = 0
 
 " Configuring vim-markdown
-let g:vim_markdown_folding_level = 3
+" let g:vim_markdown_folding_level = 3
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
 autocmd Filetype markdown set conceallevel=0
@@ -127,9 +125,15 @@ autocmd Filetype markdown normal zR
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_json_frontmatter = 1
+" Indent and auto-insert disabled because conflicts with MKDX plugin
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
 
 " Configuring vim-stay
 set viewoptions=cursor,folds,slash,unix
+
+" Configuring indentLine
+let g:indentLine_conceallevel=0
 
 " Configuring gutentags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
@@ -170,8 +174,7 @@ let g:neoformat_basic_format_trim = 1
 
 " VimTex extension configurations
 let g:tex_flavor = 'latex'
-" set conceallevel=1
-" let g:tex_conceal = 'abdmg'
+let g:tex_conceal = 'abdmg'
 let g:vimtex_fold_manual = 1
 let g:vimtex_latexmk_continuous = 1
 let g:vimtex_quickfix_mode=1
@@ -183,9 +186,9 @@ let g:latex_view_general_viewer = 'zathura'
 let g:vimtex_view_method = "zathura"
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<C-space>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 nmap <M-j> ddp
 nmap <M-k> kddpk
@@ -227,15 +230,6 @@ autocmd! User GoyoLeave Limelight!
 
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
-" Custom | Personal Hacks for everyday ease
-" Had to add <bs>l because https://vi.stackexchange.com/a/1878
-" Adds n trailing spaces
-nmap <leader>il a<space><esc><bs>l
-" Adds n leading spaces
-nmap <leader>ih i<space><esc>
-" Adds newline in insert mode
-" imap <leader><cr> <esc>o
-
 " Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 augroup qs_colors
@@ -245,17 +239,12 @@ augroup qs_colors
 augroup END
 let g:qs_lazy_highlight = 1
 
-
-
-
-
-
-
 " Optional Support
 
 " Configuring You Complete Me (YCM)
 " let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
 let g:python3_host_prog = "/usr/bin/python"
+let g:python_host_prog = "/usr/bin/python2"
 " let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 " let g:ycm_complete_in_comments = 1 " turn on completion in comments
 " let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
@@ -290,17 +279,6 @@ let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 1
 let g:mkdp_browser = 'firefox'
 let g:mkdp_browserfunc = ''
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-" hide_yaml_meta: if hide yaml metadata, default is 1
 let g:mkdp_preview_options = {
     \ 'mkit': {},
     \ 'katex': {},
@@ -319,3 +297,20 @@ let g:mkdp_port = ''
 " preview page title
 " ${name} will be replace with the file name
 let g:mkdp_page_title = '「${name}」'
+
+
+
+
+" Custom | Personal Hacks for everyday ease
+
+" Had to add <bs>l because https://vi.stackexchange.com/a/1878
+" Adds n trailing spaces
+nmap <leader>il a<space><esc><bs>l
+" Adds n leading spaces
+nmap <leader>ih i<space><esc>
+" Adds newline in insert mode
+" imap <leader><cr> <esc>o
+
+" Allows yanking selected text (https://vim.fandom.com/wiki/Search_for_visually_selected_text)
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+

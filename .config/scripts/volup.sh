@@ -2,7 +2,7 @@
 x=$(pamixer --get-volume);
 if [ $x -gt 145 ]
 then
-    volnoti-show $x;
+    volnoti-show 100;
 else
     pactl set-sink-volume 0 +5%;
     x=$(($x+5))

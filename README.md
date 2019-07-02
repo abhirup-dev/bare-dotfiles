@@ -1,21 +1,23 @@
 ## TODO:
+* Add auxiliary scripts for all additional functions (so that config is stable in beginning)
+    * [ ] i3-layout-manager
+    * [x] weather script (used `curl  "wttr.in/Kolkata?format=%t"`)
+    * [ ] i3-blocks (make allowances for gapless config)
+    * [ ] pomodoro
 * [ ] Automating Saving and Loading layouts using i3-layout-manager
-* [ ] Layouts for Latex, Mpv-Ytdl-Jupyter
-* [ ] Mod+Shift+Enter to launch terminal in `$PWD` directory
+* Layouts
+    * [ ] for Latex, Mpv(Ytdl)-Jupyter-terminal
+* [x] Mod+Shift+Enter to launch terminal in `$PWD` directory
 * [ ] Refresh/reset all terminal instances in current workspace
 
 ## Useful snippets / codes
 * youtube-dl
-    - to download playlist bestvideo + bestaudio:
         ```sh
+            #- to download playlist bestvideo + bestaudio:
             youtube-dl -f bestvideo+bestaudio -i "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv"
-        ```
-    - to download only playlist info
-        ```sh
+            #- to download only playlist info
             youtube-dl -i --get-filename --skip-download "PLZbbT5o_s2xoWNVdDudn51XM8lOuZ_Njv" >> courselist.md
-        ```
-    - configure names of saved videos
-        ```sh
+            #- configure names of saved videos
             youtube-dl -o "%(playlist_index)s-%(title)s.%(ext)s" <playlist_link>
         ```
 
