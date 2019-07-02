@@ -1,13 +1,13 @@
 ## TODO:
 * Add auxiliary scripts for all additional functions (so that config is stable in beginning)
-    * [ ] i3-layout-manager
+    * [x] i3-layout-manager ([script](.config/scripts/load_i3layout.sh))
     * [x] weather script (used `curl  "wttr.in/Kolkata?format=%t"`)
     * [ ] i3-blocks (make allowances for gapless config)
     * [ ] pomodoro
 * [x] Automating Saving and Loading layouts using i3-layout-manager
 * Layouts
     * [ ] for Latex, Mpv(Ytdl)-Jupyter-terminal
-* [x] Mod+Shift+Enter to launch terminal in `$PWD` directory
+* [x] Mod+Shift+Enter to launch terminal in `$PWD` directory ([script](.config/scripts/last_pwd_shell.sh))
 * [ ] Refresh/reset all terminal instances in current workspace
 
 ## Useful snippets / codes
