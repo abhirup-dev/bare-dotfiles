@@ -229,3 +229,5 @@ set -gx LESS_TERMCAP_ue $default
 set -gx LESS_TERMCAP_us $green
 
 # set -gx COMP_WORDBREAKS " /"'><;|&("
+
+source pre-ubuntu.fish
