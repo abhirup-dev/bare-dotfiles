@@ -230,4 +230,4 @@ set -gx LESS_TERMCAP_us $green
 
 # set -gx COMP_WORDBREAKS " /"'><;|&("
 
-source pre-ubuntu.fish
+source "/home/rebaca/.config/fish/pre-ubuntu.fish"
