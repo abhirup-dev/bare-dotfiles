@@ -253,7 +253,8 @@ let g:qs_lazy_highlight = 1
 
 " Configuring You Complete Me (YCM)
 " let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
-let g:python3_host_prog = "/usr/bin/python"
+let g:python3_host_prog = "/usr/bin/python3"
+let g:python_host_prog = "/usr/bin/python2"
 " let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
 " let g:ycm_complete_in_comments = 1 " turn on completion in comments
 " let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
