@@ -36,19 +36,32 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (c-c++ :variables
+            c-c++-backend 'rtags
+            c-c++-enable-rtags-completion nil)
+     python
+     vimscript
+     markdown
+     latex
+     bibtex
+     pdf
+     themes-megapack
      helm
-     ;; auto-completion
+     (auto-completion :variables
+                      auto-completion-return-key-behavior nil
+                      auto-completion-tab-key-behavior 'complete)
      ;; better-defaults
+     imenu-list
      emacs-lisp
      git
-     ;; markdown
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-shell 'eshell
+            shell-default-height 30
+            shell-default-position 'bottom)
      ;; spell-checking
-     ;; syntax-checking
-     ;; version-control
+     syntax-checking
+     version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -126,8 +139,12 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(
+                         ;; seti has wierd colour theme in menus; contrast is great
+                         seti
+                         spacemacs-dark
+                         spacemacs-light
+                         )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -293,6 +310,47 @@ values."
    dotspacemacs-whitespace-cleanup nil
    ))
 
+;; Custom addition for Restoring and saving window layout
+;; (defun save-framegeometry ()
+;;   "Gets the current frame's geometry and saves to ~/.emacs.d/framegeometry."
+;;   (let (
+;;         (framegeometry-left (frame-parameter (selected-frame) 'left))
+;;         (framegeometry-top (frame-parameter (selected-frame) 'top))
+;;         (framegeometry-width (frame-parameter (selected-frame) 'width))
+;;         (framegeometry-height (frame-parameter (selected-frame) 'height))
+;;         (framegeometry-file (expand-file-name "~/.emacs.d/framegeometry"))
+;;         )
+
+;;     (when (not (number-or-marker-p framegeometry-left))
+;;       (setq framegeometry-left 0))
+;;     (when (not (number-or-marker-p framegeometry-top))
+;;       (setq framegeometry-top 0))
+;;     (when (not (number-or-marker-p framegeometry-width))
+;;       (setq framegeometry-width 0))
+;;     (when (not (number-or-marker-p framegeometry-height))
+;;       (setq framegeometry-height 0))
+
+;;     (with-temp-buffer
+;;       (insert
+;;        ";;; This is the previous emacs frame's geometry.\n"
+;;        ";;; Last generated " (current-time-string) ".\n"
+;;        "(setq initial-frame-alist\n"
+;;        "      '(\n"
+;;        (format "        (top . %d)\n" (max framegeometry-top 0))
+;;        (format "        (left . %d)\n" (max framegeometry-left 0))
+;;        (format "        (width . %d)\n" (max framegeometry-width 0))
+;;        (format "        (height . %d)))\n" (max framegeometry-height 0)))
+;;       (when (file-writable-p framegeometry-file)
+;;         (write-file framegeometry-file))))
+;;   )
+;; (defun load-framegeometry ()
+;;   "Loads ~/.emacs.d/framegeometry which should load the previous frame's
+;; geometry."
+;;   (let ((framegeometry-file (expand-file-name "~/.emacs.d/framegeometry")))
+;;     (when (file-readable-p framegeometry-file)
+;;       (load-file framegeometry-file)))
+;;   )
+
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -300,6 +358,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; Restore Frame size and location, if we are using gui emacs
+  ;; (if window-system
+  ;;     (progn
+  ;;       (add-hook 'after-init-hook 'load-framegeometry)
+  ;;       (add-hook 'kill-emacs-hook 'save-framegeometry))
+  ;;   )
   )
 
 (defun dotspacemacs/user-config ()
@@ -309,8 +373,27 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  )
+  (setq org-agenda-files (list "~/Dropbox/sync/org/test.org"
+                               "~/Dropbox/sync/org/newtodos.org")
+        )
+  (setq org-latex-pdf-process
+        '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+  ;; This allows the preview pdf to opened in emacs
+  ;; However, the sync b/w LaTeX and PDF buffers does not work
+  ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+  ;;       TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+  ;;       TeX-source-correlate-start-server t
+  ;;       )
+  ;; UTF8!
+  (set-language-environment 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (setq locale-coding-system 'utf-8)
+  (set-default-coding-systems 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+)
 
+(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "FAIL" "|" "DONE" "DELEGATED" "CANCELLED" )))
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -327,3 +410,25 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("~/Dev/Testbench/org-mode/test.org")))
+ '(package-selected-packages
+   (quote
+    (vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)

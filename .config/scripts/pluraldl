@@ -1,0 +1,9 @@
+#!/bin/bash
+uname=samir-chatterjee
+passw=Plural@R2020
+url=$1
+pstart=$2
+echo -e "*******\nDownloading subtitles only\n*******"
+youtube-dl -u $uname -p $passw -o "%(playlist)s/%(chapter_number)s-%(chapter)s/%(playlist_index)s-%(title)s.%(ext)s" $url --playlist-start $pstart --all-subs --skip-download
+echo -e "*******\nDownloading Videos only\n*******"
+youtube-dl -u $uname -p $passw -o "%(playlist)s/%(chapter_number)s-%(chapter)s/%(playlist_index)s-%(title)s.%(ext)s" --min-sleep-interval 31 --max-sleep-interval 32 $url --playlist-start $pstart -r 500K

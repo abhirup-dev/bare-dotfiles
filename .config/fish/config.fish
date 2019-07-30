@@ -1,15 +1,19 @@
+set -gx GTK_THEME Adwaita:dark
+set -gx PDFR /usr/bin/zathura
+set -gx BROWSER /usr/bin/google-chrome-stable
+# $TERMINAL made use of by mimeapps for xdg-open
 set -gx TERMINAL /usr/bin/termite
 set -gx WALLPAPERS ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
 set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
-export QT_SCALE_FACTOR=1.25
+export QT_SCALE_FACTOR=1
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 # set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
-set -gx PATH $PATH $SCRIPTS
+set -gx PATH $PATH $SCRIPTS $HOME/.local/bin
 set -gx megadir $HOME/MEGAsync
 set -gx vinit $HOME/.config/nvim/init.vim
   # ________  .___  ___________
@@ -70,11 +74,13 @@ end
 
 alias la="ls -a"
 alias ll="ls -l"
+alias lgrep="ls | grep"
 alias rrf="rm -rf"
 alias grep="grep --color"
 alias diff="diff --color"
 alias open="xdg-open"
 alias vi="nvim"
+alias svi="sudo nvim"
 alias med="medit > /dev/null 2>&1"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
@@ -82,7 +88,7 @@ alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlis
 alias logoff="kill -9 -1"
 alias chcaps="setxkbmap -option \"caps:swapescape\""
 alias chback="setxkbmap -option "
-
+alias mpva="mpv --no-video"
 # Abbreviations
 # if not set -q abbrs_initialized
 #   set -U abbrs_initialized

@@ -180,8 +180,8 @@ bar {
 
 # Title bars
 for_window [class="^.*"] border pixel 3
-gaps inner 7
-gaps outer 3
+gaps inner 4
+gaps outer 1
 
 # polkit
 exec --no-startup-id bash -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & eval $(gnome-keyring-daemon -s --components=pkcs11,secrets,ssh,gpg) &"
@@ -203,9 +203,15 @@ bindsym XF86MonBrightnessDown exec light -U 5;
 
 exec --no-startup-id volnoti &
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
-exec --no-startup-id feh --bg-scale $WALLPAPERS/lofi-sunglasses_books_beach.jpg
+exec --no-startup-id feh --bg-scale $WALLPAPERS/Reef_patches_sand_sea.jpg
 exec --no-startup-id "compton -cbf"
 exec --no-startup-id nm-applet
 exec --no-startup-id alsactl restore
 
 bindsym $mod+Control+L exec --no-startup-id $SCRIPTS/load_i3layout.sh
+
+# jump to specific windows
+bindsym $mod+t [class="termite"] focus
+bindsym $mod+greater exec "$SCRIPTS/spcl next"
+bindsym $mod+less exec "$SCRIPTS/spcl prev"
+bindsym $mod+slash exec "$SCRIPTS/spcl play"

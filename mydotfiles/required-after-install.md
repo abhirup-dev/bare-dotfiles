@@ -22,6 +22,9 @@
     - archive-plugin
     - xarchiver (not a plugin; standalone binary)
 * grub-cutomiser
+* for Spacemacs - 
+    - python-importmagic
+    - python-epc
 * for [delicious-sddm-theme](https://github.com/stuomas/delicious-sddm-theme) :
     - qt5-graphicaleffects
     - qt5-multimedia

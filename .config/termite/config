@@ -6,7 +6,8 @@ bold_is_bright = true
 #cell_width_scale = 1.0
 #clickable_url = true
 dynamic_title = true
-font = RobotoMono Nerd Font 11
+cursor_shape = ibeam
+font = RobotoMono Nerd Font 10
 # fullscreen = true
 icon_name = terminal
 #mouse_autohide = false
@@ -23,42 +24,83 @@ search_wrap = true
 #browser = xdg-open
 
 [colors]
+
 # special
 foreground      = #f4fef7
 foreground_bold = #f4fef7
-cursor          = #c5c8c6
-background = rgba(20, 20, 20, 0.80)
+cursor          = #969896
+background      = #1d1f21
+
+background = rgba(20, 20, 20, 0.70)
 
 # black
-color0  = #2822ee
-color8  = #373411
+color0  = #1d1f21
+color8  = #969896
 
 # red
-color1  = #a54242
-color9  = #cc6666
+color1  = #cc342b
+color9  = #cc342b
 
 # green
-color2  = #8c9440
-color10 = #b5bd68
+color2  = #198844
+color10 = #198844
 
 # yellow
-color3  = #de935f
-color11 = #f0c674
+color3  = #fba922
+color11 = #fba922
 
 # blue
 color4  = #5f819d
 color12 = #81a2be
 
 # magenta
-color5  = #85678f
-color13 = #b294bb
+color5  = #a36ac7
+color13 = #a36ac7
 
 # cyan
 color6  = #5e8d87
 color14 = #8abeb7
 
 # white
-color7  = #707880
-color15 = #c5c8c6
+color7  = #c5c8c6
+color15 = #ffffff
 
+# [colors]
+# # special
+# foreground      = #f4fef7
+# foreground_bold = #f4fef7
+# cursor          = #c5c8c6
+# background = rgba(20, 20, 20, 0.70)
+#
+# # black
+# color0  = #2822ee
+# color8  = #373411
+#
+# # red
+# color1  = #a54242
+# color9  = #cc6666
+#
+# # green
+# color2  = #8c9440
+# color10 = #b5bd68
+#
+# # yellow
+# color3  = #de935f
+# color11 = #fff538
+#
+# # blue
+# color4  = #5f819d
+# color12 = #81a2be
+#
+# # magenta
+# color5  = #85678f
+# color13 = #b294bb
+#
+# # cyan */
+# color6  = #5e8d87
+# color14 = #8abeb7
+
+# # white */
+# color7  = #707880
+# color15 = #c5c8c6
 # vim: ft=css
