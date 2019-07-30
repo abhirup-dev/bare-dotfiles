@@ -4,11 +4,11 @@
     * [x] weather script (used `curl  "wttr.in/Kolkata?format=%t"`)
     * [ ] i3-blocks (make allowances for gapless config)
     * [ ] pomodoro
-* [x] Automating Saving and Loading layouts using i3-layout-manager
+    * [x] Automating Saving and Loading layouts using i3-layout-manager
 * Layouts
     * [ ] for Latex, Mpv(Ytdl)-Jupyter-terminal
+* [x] spotify controls through spcl ([blocklet](.config/scripts/spcl_blocklet))
 * [x] Mod+Shift+Enter to launch terminal in `$PWD` directory ([script](.config/scripts/last_pwd_shell.sh))
-* [ ] Refresh/reset all terminal instances in current workspace
 
 ## Useful snippets / codes
 * youtube-dl
