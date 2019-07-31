@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -198,5 +198,5 @@ bindsym XF86MonBrightnessDown exec light -U 5;
 
 exec --no-startup-id volnoti -a 0.3
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
-exec --no-startup-id feh --bg-scale $WALLPAPERS/sunglass-unsplash.jpg
+exec --no-startup-id feh --bg-scale $WALLPAPERS/lofi-sunglasses_books_beach.jpg
 exec --no-startup-id "compton -cbf"

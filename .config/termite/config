@@ -27,7 +27,7 @@ search_wrap = true
 foreground      = #f4fef7
 foreground_bold = #f4fef7
 cursor          = #c5c8c6
-background = rgba(20, 20, 20, 0.65)
+background = rgba(20, 20, 20, 0.75)
 
 # black
 color0  = #2822ee

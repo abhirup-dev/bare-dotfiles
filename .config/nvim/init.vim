@@ -287,7 +287,7 @@ let g:airline_symbols.maxlinenr = ''
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_refresh_slow = 1
-let g:mkdp_browser = 'firefox'
+let g:mkdp_browser = 'google-chrome'
 let g:mkdp_browserfunc = ''
 " options for markdown render
 " mkit: markdown-it options for render
