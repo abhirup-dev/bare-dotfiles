@@ -4,7 +4,8 @@ set -gx VISUAL vim
 set -gx EDITOR nvim
 set -gx BROWSER /usr/bin/google-chrome-stable
 # $TERMINAL made use of by mimeapps for xdg-open
-set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
+# set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
+set -gx TERMINAL /usr/bin/termite
 set -gx WALLPAPERS ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config

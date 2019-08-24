@@ -30,6 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
+# bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec st -f 'Source Code Pro Medium:size=12'
 bindsym $mod+Shift+Return exec $SCRIPTS/last_pwd_shell.sh
 
