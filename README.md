@@ -1,5 +1,6 @@
 ## TODO:
 * Add auxiliary scripts for all additional functions (so that config is stable in beginning)
+    * [ ] remote control for mpv
     * [x] i3-layout-manager ([script](.config/scripts/load_i3layout.sh))
     * [x] weather script (used `curl  "wttr.in/Kolkata?format=%t"`)
     * [ ] i3-blocks (make allowances for gapless config)

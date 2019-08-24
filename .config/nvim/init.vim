@@ -8,8 +8,13 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'deathlyfrantic/deoplete-spell'
-Plug 'Rip-Rip/clang_complete'
+" Plug 'Rip-Rip/clang_complete'
 Plug 'davidhalter/jedi-vim'
+Plug 'autozimu/LanguageClient-neovim', {
+            \ 'branch': 'next',
+            \ 'do': 'bash install.sh',
+            \ }
+Plug 'junegunn/fzf'
 Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
@@ -22,22 +27,27 @@ Plug 'honza/vim-snippets'
 Plug 'unblevable/quick-scope'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
-Plug 'Yggdroot/indentLine' " Why important?
+" Plug 'Yggdroot/indentLine' " Why important?
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/goyo.vim'
+" Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
-Plug 'elzr/vim-json', {'for': 'json'}
-Plug 'SidOfc/mkdx'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
+" Plug 'elzr/vim-json', {'for': 'json'}
+" Plug 'SidOfc/mkdx'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 Plug 'dag/vim-fish', {'for': 'fish'}
+Plug 'jceb/vim-orgmode'
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'airblade/vim-gitgutter'
+" Plug 'tpope/vim-abolish'
 call plug#end()
 
+set incsearch
 set ignorecase
 set autochdir
 syntax on
@@ -62,7 +72,9 @@ autocmd Filetype tex set spell complete+=kspell
 autocmd BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown" markdown file recognition
 autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
-
+autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd Filetype markdown set conceallevel=0
+autocmd Filetype markdown normal zR
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\
 " :set list
@@ -79,8 +91,8 @@ colorscheme gruvbox
 set background=dark
 
 " " Configuring Airline
-let g:airline_theme='luna'
-let g:airline#extensions#ale#enabled = 0
+" let g:airline_theme='luna'
+let g:airline#extensions#ale#enabled = 1
 " hi Normal guibg=NONE ctermbg=NONE
 
 " set noshowmode " Already handled well by powerline/airline/lightline
@@ -88,12 +100,37 @@ let g:airline#extensions#ale#enabled = 0
 let g:python3_host_prog = "/usr/bin/python"
 let g:python_host_prog = "/usr/bin/python2"
 
-" Configuring deoplete
+" " Configuring deoplete
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
-call deoplete#custom#var('omni', 'input_patterns', {
-            \ 'tex': g:vimtex#re#deoplete
+let g:deoplete#sources = {}
+" " let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
+" call deoplete#custom#var('omni', 'input_patterns', {
+"             \ 'tex': g:vimtex#re#deoplete
+"             \})
+" Pass a dictionary to set multiple options
+call deoplete#custom#option({
+            \ 'auto_complete_delay': 20,
+            \ 'smart_case': v:true,
+            \ })
+" Disable the candidates in Comment/String syntaxes.
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
+call deoplete#custom#option('sources', {
+            \ 'cpp': ['LanguageClient'],
+            \ 'c': ['LanguageClient'],
             \})
+" Configuring LanguageClient
+let g:LanguageClient_serverCommands={
+            \ 'cpp': ['/usr/bin/ccls'],
+            \ 'c': ['/usr/bin/ccls'],
+            \}
+
+" Configuring Coc.nvim
+" inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Configuring jedi-vim
 let g:jedi#use_splits_not_buffers = "left"
@@ -112,8 +149,6 @@ let g:jedi#completions_enabled = 0
 " let g:vim_markdown_folding_level = 3
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
-autocmd Filetype markdown set conceallevel=0
-autocmd Filetype markdown normal zR
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_json_frontmatter = 1
@@ -145,8 +180,8 @@ let g:ale_fixers = {
             \ '*': [
             \ 'trim_whitespace'
             \]}
-            " \ , 'ale#fixers#generic_python#BreakUpLongLines'
-            " \ 'yapf']
+" \ , 'ale#fixers#generic_python#BreakUpLongLines'
+" \ 'yapf']
 let g:ale_linters = {
             \   'python': ['flake8', 'pycodestyle']
             \}
@@ -198,47 +233,42 @@ nmap <leader>cp :let @" = expand("%:p")<CR>
 
 " Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-augroup qs_colors
-    autocmd!
-    autocmd ColorScheme * highlight QuickScopePrimary guifg="#afff5f" gui=underline ctermfg=155 cterm=underline
-    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-augroup END
 let g:qs_lazy_highlight = 1
 
 " powerline symbols
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols = {}
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols = {}
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = '☰'
+" let g:airline_symbols.maxlinenr = ''
 
 " Live markdown preview
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 1
-let g:mkdp_browser = 'google-chrome-stable'
-let g:mkdp_browserfunc = ''
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1
-    \ }
+" let g:mkdp_auto_start = 0
+" let g:mkdp_auto_close = 1
+" let g:mkdp_refresh_slow = 1
+" let g:mkdp_browser = 'google-chrome-stable'
+" let g:mkdp_browserfunc = ''
+" let g:mkdp_preview_options = {
+" \ 'mkit': {},
+" \ 'katex': {},
+" \ 'uml': {},
+" \ 'maid': {},
+" \ 'disable_sync_scroll': 0,
+" \ 'sync_scroll_type': 'middle',
+" \ 'hide_yaml_meta': 1
+" \ }
 " use a custom markdown style must be absolute path
-let g:mkdp_markdown_css = ''
+" let g:mkdp_markdown_css = ''
 " use a custom highlight style must absolute path
-let g:mkdp_highlight_css = ''
+" let g:mkdp_highlight_css = ''
 " use a custom port to start server or random for empty
-let g:mkdp_port = ''
+" let g:mkdp_port = ''
 " preview page title
-let g:mkdp_page_title = '「${name}」'
+" let g:mkdp_page_title = '「${name}」'
 
 
 
@@ -263,6 +293,8 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 nmap <M-j> ddp
 nmap <M-k> kddpk
 
+nnoremap <leader>bb :ls<CR>
+nnoremap <leader>bo :b<space>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>

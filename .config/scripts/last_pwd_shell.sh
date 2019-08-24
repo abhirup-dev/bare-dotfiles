@@ -1,4 +1,6 @@
 #!/bin/bash
-
+# term=st
 DIR=$(cat /tmp/whereami)
-i3-sensible-terminal --directory="$DIR"
+PWD=$DIR
+$TERMINAL
+# --directory="$DIR"

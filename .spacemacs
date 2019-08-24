@@ -36,9 +36,15 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     html
+     emoji
+     go
      (c-c++ :variables
-            c-c++-backend 'rtags
-            c-c++-enable-rtags-completion nil)
+            ;; c-c++-backend 'rtags
+            ;; c-c++-enable-rtags-completion nil
+            c-c++-enable-clang-support t
+            )
+     cmake
      python
      vimscript
      markdown
@@ -59,7 +65,7 @@ values."
             shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; spell-checking
+     spell-checking
      syntax-checking
      version-control
      )
@@ -140,10 +146,10 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         ;; seti has wierd colour theme in menus; contrast is great
-                         seti
                          spacemacs-dark
                          spacemacs-light
+                         ;; seti has wierd colour theme in menus, and org-mode is less colorful; contrast is great
+                         seti
                          )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -276,7 +282,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers 'relative
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -373,11 +379,86 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq org-agenda-files (list "~/Dropbox/sync/org/test.org"
-                               "~/Dropbox/sync/org/newtodos.org")
-        )
+  ;; (setq global-linum-mode )
+  ;; (setq org-agenda-files (list "~/Dropbox/sync/org/test.org"
+  ;;                              "~/Dropbox/sync/org/newtodos.org")
+  ;;       )
+  ;; (with-eval-after-load 'org
+  ;;     (org-babel-do-load-languages 'org-babel-load-languages
+  ;;                                 '((dot . t)
+  ;;                                   (maxima . t)
+  ;;                                   (python . t)))
+  ;;     (setq org-babel-python-command "python3"))
+  (with-eval-after-load 'ox-latex
+      (add-to-list 'org-latex-classes
+                  '("bjmarticle"
+                    "\\documentclass{article}
+                    \\usepackage[utf8]{inputenc}
+                    \\usepackage[T1]{fontenc}
+                    \\usepackage{graphicx}
+                    \\usepackage{longtable}
+                    \\usepackage{hyperref}
+                    \\usepackage{natbib}
+                    \\usepackage{amssymb}
+                    \\usepackage{amsmath}
+                    \\usepackage{geometry}
+                    \\geometry{a4paper,left=2.5cm,top=2cm,right=2.5cm,bottom=2cm,marginparsep=7pt, marginparwidth=.6in}"
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+    (add-to-list 'org-latex-classes
+                 ;; ebook class using memoir
+                 '("ebook"
+                    "\\documentclass[11pt, oneside]{memoir}
+                    \\setstocksize{9in}{6in}
+                    \\settrimmedsize{\\stockheight}{\\stockwidth}{*}
+                    \\setlrmarginsandblock{2cm}{2cm}{*} % Left and right margin
+                    \\setulmarginsandblock{2cm}{2cm}{*} % Upper and lower margin
+                    \\checkandfixthelayout
+                    \\usepackage{times}
+                    \\usepackage[british]{babel}
+                    \\usepackage[raggedright]{sidecap}
+                    \\setsecheadstyle{\\normalfont \\raggedright \\textbf}
+                    \\setsubsecheadstyle{\\normalfont \\raggedright \\emph}
+                    \\usepackage[labelformat=empty, font=small]{caption}
+                    \\usepackage{pdfpages}
+                    \\usepackage[unicode=true,
+                    bookmarks=true,bookmarksnumbered=false,bookmarksopen=true,bookmarksopenlevel=1,
+                    breaklinks=true,pdfborder={0 0 0},backref=false,colorlinks=false,pdfborderstyle={/S/U/W .5}, allbordercolors={.8 .8 .8}]
+                    {hyperref}
+                    \\pagestyle{myheadings}
+                    \\setcounter{tocdepth}{0}
+                    \\usepackage{ccicons}
+                    \\OnehalfSpacing
+                    \\usepackage[authoryear]{natbib}
+                    "
+                ("\\chapter{%s}" . "\\chapter*{%s}")
+                ("\\section{%s}" . "\\section*{%s}")
+                ("\\subsection{%s}" . "\\subsection*{%s}")
+                ))
+      ;; Settings to export code with `minted' instead of `verbatim'.
+      (setq org-export-latex-listings t)
+      ;; (setq org-latex-listings 'minted
+      ;;       org-latex-packages-alist '(("" "minted"))
+      ;;       org-latex-pdf-process
+      ;;       '("pdflatex -shell-escape -intera"))
+     )
+
+  ;; Syntax highlight in #+BEGIN_SRC blocks
+  (setq org-src-fontify-natively t)
+  ;; Don't prompt before running code in org
+  (setq org-confirm-babel-evaluate nil)
+  (setq org-directory "~/MEGAsync/sync/org")
+  (setq org-default-notes-file "~/MEGAsync/sync/org/org-notes.org")
   (setq org-latex-pdf-process
         '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+
+  (setq yas-snippet-dirs (append yas-snippet-dirs
+                                 '("~/MEGAsync/sync/org/snippets")
+                                 )
+        )
   ;; This allows the preview pdf to opened in emacs
   ;; However, the sync b/w LaTeX and PDF buffers does not work
   ;; (setq TeX-view-program-selection '((output-pdf "PDF Tools"))
@@ -385,6 +466,7 @@ you should place your code here."
   ;;       TeX-source-correlate-start-server t
   ;;       )
   ;; UTF8!
+  (setq org-export-coding-system 'utf-8)
   (set-language-environment 'utf-8)
   (set-terminal-coding-system 'utf-8)
   (setq locale-coding-system 'utf-8)
@@ -421,10 +503,16 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files (quote ("~/Dev/Testbench/org-mode/test.org")))
+ '(org-capture-templates
+   (quote
+    (("r" "Recording reads" entry
+      (file+headline "~/MEGAsync/sync/org/notes/readings.org" "Examples")
+      (file "~/MEGAsync/sync/org/capture-templates/read.tpl")
+      :clock-in t))))
+ '(org-export-backends (quote (ascii html icalendar latex md odt org)))
  '(package-selected-packages
    (quote
-    (vimrc-mode helm-gtags ggtags dactyl-mode counsel-gtags spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (spinner evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state iedit evil-exchange evil-ediff evil-args evil-anzu anzu evil undo-tree adaptive-wrap ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartparens restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-unimpaired evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-escape goto-chg eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
