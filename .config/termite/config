@@ -32,7 +32,7 @@ foreground_bold = #f4fef7
 cursor          = #969896
 background      = #1d1f21
 
-background = rgba(20, 20, 20, 0.70)
+background = rgba(20, 20, 20, 0.80)
 
 # black
 color0  = #1d1f21

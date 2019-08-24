@@ -12,6 +12,7 @@
 /home/abhirup/.config/ranger
 /home/abhirup/.config/rofi
 /home/abhirup/.config/dunst
+/home/abhirup/.config/wal
 /home/abhirup/.spacemacs
 /home/abhirup/.vimrc
 /home/abhirup/.Xresources
@@ -19,5 +20,4 @@
 /home/abhirup/.themes
 /home/abhirup/mydotfiles/required-after-install.md
 /home/abhirup/mydotfiles/.includes
-/home/abhirup/README.md
 /home/abhirup/README.org

@@ -6,7 +6,7 @@ set -gx BROWSER /usr/bin/google-chrome-stable
 # $TERMINAL made use of by mimeapps for xdg-open
 # set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
 set -gx TERMINAL /usr/bin/termite
-set -gx WALLPAPERS ~/Pictures/Wallpapers
+set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
@@ -236,3 +236,6 @@ set -gx LESS_TERMCAP_so $purple
 set -gx LESS_TERMCAP_ue $default
 # Begin underline
 set -gx LESS_TERMCAP_us $green
+
+source ~/.cache/wal/colors.fish
+wal -enqi (cat ~/.cache/wal/wal)

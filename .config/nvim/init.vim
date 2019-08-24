@@ -45,6 +45,7 @@ Plug 'jceb/vim-orgmode'
 " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'airblade/vim-gitgutter'
 " Plug 'tpope/vim-abolish'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 set incsearch
