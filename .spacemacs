@@ -43,6 +43,8 @@ values."
             ;; c-c++-backend 'rtags
             ;; c-c++-enable-rtags-completion nil
             c-c++-enable-clang-support t
+            c-c++-default-mode-for-headers 'c++-mode
+            c-c++-enable-clang-format-on-save t
             )
      cmake
      python
@@ -316,47 +318,6 @@ values."
    dotspacemacs-whitespace-cleanup nil
    ))
 
-;; Custom addition for Restoring and saving window layout
-;; (defun save-framegeometry ()
-;;   "Gets the current frame's geometry and saves to ~/.emacs.d/framegeometry."
-;;   (let (
-;;         (framegeometry-left (frame-parameter (selected-frame) 'left))
-;;         (framegeometry-top (frame-parameter (selected-frame) 'top))
-;;         (framegeometry-width (frame-parameter (selected-frame) 'width))
-;;         (framegeometry-height (frame-parameter (selected-frame) 'height))
-;;         (framegeometry-file (expand-file-name "~/.emacs.d/framegeometry"))
-;;         )
-
-;;     (when (not (number-or-marker-p framegeometry-left))
-;;       (setq framegeometry-left 0))
-;;     (when (not (number-or-marker-p framegeometry-top))
-;;       (setq framegeometry-top 0))
-;;     (when (not (number-or-marker-p framegeometry-width))
-;;       (setq framegeometry-width 0))
-;;     (when (not (number-or-marker-p framegeometry-height))
-;;       (setq framegeometry-height 0))
-
-;;     (with-temp-buffer
-;;       (insert
-;;        ";;; This is the previous emacs frame's geometry.\n"
-;;        ";;; Last generated " (current-time-string) ".\n"
-;;        "(setq initial-frame-alist\n"
-;;        "      '(\n"
-;;        (format "        (top . %d)\n" (max framegeometry-top 0))
-;;        (format "        (left . %d)\n" (max framegeometry-left 0))
-;;        (format "        (width . %d)\n" (max framegeometry-width 0))
-;;        (format "        (height . %d)))\n" (max framegeometry-height 0)))
-;;       (when (file-writable-p framegeometry-file)
-;;         (write-file framegeometry-file))))
-;;   )
-;; (defun load-framegeometry ()
-;;   "Loads ~/.emacs.d/framegeometry which should load the previous frame's
-;; geometry."
-;;   (let ((framegeometry-file (expand-file-name "~/.emacs.d/framegeometry")))
-;;     (when (file-readable-p framegeometry-file)
-;;       (load-file framegeometry-file)))
-;;   )
-
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -364,12 +325,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; Restore Frame size and location, if we are using gui emacs
-  ;; (if window-system
-  ;;     (progn
-  ;;       (add-hook 'after-init-hook 'load-framegeometry)
-  ;;       (add-hook 'kill-emacs-hook 'save-framegeometry))
-  ;;   )
   )
 
 (defun dotspacemacs/user-config ()
@@ -379,16 +334,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  ;; (setq global-linum-mode )
-  ;; (setq org-agenda-files (list "~/Dropbox/sync/org/test.org"
-  ;;                              "~/Dropbox/sync/org/newtodos.org")
-  ;;       )
-  ;; (with-eval-after-load 'org
-  ;;     (org-babel-do-load-languages 'org-babel-load-languages
-  ;;                                 '((dot . t)
-  ;;                                   (maxima . t)
-  ;;                                   (python . t)))
-  ;;     (setq org-babel-python-command "python3"))
   (with-eval-after-load 'ox-latex
       (add-to-list 'org-latex-classes
                   '("bjmarticle"
@@ -408,7 +353,7 @@ you should place your code here."
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                     ("\\paragraph{%s}" . "\\paragraph*{%s}")
                     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-    (add-to-list 'org-latex-classes
+     (add-to-list 'org-latex-classes
                  ;; ebook class using memoir
                  '("ebook"
                     "\\documentclass[11pt, oneside]{memoir}
@@ -438,25 +383,48 @@ you should place your code here."
                 ("\\section{%s}" . "\\section*{%s}")
                 ("\\subsection{%s}" . "\\subsection*{%s}")
                 ))
-      ;; Settings to export code with `minted' instead of `verbatim'.
-      (setq org-export-latex-listings t)
-      ;; (setq org-latex-listings 'minted
-      ;;       org-latex-packages-alist '(("" "minted"))
-      ;;       org-latex-pdf-process
-      ;;       '("pdflatex -shell-escape -intera"))
      )
 
   ;; Syntax highlight in #+BEGIN_SRC blocks
   (setq org-src-fontify-natively t)
   ;; Don't prompt before running code in org
   (setq org-confirm-babel-evaluate nil)
-  (setq org-directory "~/MEGAsync/sync/org")
-  (setq org-default-notes-file "~/MEGAsync/sync/org/org-notes.org")
-  (setq org-latex-pdf-process
-        '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -bibtex -f %f"))
+  (setq org-directory "~/MEGAsync/sync/org-HQ")
+  (setq org-default-notes-file "~/MEGAsync/sync/org-HQ/notes/my-notes.org")
+  (setq flyspell-consider-dash-as-word-delimiter-flag nil)
+  (setq doc-view-continuous t)
+  (defun org.export.cleanup-pdf-export ()
+      (add-hook 'org-mode-hook
+                  (lambda ()
+                      (add-to-list 'org-latex-logfiles-extensions "tex")
+                        )
+                    )
+        )
+  (defun org.export.format-latex-listings ()
+      (require 'ox-latex)
+        (add-to-list 'org-latex-packages-alist '("" "listings"))
+          (add-to-list 'org-latex-packages-alist '("" "color"))
+            (setq org-latex-listings t)
+              (setq org-latex-listings-options
+                      '(("breaklines" "true"))
+                        )
+                )
+  (org.export.cleanup-pdf-export)
+  (org.export.format-latex-listings)
+
+  ;; All exports from Org-mode are stored in "exports" file
+  (defun org-export-output-file-name-modified (orig-fun extension &optional subtreep pub-dir)
+    (unless pub-dir
+      (setq pub-dir "exports")
+      (unless (file-directory-p pub-dir)
+        (make-directory pub-dir)))
+    (apply orig-fun extension subtreep pub-dir nil))
+  (advice-add 'org-export-output-file-name :around #'org-export-output-file-name-modified)
+  ;; (setq org-latex-pdf-process
+  ;;       '("latexmk -pdflatex='pdflatex -interaction nonstopmode' -pdf -jobname=./exports/%b -bibtex -f %f"))
 
   (setq yas-snippet-dirs (append yas-snippet-dirs
-                                 '("~/MEGAsync/sync/org/snippets")
+                                 '("~/MEGAsync/sync/org-HQ/snippets")
                                  )
         )
   ;; This allows the preview pdf to opened in emacs
@@ -473,9 +441,10 @@ you should place your code here."
   (set-default-coding-systems 'utf-8)
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
-)
 
-(setq org-todo-keywords '((sequence "TODO" "PROGRESS" "BLOCKED" "FAIL" "|" "DONE" "DELEGATED" "CANCELLED" )))
+  (setq org-todo-keywords '((sequence "TODO" "NEXT" "PROGRESS" "BLOCKED" "FAIL" "|" "DONE" "DELEGATED" "CANCELLED" )))
+  )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -503,11 +472,12 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ispell-personal-dictionary "~/MEGAsync/sync/org-HQ/config/aspell.LANG.pws")
  '(org-capture-templates
    (quote
     (("r" "Recording reads" entry
-      (file+headline "~/MEGAsync/sync/org/notes/readings.org" "Examples")
-      (file "~/MEGAsync/sync/org/capture-templates/read.tpl")
+      (file "~/MEGAsync/sync/org-HQ/notes/readings.org")
+      (file "~/MEGAsync/sync/org-HQ/capture-templates/read-tpl.org")
       :clock-in t))))
  '(org-export-backends (quote (ascii html icalendar latex md odt org)))
  '(package-selected-packages
