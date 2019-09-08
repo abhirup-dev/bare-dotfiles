@@ -1,7 +1,7 @@
 #+title: Collection of useful snippets
 #+author: Abhirup Das
 * Youtube-dl
-  #+BEGIN_SRC shell :results verbatim :exports all
+  #+BEGIN_SRC shell :results verbatim :exports both
     #- to download playlist bestvideo + bestaudio:
     youtube-dl-dl -f bestvideo+bestaudio -i "<playlist_id>"
     #- to download only playlist info
