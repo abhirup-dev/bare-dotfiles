@@ -1,3 +1,4 @@
+# Environment variables
 set -gx GTK_THEME Adwaita:dark
 set -gx PDFR /usr/bin/zathura
 set -gx VISUAL vim
@@ -6,12 +7,13 @@ set -gx BROWSER /usr/bin/google-chrome-stable
 # $TERMINAL made use of by mimeapps for xdg-open
 # set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
 set -gx TERMINAL /usr/bin/termite
+set -gx TALPHA 0.80
 set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
 set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
-export QT_SCALE_FACTOR=1
+set -gx QT_SCALE_FACTOR 1
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
@@ -20,14 +22,8 @@ set -gx GOPATH $HOME/go
 set -gx PATH $PATH $SCRIPTS $HOME/.local/bin $GOPATH/bin
 set -gx megadir $HOME/MEGAsync
 set -gx vinit $HOME/.config/nvim/init.vim
-  # ________  .___  ___________
- # /  _____/  |   | \__    ___/
-# /   \  ___  |   |   |    |
-# \    \_\  \ |   |   |    |
- # \______  / |___|   |____|
- #        \/
 
-# Configuring bare repository
+# Configuring bare git repository
 set -x bare_dir $HOME/mydotfiles
 set -x bare_includes $bare_dir/.includes
 alias baredot="git --git-dir=$bare_dir --work-tree=$HOME"
@@ -41,7 +37,7 @@ function bare_include_file
             return
         end
     end
-    echo $key >> $bare_includes
+    echo $key >>$bare_includes
 end
 
 function bare_add_all
@@ -49,10 +45,10 @@ function bare_add_all
 end
 
 function git_productivity
-	echo "Between "$argv[1]" and "$argv[2]" --"
-	git log --shortstat --since=$argv[1] --until=$argv[2] \
-		  | grep "files changed\|Author\|Merge:" \
-		  | awk '{ \
+    echo "Between "$argv[1]" and "$argv[2]" --"
+    git log --shortstat --since=$argv[1] --until=$argv[2] \
+        | grep "files changed\|Author\|Merge:" \
+        | awk '{ \
 		    if ($1 == "Author:") {\
 		      currentUser = $2;\
 		    }\
@@ -68,16 +64,10 @@ function git_productivity
 		  }'
 end
 
-  # _____
-# _/ ____\_ __  ____   ____   ______
-# \   __\  |  \/    \_/ ___\ /  ___/
- # |  | |  |  /   |  \  \___ \___ \
- # |__| |____/|___|  /\___  >____  >
-  #                \/     \/     \/
+# Useful functions
 
-# Redirect stdout / stderr
 function noerr --description 'Redirects error of command to /dev/null'
-    $argv > /dev/null 2>&1
+    $argv >/dev/null 2>&1
 end
 
 function capture --description 'Stores output of given command in $pop'
@@ -86,13 +76,11 @@ function capture --description 'Stores output of given command in $pop'
     echo "Captured output to pop"
 end
 
-# Run bash commands from fish
-function fbash
+function fbash --description 'Run bash commands from fish'
     exec bash -c "$argv"
 end
 
-# Prefix current command with "sudo"
-function .runsudo --description 'Run current command line as root'
+function .runsudo --description 'Prefix given command with sudo'
     set cursor_pos (echo (commandline -C) + 5 | bc)
     commandline -C 0
     commandline -i 'sudo '
@@ -100,9 +88,9 @@ function .runsudo --description 'Run current command line as root'
 end
 bind \es ".runsudo"
 
-# Create directory and cd into it
-function mkcd --description  'Create directory and cd into it'
-    mkdir $argv[1] ; cd $argv[1]
+function mkcd --description 'Create directory and cd into it'
+    mkdir $argv[1]
+    cd $argv[1]
 end
 
 # Generating metadata from video
@@ -120,16 +108,14 @@ end
 function sample
     echo $argv[1]:$argv[2] | awk -F: -v name=$argv[3] '{print $1 " " name " " $2}'
 end
-
+function fzl
+    ls $argv | fzf
+end
 # Keybindings
 bind RR "ranger"
-       # .__  .__
-# _____  |  | |__|____    ______
-# \__  \ |  | |  \__  \  /  ___/
- # / __ \|  |_|  |/ __ \_\___ \
-# (____  /____/__(____  /____  >
-     # \/             \/     \/
 
+alias yuy="yay --answerclean N --answerdiff N -Syyu"
+alias zra="zathura"
 alias st="st -f 'Source Code Pro Medium:size=12'"
 alias rn="ranger"
 alias la="ls -a"
@@ -161,48 +147,40 @@ alias ytdl="youtube-dl --write-auto-sub --sub-lang en"
 #   set -U abbrs_initialized
 #   echo -n 'Setting abbreviations...'
 
-  abbr rs 'reset'
-  abbr ssn 'shutdown now'
-  abbr ne 'noerr'
-  abbr dwn '~/Downloads'
-  abbr mus '~/Music'
-  abbr dcs '~/Documents'
+abbr rs 'reset'
+abbr ssn 'shutdown now'
+abbr ne 'noerr'
+abbr dwn '~/Downloads'
+abbr mus '~/Music'
+abbr dcs '~/Documents'
 
-  abbr pi 'sudo pacman -S'
-  abbr pu 'pacman -Syy'
-  abbr pq 'pacman -Qs'
-  abbr pr 'sudo pacman -Rns'
+abbr pi 'sudo pacman -S'
+abbr pu 'pacman -Syy'
+abbr pq 'pacman -Qs'
+abbr pr 'sudo pacman -Rns'
 
-  abbr sup 'sudo updatedb'
-  abbr sct 'sudo systemctl'
-  abbr bt 'baredot'
-  abbr clipb 'xclip -selection clipboard'
-  abbr cap 'capture'
+abbr sup 'sudo updatedb'
+abbr sct 'sudo systemctl'
+abbr bt 'baredot'
+abbr clipb 'xclip -selection clipboard'
+abbr cap 'capture'
 
-  abbr cl 'git clone'
-  abbr gs 'git status'
-  abbr gA 'git add .'
-  abbr ga 'git add'
-  abbr gP 'git push -u origin master'
-  abbr gp 'git push'
-  abbr gc 'git commit -m "'
+abbr cl 'git clone'
+abbr gs 'git status'
+abbr gA 'git add .'
+abbr ga 'git add'
+abbr gP 'git push -u origin master'
+abbr gp 'git push'
+abbr gc 'git commit -m "'
 
-  abbr cf 'nvim ~/.config/fish/config.fish'
-  abbr cnv 'nvim ~/.config/nvim/init.vim'
-  abbr ccm 'nvim ~/.config/compton.conf'
-  abbr ci3 'nvim ~/.config/i3/config'
-  abbr ytd 'youtube-dl'
-  # echo -n 'Done'
+abbr cf 'nvim ~/.config/fish/config.fish'
+abbr cnv 'nvim ~/.config/nvim/init.vim'
+abbr ccm 'nvim ~/.config/compton.conf'
+abbr ci3 'nvim ~/.config/i3/config'
+abbr ytd 'youtube-dl'
+# echo -n 'Done'
 # end
 
-   # _____  .__                    .__
-  # /     \ |__| ______ ____  ____ |  |
- # /  \ /  \|  |/  ___// ___\/ __ \|  |
-# /    Y    \  |\___ \\  \__\  ___/|  |__
-# \____|__  /__/____  >\___  >___  >____/ /\
-   #      \/        \/     \/    \/       \/
-
-#VIM mode in fish
 # fish_vi_key_bindings
 fish_default_key_bindings
 #Swap CapsLock and Escape
@@ -210,7 +188,7 @@ chcaps
 
 # Event listener functions
 function dostuff --on-event fish_prompt
-    pwd > /tmp/whereami
+    pwd >/tmp/whereami
 end
 
 
