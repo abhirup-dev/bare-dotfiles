@@ -1,11 +1,14 @@
 #!/bin/bash
 btmod=/usr/local/libexec/i3blocks/battery
-thresh=15
+thresh=20
 msg="⚡"
 # msg="Battery Low "
-curr=$($btmod | sed -nre 's/^([0-9]{1,2})%.*/\1/p' -e 1q)
+curr=($(/usr/local/libexec/i3blocks/battery | awk -F"[ %]" 'NR==1{print $1" "$3}'))
 # echo $curr
-if [ $curr -lt $thresh ]
+charge=${curr[0]}
+stat=${curr[1]}
+# echo $charge"+"$stat
+if [[ $charge -lt $thresh && $stat == "DIS" ]]
 then
     echo $msg
 fi
