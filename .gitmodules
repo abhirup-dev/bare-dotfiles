@@ -1,9 +1,6 @@
 [submodule ".config/scripts/pomodoro"]
 	path = .config/scripts/pomodoro
 	url = https://github.com/wilsonchaney/pomodoro
-[submodule ".themes/adapta-gtk-theme"]
-	path = .themes/adapta-gtk-theme
-	url = https://github.com/adapta-project/adapta-gtk-theme
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = https://github.com/syl20bnr/spacemacs/tree/develop

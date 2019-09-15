@@ -12,7 +12,8 @@
    - [ ] Pomodoro timer + i3-blocks blocklet
    - [X] Mod+Shift+Enter to launch terminal in ~$PWD~ directory  ([[file:.config/scripts/last_pwd_shell.sh][script]])
    - [ ] Stable script to obtain weather information
-     - Current: ~curl  "wttr.in/Kolkata?format=%t"~
+     - Wttr.in: ~curl  "wttr.in/Kolkata?format=%t"~
+     - Accuweather: [[file:.config/scripts/weather.sh][accuweather script]] 
 ** Useful snippets
    [[file:.config/useful-snippets.org][useful-snippets.org]]
 ** Setup details
