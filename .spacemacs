@@ -443,6 +443,9 @@ you should place your code here."
   (prefer-coding-system 'utf-8)
 
   (setq org-todo-keywords '((sequence "TODO" "NEXT" "PROGRESS" "BLOCKED" "FAIL" "|" "DONE" "DELEGATED" "CANCELLED" )))
+  (global-visual-line-mode t)
+  (evil-define-minor-mode-key 'motion 'visual-line-mode "j" 'evil-next-visual-line)
+  (evil-define-minor-mode-key 'motion 'visual-line-mode "k" 'evil-previous-visual-line)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

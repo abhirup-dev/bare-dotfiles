@@ -1,18 +1,19 @@
 
 # Table of Contents
 
-1.  [Features <code>[37%]</code>](#org940a86d)
-2.  [Useful snippets](#org9dea2ce)
-3.  [Setup details](#org670ad42)
-    1.  [Bare repository](#orgf852b26)
-        1.  [Create alias](#orgfd9d9c7)
-        2.  [Checkout](#org4f048f1)
-    2.  [Touchpad (on Arch-linux/i3)](#orgf39b09a)
-    3.  [Vim-plug](#org33cb729)
-    4.  [Important packages](#org8577977)
+1.  [Features <code>[37%]</code>](#orge8ed3ed)
+2.  [Useful snippets](#org49eb97d)
+3.  [Setup details](#orgcd3ecaa)
+    1.  [Bare repository](#org1aabd49)
+        1.  [Create alias](#org692ec7f)
+        2.  [Checkout](#org9eb93a0)
+    2.  [Touchpad (on Arch-linux/i3)](#orgd97182c)
+    3.  [Vim-plug](#org5e17906)
+    4.  [Compiling Vim](#orgdc7827b)
+    5.  [Important packages](#org21eb2e4)
 
 
-<a id="org940a86d"></a>
+<a id="orge8ed3ed"></a>
 
 # Features <code>[37%]</code>
 
@@ -32,31 +33,31 @@
     -   Accuweather: [accuweather script](.config/scripts/weather.sh)
 
 
-<a id="org9dea2ce"></a>
+<a id="org49eb97d"></a>
 
 # Useful snippets
 
 [useful-snippets.org](.config/useful-snippets.md)
 
 
-<a id="org670ad42"></a>
+<a id="orgcd3ecaa"></a>
 
 # Setup details
 
 
-<a id="orgf852b26"></a>
+<a id="org1aabd49"></a>
 
 ## Bare repository
 
 
-<a id="orgfd9d9c7"></a>
+<a id="org692ec7f"></a>
 
 ### Create alias
 
     alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 
 
-<a id="org4f048f1"></a>
+<a id="org9eb93a0"></a>
 
 ### Checkout
 
@@ -71,7 +72,7 @@ For `fish shell`
     baredot checkout <branch>
 
 
-<a id="orgf39b09a"></a>
+<a id="orgd97182c"></a>
 
 ## Touchpad (on Arch-linux/i3)
 
@@ -88,7 +89,7 @@ Paste in `/etc/X11/xorg.conf.d/90-touchpad.conf` ([Source](https://cravencode.co
     EndSection
 
 
-<a id="org33cb729"></a>
+<a id="org5e17906"></a>
 
 ## Vim-plug
 
@@ -96,7 +97,17 @@ Paste in `/etc/X11/xorg.conf.d/90-touchpad.conf` ([Source](https://cravencode.co
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
-<a id="org8577977"></a>
+<a id="orgdc7827b"></a>
+
+## Compiling Vim
+
+    ./configure --prefix=/usr --with-compiledby="Abhirup Das" \
+                --enable-gui=auto --enable-gtk2-check --with-x  --enable-gnome-check \
+                --with-features=huge --enable-cscope  --enable-fontset --enable-multibyte \
+                --with-python-config-dir=/usr/lib/python2.7/config/
+
+
+<a id="org21eb2e4"></a>
 
 ## Important packages
 

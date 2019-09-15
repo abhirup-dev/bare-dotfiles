@@ -47,10 +47,17 @@
    Option "ScrollMethod" "twofinger"
    EndSection
 #+END_SRC
-*** Vim-plug 
+*** Vim-plug
  #+BEGIN_SRC shell  :results verbatim :exports both
    vim-plug: curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
  #+END_SRC
+*** Compiling Vim
+   #+BEGIN_SRC sh :results verbatim :exports all :session 
+     ./configure --prefix=/usr --with-compiledby="Abhirup Das" \
+                 --enable-gui=auto --enable-gtk2-check --with-x  --enable-gnome-check \
+                 --with-features=huge --enable-cscope  --enable-fontset --enable-multibyte \
+                 --with-python-config-dir=/usr/lib/python2.7/config/
+   #+END_SRC
 *** Important packages
    [[file:mydotfiles/required-after-install.md::##%20After%20install][package list]] 
