@@ -13,6 +13,8 @@
     - scrot
 * acpi - battery client
 * i3blocks-gaps - clone (not AUR)
+* xtitle - show window titles ( i3blocks )
+* pacman-contrib - for checkupdates package ( i3blocks )
 * gnome-polkit
 * gvfs, gvfs-mtp - for automounting of removable drives
 * thunar + plugins:
@@ -20,6 +22,9 @@
     - archive-plugin
     - xarchiver (not a plugin; standalone binary)
 * grub-cutomiser
+* for Spacemacs - 
+    - python-importmagic
+    - python-epc
 * for [delicious-sddm-theme](https://github.com/stuomas/delicious-sddm-theme) :
     - qt5-graphicaleffects
     - qt5-multimedia
@@ -31,4 +36,8 @@
         - gst-plugins-good
         - gst-plugins-ugly
         - gst-plugin-libde265 [AUR]
+* ranger + optional-deps:
+    - w3m : image previews
+    - ffmpegthumnailer
+* fd - Simple, fast ,user-friendly alternative to find
  

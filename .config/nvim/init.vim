@@ -1,56 +1,55 @@
 "for f in split(glob('~/.config/nvim/config/*.vim'), '\n')
 "   exe 'source' f
 "endfor
-" Enable syntax highlighting
-" Set Leader key
-:let mapleader = " "
+let mapleader = " "
 
 " Load Plugins
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
-Plug 'Rip-Rip/clang_complete'
+Plug 'deathlyfrantic/deoplete-spell'
+" Plug 'Rip-Rip/clang_complete'
 Plug 'davidhalter/jedi-vim'
+Plug 'autozimu/LanguageClient-neovim', {
+            \ 'branch': 'next',
+            \ 'do': 'bash install.sh',
+            \ }
+Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
-Plug 'godlygeek/tabular'
+" Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'zhimsel/vim-stay'
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', {'for': 'latex'}
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'unblevable/quick-scope'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mhinz/neovim-remote', {'do': 'python setup.py install --user'}
-Plug 'Yggdroot/indentLine' " Why important?
-Plug 'ap/vim-css-color'
+" Plug 'Yggdroot/indentLine' " Why important?
 Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
-" Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'junegunn/goyo.vim'
-Plug 'junegunn/limelight.vim'
-" Smooth scrolling
-" Plug 'yuttie/comfortable-motion.vim'
-" Plug 'tpope/vim-vinegar'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'ayu-theme/ayu-vim'
+" Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'Konfekt/FastFold'
-Plug 'elzr/vim-json'
-" Plug 'dcharbon/vim-flatbuffers'
-" Plug 'JamshedVesuna/vim-markdown-preview'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'dag/vim-fish'
-" Plug 'tpope/vim-fugitive'
+" Plug 'elzr/vim-json', {'for': 'json'}
+" Plug 'SidOfc/mkdx'
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
+Plug 'dag/vim-fish', {'for': 'fish'}
+Plug 'jceb/vim-orgmode'
+" Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'airblade/vim-gitgutter'
+" Plug 'tpope/vim-abolish'
+Plug 'ap/vim-css-color'
 call plug#end()
 
+set incsearch
+set ignorecase
 set autochdir
 syntax on
 set foldmethod=syntax
@@ -68,9 +67,15 @@ set shiftwidth=4
 set expandtab                                             " set sta
 set sts=4                                                 " softtabstop, makes spaces feel like tabs when deleting
 set mouse=a mousemodel=popup                              " enable mouse support
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown " markdown file recognition
+set synmaxcol=200
+autocmd Filetype markdown set spell complete+=kspell
+autocmd Filetype tex set spell complete+=kspell
+autocmd BufWinEnter * if line2byte(line("$") + 1) > 100000 | syntax clear | endif
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown" markdown file recognition
 autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
-
+autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd Filetype markdown set conceallevel=0
+autocmd Filetype markdown normal zR
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\
 " :set list
@@ -82,26 +87,51 @@ set relativenumber
 
 " Configuring theme
 set termguicolors     " enable true colors support
-let g:gruvbox_italic=1
+let g:gruvbox_italic = 1
 colorscheme gruvbox
 set background=dark
 
 " " Configuring Airline
-let g:airline_theme='luna'
-let g:airline#extensions#ale#enabled = 0
+" let g:airline_theme='luna'
+let g:airline#extensions#ale#enabled = 1
 " hi Normal guibg=NONE ctermbg=NONE
 
 " set noshowmode " Already handled well by powerline/airline/lightline
 
-autocmd VimEnter * :silent !chcaps
-" autocmd VimLeave * :silent !chback
+let g:python3_host_prog = "/usr/bin/python"
+let g:python_host_prog = "/usr/bin/python2"
 
-" Configuring deoplete
+" " Configuring deoplete
 let g:deoplete#enable_at_startup = 1
-" let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
-call deoplete#custom#var('omni', 'input_patterns', {
-            \ 'tex': g:vimtex#re#deoplete
+let g:deoplete#sources = {}
+" " let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
+" call deoplete#custom#var('omni', 'input_patterns', {
+"             \ 'tex': g:vimtex#re#deoplete
+"             \})
+" Pass a dictionary to set multiple options
+call deoplete#custom#option({
+            \ 'auto_complete_delay': 20,
+            \ 'smart_case': v:true,
+            \ })
+" Disable the candidates in Comment/String syntaxes.
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
+call deoplete#custom#option('sources', {
+            \ 'cpp': ['LanguageClient'],
+            \ 'c': ['LanguageClient'],
             \})
+" Configuring LanguageClient
+let g:LanguageClient_serverCommands={
+            \ 'cpp': ['/usr/bin/ccls'],
+            \ 'c': ['/usr/bin/ccls'],
+            \}
+
+" Configuring Coc.nvim
+" inoremap <silent><expr> <c-space> coc#refresh()
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Configuring jedi-vim
 let g:jedi#use_splits_not_buffers = "left"
@@ -117,17 +147,21 @@ let g:jedi#rename_command = "<leader>r"
 let g:jedi#completions_enabled = 0
 
 " Configuring vim-markdown
-let g:vim_markdown_folding_level = 3
+" let g:vim_markdown_folding_level = 3
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_conceal = 0
-autocmd Filetype markdown set conceallevel=0
-autocmd Filetype markdown normal zR
 let g:vim_markdown_strikethrough = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_json_frontmatter = 1
+" Indent and auto-insert disabled because conflicts with MKDX plugin
+let g:vim_markdown_new_list_item_indent = 0
+let g:vim_markdown_auto_insert_bullets = 0
 
 " Configuring vim-stay
 set viewoptions=cursor,folds,slash,unix
+
+" Configuring indentLine
+let g:indentLine_conceallevel = 0
 
 " Configuring gutentags
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
@@ -147,15 +181,15 @@ let g:ale_fixers = {
             \ '*': [
             \ 'trim_whitespace'
             \]}
-            " \ , 'ale#fixers#generic_python#BreakUpLongLines'
-            " \ 'yapf']
+" \ , 'ale#fixers#generic_python#BreakUpLongLines'
+" \ 'yapf']
 let g:ale_linters = {
             \   'python': ['flake8', 'pycodestyle']
             \}
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+highlight ALEErrorSign ctermbg = NONE ctermfg = red
+highlight ALEWarningSign ctermbg = NONE ctermfg = yellow
 
 " Configuring Neoformat
 let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
@@ -168,8 +202,7 @@ let g:neoformat_basic_format_trim = 1
 
 " VimTex extension configurations
 let g:tex_flavor = 'latex'
-" set conceallevel=1
-" let g:tex_conceal = 'abdmg'
+let g:tex_conceal = 'abdmg'
 let g:vimtex_fold_manual = 1
 let g:vimtex_latexmk_continuous = 1
 let g:vimtex_quickfix_mode=1
@@ -178,32 +211,12 @@ if has("nvim")
     let g:vimtex_latexmk_progname = 'nvr'
 endif
 let g:latex_view_general_viewer = 'zathura'
-let g:vimtex_view_method = "zathura"
+let g:vimtex_view_method = 'zathura'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger="<C-space>"
-" let g:UltiSnipsJumpForwardTrigger="<c-j>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-nmap <M-j> ddp
-nmap <M-k> kddpk
-
-noremap <leader>q :q<CR>
-noremap <leader>w :w<CR>
-noremap <leader>W :wq<CR>
-" Moving between split windows
-nmap <C-k> <C-w>k
-nmap <C-j> <C-w>j
-nmap <C-h> <C-w>h
-nmap <C-l> <C-w>l
-" Resizing split windows
-" nmap <Leader>k :resize +3<cr>
-" nmap <Leader>j :resize -3<cr>
-nmap <leader>k <C-w>5+
-nmap <leader>j <C-w>5-
-nmap <leader>h <C-w>5<
-nmap <leader>l <C-w>5>
-nmap <leader>s= <C-w>=
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
 
 " NERDTree
 nmap <leader>nt :NERDTreeToggle<CR>
@@ -211,65 +224,15 @@ nmap <leader>Nt :NERDTree
 nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
-" nmap <Leader>ll <Plug>(Limelight)
-" xmap <Leader>ll <Plug>(Limelight)
-" Goyo and Limelight
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-
-"smooth scrolling
-" nnoremap <silent> <C-u> :call comfortable_motion#flick(75)<CR>
-" nnoremap <silent> <C-U> :call comfortable_motion#flick(-75)<CR>
-" noremap <silent> <ScrollWheelDown> :call comfortable_motion#flick(10)<CR>
-" noremap <silent> <ScrollWheelUp>   :call comfortable_motion#flick(-10)<CR>
+" FZF
+nnoremap <C-o> :Files<CR>
+nnoremap <C-f> :Rg<CR>
 
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
-" Custom | Personal Hacks for everyday ease
-" Had to add <bs>l because https://vi.stackexchange.com/a/1878
-" Adds n trailing spaces
-nmap <leader>il a<space><esc><bs>l
-" Adds n leading spaces
-nmap <leader>ih i<space><esc>
-" Adds newline in insert mode
-" imap <leader><cr> <esc>o
-
 " Quick-Scope (quick scope) for use with Seeker commands like f,F,t,T
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
-augroup qs_colors
-    autocmd!
-    autocmd ColorScheme * highlight QuickScopePrimary guifg="#afff5f" gui=underline ctermfg=155 cterm=underline
-    autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-augroup END
 let g:qs_lazy_highlight = 1
-
-
-
-
-
-
-
-" Optional Support
-
-" Configuring You Complete Me (YCM)
-" let g:ycm_server_python_interpretor = "/usr/bin/python2.7"
-let g:python3_host_prog = "/usr/bin/python"
-" let g:ycm_global_ycm_extra_conf = '~/.config/nvim/.ycm_extra_conf.py'
-" let g:ycm_complete_in_comments = 1 " turn on completion in comments
-" let g:ycm_confirm_extra_conf=0 " load .ycm_conf by default
-" let g:ycm_collect_identifiers_from_tags_files=1 " use tag information
-" set completeopt- = preview " start completion from first character
-" let g:ycm_min_num_of_chars_for_completion=3
-" let g:ycm_cache_omnifunc = 0
-" let g:ycm_seed_identifiers_with_syntax=1 " complete syntax keywords
-" Shorcut for Ycm FixIt feature
-" map <F2> :YcmCompleter FixIt<CR>
-
-" LaTeX specific theme
-" autocmd BufEnter *.tex :colorscheme Tomorrow-Night
-" autocmd BufEnter *.tex :let g:airline_theme='luna'
-" let g:airline_left_sep='>>'
-" let g:airline_right_sep='<<'
 
 " powerline symbols
 let g:airline_left_sep = ''
@@ -281,39 +244,29 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = '☰'
 let g:airline_symbols.maxlinenr = ''
+" C-c and C-v - Copy/Paste to global clipboard
+vmap <C-c> "+ya
+imap <C-v> <esc>"+gpa
 
-" Live markdown preview
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 1
-let g:mkdp_browser = 'firefox'
-let g:mkdp_browserfunc = ''
-" options for markdown render
-" mkit: markdown-it options for render
-" katex: katex options for math
-" uml: markdown-it-plantuml options
-" maid: mermaid options
-" disable_sync_scroll: if disable sync scroll, default 0
-" sync_scroll_type: 'middle', 'top' or 'relative', default value is 'middle'
-"   middle: mean the cursor position alway show at the middle of the preview page
-"   top: mean the vim top viewport alway show at the top of the preview page
-"   relative: mean the cursor position alway show at the relative positon of the preview page
-" hide_yaml_meta: if hide yaml metadata, default is 1
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1
-    \ }
-" use a custom markdown style must be absolute path
-let g:mkdp_markdown_css = ''
-" use a custom highlight style must absolute path
-let g:mkdp_highlight_css = ''
-" use a custom port to start server or random for empty
-let g:mkdp_port = ''
-" preview page title
-" ${name} will be replace with the file name
-let g:mkdp_page_title = '「${name}」'
+" Allows searching selected text (https://vim.fandom.com/wiki/Search_for_visually_selected_text)
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
+nmap <M-j> ddp
+nmap <M-k> kddpk
+
+nnoremap <leader>bb :ls<CR>
+nnoremap <leader>bo :b<space>
+nnoremap <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>W :wq<CR>
+" Moving between split windows
+nmap <C-k> <C-w>k
+nmap <C-j> <C-w>j
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>l
+nmap <leader>k <C-w>5+
+nmap <leader>j <C-w>5-
+nmap <leader>h <C-w>5<
+nmap <leader>l <C-w>5>
+nmap <leader>s= <C-w>=
+

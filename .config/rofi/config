@@ -1,0 +1,36 @@
+! +++++++++++++++++++++++++++++++++++++++++
+! +          Rofi color theme             +
+! +++++++++++++++++++++++++++++++++++++++++
+
+rofi.color-enabled: true
+
+! Window:           'background',  'border', 'separator'
+rofi.color-window: argb:cc252936,  #9575cd, argb:ffffffff
+
+!   State:              'bg',       'fg',   'altbg',        'hlbg',         hlfg
+rofi.color-normal: argb:00252936, #ffffff, argb:00252936, argb:009575cd, #ff9575cd
+rofi.color-active: argb:00252936, #252936, argb:00252936, argb:009575cd, #ffc000
+rofi.color-urgent: argb:00252936, #ff0000, argb:00252936, argb:00252936, #ff0000
+
+rofi.cycle: true
+rofi.fullscreen: true
+rofi.width: 50
+rofi.padding: 180
+rofi.fixed-num-lines: true
+rofi.line-padding: 5
+rofi.line-margin: 8
+rofi.lines: 5
+rofi.separator-style: none
+rofi.columns: 1
+rofi.terminal: termite
+rofi.font: RobotoMono Nerd Font 16
+rofi.bw: 1
+rofi.eh: 1
+rofi.hide-scrollbar: true
+rofi.auto-select: false
+
+rofi.display-run:    
+rofi.display-drun:   
+rofi.display-window: 
+
+!vim:ft=css

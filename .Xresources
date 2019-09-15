@@ -1,3 +1,10 @@
+Xft.dpi: 100
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
 /* rofi.lines: 5 */
 /* rofi.eh: 2 */
 /* rofi.padding: 200 */
@@ -12,6 +19,24 @@
 /* rofi.color-normal: argb:31d1f21, #f3f4f5, argb:31d1f21, argb:31d1f21, #9575cd */ 
 /* rofi.font: System San Francisco Display 18 */
 
+
+/* rofi.display-run:     */
+/* rofi.display-drun:    */
+/* rofi.display-window:  */
+
+/* #                  background     border         separator */
+/* rofi.color-window: argb:cc14161a, argb:00000000, argb:00000000 */
+/* #                  bg             fg             alt-bg         hl-bg          hl-fg */
+/* rofi.color-normal: argb:0000000,  argb:ff878d94, argb:00000000, argb:00000000, argb:ff4978B3 */
+/* rofi.color-active: argb:0000000,  argb:ffced4db, argb:00000000, argb:00000000, argb:ff4978B3 */
+/* rofi.color-urgent: argb:0000000,  argb:ff623e3e, argb:00000000, argb:00000000, argb:ff4978B3 */
+
+/* rofi.fake-transparency: true */
+/* rofi.fake-background:   background */
+
+/* rofi.separator-style: none */
+/* rofi.scroll-method:   0 */
+/* rofi.hide-scrollbar:  true */
 
 /* URxvt*termName:          rxvt-256colours */
 URxvt*buffered:          true

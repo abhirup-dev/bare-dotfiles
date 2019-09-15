@@ -1,0 +1,56 @@
+** Features [37%]
+   - [ ] Pacman update hook with efficent i3bar blocklet
+   - [ ] Make fish config independent of distribution & package manager
+   - [ ] Allowances for "gapless" version of i3wm
+   - [ ] Stable layouts for i3-layout-manager (window agnostic)
+   - [X] Keyboard control for spotify client + i3-blocks blocklet
+   - [2/3] Automating layouts to i3-layout-manager
+     - [X] [[file:.config/scripts/load_i3layout.sh][Script]] 
+     - [X] Latex + PDF
+     - [ ] mpv (ytdl) + jupyter notebook
+   - [ ] Pomodoro timer + i3-blocks blocklet
+   - [X] Mod+Shift+Enter to launch terminal in ~$PWD~ directory  ([[file:.config/scripts/last_pwd_shell.sh][script]])
+   - [X] Stable script to obtain weather information
+     - Wttr.in: ~curl  "wttr.in/Kolkata?format=%t"~
+     - Accuweather: [[file:.config/scripts/weather.sh][accuweather script]] 
+** Useful snippets
+   [[file:.config/useful-snippets.org][useful-snippets.org]]
+** Setup details
+*** Bare repository
+**** Create alias
+ #+BEGIN_SRC shell :results verbatim :exports both
+   alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
+ #+END_SRC
+**** Checkout
+   #+BEGIN_SRC shell :results verbatim :exports both
+     baredot checkout 2>&1 | egrep "\s+\." | awk "{print $1}" | xargs -I{} mv {} {}.bak
+   #+END_SRC
+    
+    For ~fish shell~
+   #+BEGIN_SRC shell :results verbatim :exports both
+     set fl (baredot checkout <branch> 2>&1 | egrep "\s+\." | awk -F"\t" "{print $2}")
+     for f in $fl
+         mv $f $f".bak"
+     end
+     baredot checkout <branch>
+   #+END_SRC
+*** Touchpad (on Arch-linux/i3)
+    Paste in ~/etc/X11/xorg.conf.d/90-touchpad.conf~ ([[https://cravencode.com/post/essentials/enable-tap-to-click-in-i3wm][Source]])
+#+BEGIN_SRC conf :results verbatim :exports both
+   Section "InputClass"
+   Identifier "touchpad"
+   MatchIsTouchpad "on"
+   Driver "libinput"
+   Option "Tapping" "on"
+   Option "TappingButtonMap" "lrm"
+   Option "NaturalScrolling" "on"
+   Option "ScrollMethod" "twofinger"
+   EndSection
+#+END_SRC
+*** Vim-plug 
+ #+BEGIN_SRC shell  :results verbatim :exports both
+   vim-plug: curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs \
+   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ #+END_SRC
+*** Important packages
+   [[file:mydotfiles/required-after-install.md::##%20After%20install][package list]] 
