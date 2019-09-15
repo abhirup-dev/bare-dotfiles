@@ -14,7 +14,7 @@ Plug 'autozimu/LanguageClient-neovim', {
             \ 'branch': 'next',
             \ 'do': 'bash install.sh',
             \ }
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
@@ -224,11 +224,9 @@ nmap <leader>Nt :NERDTree
 nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
-" nmap <Leader>ll <Plug>(Limelight)
-" xmap <Leader>ll <Plug>(Limelight)
-" Goyo and Limelight
-" autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
+" FZF
+nnoremap <C-o> :Files<CR>
+nnoremap <C-f> :Rg<CR>
 
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
@@ -237,53 +235,15 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_lazy_highlight = 1
 
 " powerline symbols
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-" let g:airline_left_alt_sep = ''
-" let g:airline_right_alt_sep = ''
-" let g:airline_symbols = {}
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.readonly = ''
-" let g:airline_symbols.linenr = '☰'
-" let g:airline_symbols.maxlinenr = ''
-
-" Live markdown preview
-" let g:mkdp_auto_start = 0
-" let g:mkdp_auto_close = 1
-" let g:mkdp_refresh_slow = 1
-" let g:mkdp_browser = 'google-chrome-stable'
-" let g:mkdp_browserfunc = ''
-" let g:mkdp_preview_options = {
-" \ 'mkit': {},
-" \ 'katex': {},
-" \ 'uml': {},
-" \ 'maid': {},
-" \ 'disable_sync_scroll': 0,
-" \ 'sync_scroll_type': 'middle',
-" \ 'hide_yaml_meta': 1
-" \ }
-" use a custom markdown style must be absolute path
-" let g:mkdp_markdown_css = ''
-" use a custom highlight style must absolute path
-" let g:mkdp_highlight_css = ''
-" use a custom port to start server or random for empty
-" let g:mkdp_port = ''
-" preview page title
-" let g:mkdp_page_title = '「${name}」'
-
-
-
-
-" Custom | Personal Hacks for everyday ease
-
-" Had to add <bs>l because https://vi.stackexchange.com/a/1878
-" Adds n trailing spaces
-" nmap <leader>il a<space><esc><bs>l
-" Adds n leading spaces
-" nmap <leader>ih i<space><esc>
-" Adds newline in insert mode
-" imap <leader><cr> <esc>o
-
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols = {}
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
 " C-c and C-v - Copy/Paste to global clipboard
 vmap <C-c> "+ya
 imap <C-v> <esc>"+gpa
@@ -304,9 +264,6 @@ nmap <C-k> <C-w>k
 nmap <C-j> <C-w>j
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>l
-" Resizing split windows
-" nmap <Leader>k :resize +3<cr>
-" nmap <Leader>j :resize -3<cr>
 nmap <leader>k <C-w>5+
 nmap <leader>j <C-w>5-
 nmap <leader>h <C-w>5<

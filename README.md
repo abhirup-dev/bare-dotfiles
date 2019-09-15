@@ -1,26 +1,25 @@
 
 # Table of Contents
 
-1.  [Features <code>[40%]</code>](#orgb5de105)
-2.  [Useful snippets](#orgb628128)
-3.  [Setup details](#org2d34adb)
-    1.  [Bare repository](#org49921e1)
-        1.  [Create alias](#orgd549f4f)
-        2.  [Checkout](#orgea77de8)
-    2.  [Touchpad (on Arch-linux/i3)](#org7bceaba)
-    3.  [Vim-plug](#orgfd5375a)
-    4.  [Important packages](#org2005a3b)
+1.  [Features <code>[37%]</code>](#org940a86d)
+2.  [Useful snippets](#org9dea2ce)
+3.  [Setup details](#org670ad42)
+    1.  [Bare repository](#orgf852b26)
+        1.  [Create alias](#orgfd9d9c7)
+        2.  [Checkout](#org4f048f1)
+    2.  [Touchpad (on Arch-linux/i3)](#orgf39b09a)
+    3.  [Vim-plug](#org33cb729)
+    4.  [Important packages](#org8577977)
 
 
-<a id="orgb5de105"></a>
+<a id="org940a86d"></a>
 
-# Features <code>[40%]</code>
+# Features <code>[37%]</code>
 
 -   [ ] Pacman update hook with efficent i3bar blocklet
--   <code>[0/3]</code> Add auxiliary scripts for all additional functions, so that config is stable in beginning
-    -   [ ] Make fish config independent of distribution & package manager
-    -   [ ] Allowances for "gapless" version of i3wm
-    -   [ ] Stable layouts for i3-layout-manager (window agnostic)
+-   [ ] Make fish config independent of distribution & package manager
+-   [ ] Allowances for "gapless" version of i3wm
+-   [ ] Stable layouts for i3-layout-manager (window agnostic)
 -   [X] Keyboard control for spotify client + i3-blocks blocklet
 -   <code>[2/3]</code> Automating layouts to i3-layout-manager
     -   [X] [Script](.config/scripts/load_i3layout.sh)
@@ -28,36 +27,36 @@
     -   [ ] mpv (ytdl) + jupyter notebook
 -   [ ] Pomodoro timer + i3-blocks blocklet
 -   [X] Mod+Shift+Enter to launch terminal in `$PWD` directory  ([script](.config/scripts/last_pwd_shell.sh))
--   [ ] Stable script to obtain weather information
+-   [X] Stable script to obtain weather information
     -   Wttr.in: `curl  "wttr.in/Kolkata?format=%t"`
     -   Accuweather: [accuweather script](.config/scripts/weather.sh)
 
 
-<a id="orgb628128"></a>
+<a id="org9dea2ce"></a>
 
 # Useful snippets
 
 [useful-snippets.org](.config/useful-snippets.md)
 
 
-<a id="org2d34adb"></a>
+<a id="org670ad42"></a>
 
 # Setup details
 
 
-<a id="org49921e1"></a>
+<a id="orgf852b26"></a>
 
 ## Bare repository
 
 
-<a id="orgd549f4f"></a>
+<a id="orgfd9d9c7"></a>
 
 ### Create alias
 
     alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 
 
-<a id="orgea77de8"></a>
+<a id="org4f048f1"></a>
 
 ### Checkout
 
@@ -72,7 +71,7 @@ For `fish shell`
     baredot checkout <branch>
 
 
-<a id="org7bceaba"></a>
+<a id="orgf39b09a"></a>
 
 ## Touchpad (on Arch-linux/i3)
 
@@ -89,7 +88,7 @@ Paste in `/etc/X11/xorg.conf.d/90-touchpad.conf` ([Source](https://cravencode.co
     EndSection
 
 
-<a id="orgfd5375a"></a>
+<a id="org33cb729"></a>
 
 ## Vim-plug
 
@@ -97,7 +96,7 @@ Paste in `/etc/X11/xorg.conf.d/90-touchpad.conf` ([Source](https://cravencode.co
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 
-<a id="org2005a3b"></a>
+<a id="org8577977"></a>
 
 ## Important packages
 

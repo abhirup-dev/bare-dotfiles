@@ -1,9 +1,8 @@
-** Features [40%]
+** Features [37%]
    - [ ] Pacman update hook with efficent i3bar blocklet
-   - [0/3] Add auxiliary scripts for all additional functions, so that config is stable in beginning
-     - [ ] Make fish config independent of distribution & package manager
-     - [ ] Allowances for "gapless" version of i3wm
-     - [ ] Stable layouts for i3-layout-manager (window agnostic)
+   - [ ] Make fish config independent of distribution & package manager
+   - [ ] Allowances for "gapless" version of i3wm
+   - [ ] Stable layouts for i3-layout-manager (window agnostic)
    - [X] Keyboard control for spotify client + i3-blocks blocklet
    - [2/3] Automating layouts to i3-layout-manager
      - [X] [[file:.config/scripts/load_i3layout.sh][Script]] 
@@ -11,7 +10,7 @@
      - [ ] mpv (ytdl) + jupyter notebook
    - [ ] Pomodoro timer + i3-blocks blocklet
    - [X] Mod+Shift+Enter to launch terminal in ~$PWD~ directory  ([[file:.config/scripts/last_pwd_shell.sh][script]])
-   - [ ] Stable script to obtain weather information
+   - [X] Stable script to obtain weather information
      - Wttr.in: ~curl  "wttr.in/Kolkata?format=%t"~
      - Accuweather: [[file:.config/scripts/weather.sh][accuweather script]] 
 ** Useful snippets

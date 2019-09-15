@@ -88,6 +88,11 @@ function .runsudo --description 'Prefix given command with sudo'
 end
 bind \es ".runsudo"
 
+function .suffixfzf --description 'Pipe command to fzf'
+    commandline -i ' | fzf'
+end
+bind \ef ".suffixfzf"
+
 function mkcd --description 'Create directory and cd into it'
     mkdir $argv[1]
     cd $argv[1]
