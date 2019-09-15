@@ -93,6 +93,11 @@ function .suffixfzf --description 'Pipe command to fzf'
 end
 bind \ef ".suffixfzf"
 
+function .outputfzf --description 'Use output from (fzf)'
+    commandline -i ' (fzf)'
+end
+bind \eF ".outputfzf"
+
 function mkcd --description 'Create directory and cd into it'
     mkdir $argv[1]
     cd $argv[1]
