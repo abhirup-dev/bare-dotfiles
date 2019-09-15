@@ -25,7 +25,6 @@ search_wrap = true
 #browser = xdg-open
 
 [colors]
-
 # special
 foreground      = #f4fef7
 foreground_bold = #f4fef7
