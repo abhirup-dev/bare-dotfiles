@@ -1,6 +1,6 @@
-** Features [33%]
+** Features [40%]
    - [ ] Pacman update hook with efficent i3bar blocklet
-   - [ ] Add auxiliary scripts for all additional functions, so that config is stable in beginning
+   - [0/3] Add auxiliary scripts for all additional functions, so that config is stable in beginning
      - [ ] Make fish config independent of distribution & package manager
      - [ ] Allowances for "gapless" version of i3wm
      - [ ] Stable layouts for i3-layout-manager (window agnostic)
