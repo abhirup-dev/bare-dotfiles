@@ -56,3 +56,5 @@ alias open="xdg-open"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
          && sudo reflector --verbose --latest 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist"
 alias logoff="kill -9 -1"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
