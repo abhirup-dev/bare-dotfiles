@@ -37,16 +37,16 @@ if [[ ${EUID} == 0 ]] ; then
 
 scipwi() {
     ip addr show dev wlp3s0 | grep -E "inet " | awk 'NR==1{print$2}'
-} 
+}
 sciplist(){
-    ip addr | grep -E "^[1-5]" | awk -F: '{print $1":"$2}'    
+    ip addr | grep -E "^[1-5]" | awk -F: '{print $1":"$2}'
 }
 scip() {
 	if [[ $1 == "" ]] ; then
-    		ip addr 
+    		ip addr
 	else
-		ip addr show dev `sciplist | awk -v ln=$1 'NR==ln' | awk -F: '{print$2}'` 
-	fi		
+		ip addr show dev `sciplist | awk -v ln=$1 'NR==ln' | awk -F: '{print$2}'`
+	fi
 }
 PATH=$PATH:/home/abhirup/.local/bin
 alias grep="grep --color"
@@ -58,3 +58,6 @@ alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlis
 alias logoff="kill -9 -1"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

@@ -35,8 +35,7 @@ Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 " Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 Plug 'ryanoasis/vim-devicons'
 " Plug 'elzr/vim-json', {'for': 'json'}
 " Plug 'SidOfc/mkdx'
@@ -88,14 +87,19 @@ set relativenumber
 
 " Configuring theme
 set termguicolors     " enable true colors support
+let base16colorspace=256  " Access colors present in 256 colorspace
 let g:gruvbox_italic = 1
-colorscheme gruvbox
-set background=dark
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+colorscheme base16-gruvbox-dark-hard
+hi Normal guibg=NONE ctermbg=NONE
+" set background=dark
 
 " " Configuring Airline
 " let g:airline_theme='luna'
 let g:airline#extensions#ale#enabled = 1
-" hi Normal guibg=NONE ctermbg=NONE
 
 " set noshowmode " Already handled well by powerline/airline/lightline
 
@@ -123,6 +127,7 @@ call deoplete#custom#source('LanguageClient',
 call deoplete#custom#option('sources', {
             \ 'cpp': ['LanguageClient'],
             \ 'c': ['LanguageClient'],
+            \ 'python': ['deoplete-jedi', 'ale'],
             \})
 " Configuring LanguageClient
 let g:LanguageClient_serverCommands={
@@ -270,4 +275,4 @@ nmap <leader>j <C-w>5-
 nmap <leader>h <C-w>5<
 nmap <leader>l <C-w>5>
 nmap <leader>s= <C-w>=
-
+nmap <leader>RR :so %<CR>

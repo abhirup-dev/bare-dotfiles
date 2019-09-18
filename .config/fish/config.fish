@@ -225,5 +225,11 @@ set -gx LESS_TERMCAP_ue $default
 # Begin underline
 set -gx LESS_TERMCAP_us $green
 
-source ~/.cache/wal/colors.fish
-wal -enqi (cat ~/.cache/wal/wal)
+# source ~/.cache/wal/colors.fish
+# wal -enqi (cat ~/.cache/wal/wal)
+
+# Use BASE16 for colours (https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/)
+set -gx BASE16_SHELL $HOME/.config/base16-shell/
+if test -s "$BASE16_SHELL/profile_helper.fish"
+    source $BASE16_SHELL/profile_helper.fish
+end
