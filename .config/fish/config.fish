@@ -1,13 +1,15 @@
-# Environment variables
-set -gx GTK_THEME Adwaita:dark
+set -gx LANG en_US.UTF-8
+set -gx GTAGSLABEL ctags
+set -gx GTK_THEME Pop-dark
 set -gx PDFR /usr/bin/zathura
 set -gx VISUAL vim
 set -gx EDITOR nvim
 set -gx BROWSER /usr/bin/google-chrome-stable
 # $TERMINAL made use of by mimeapps for xdg-open
 # set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
-set -gx TERMINAL /usr/bin/termite
+set -gx TERMINAL /usr/bin/alacritty
 set -gx TALPHA 0.80
+set -gx WALLGEN ""
 set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
@@ -103,6 +105,18 @@ function mkcd --description 'Create directory and cd into it'
     cd $argv[1]
 end
 
+function load-base16
+    # Use BASE16 for colours (https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/)
+    if test -s "$BASE16_SHELL/profile_helper.fish"
+        source $BASE16_SHELL/profile_helper.fish
+    end
+end
+
+function load-pywal
+    source ~/.cache/wal/colors.fish
+    wal -enqi (cat ~/.cache/wal/wal)
+end
+
 # Generating metadata from video
 # function ffmcreate
 #     ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
@@ -122,6 +136,7 @@ function fzl
     ls $argv | fzf
 end
 # Keybindings
+# bind RR "ranger"
 bind RR "ranger"
 
 alias yuy="yay --answerclean N --answerdiff N -Syyu"
@@ -137,6 +152,7 @@ alias diff="diff --color"
 alias open="xdg-open"
 alias vi="nvim"
 alias svi="sudo nvim"
+alias gvi="noerr gnvim"
 alias med="medit > /dev/null 2>&1"
 alias git-cred-store="git config credential.helper 'cache --timeout 3600'"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
@@ -201,35 +217,39 @@ function dostuff --on-event fish_prompt
     pwd >/tmp/whereami
 end
 
-
 # Colors
-set default (tput sgr0)
-set red (tput setaf 1)
-set green (tput setaf 2)
-set purple (tput setaf 5)
-set orange (tput setaf 9)
-# "Less" colors for man pages
-set -gx PAGER less
-# Begin blinking
-set -gx LESS_TERMCAP_mb $red
-# Begin bold
-set -gx LESS_TERMCAP_md $orange
-# End mode
-set -gx LESS_TERMCAP_me $default
-# End standout-mode
-set -gx LESS_TERMCAP_se $default
-# Begin standout-mode - nfo box
-set -gx LESS_TERMCAP_so $purple
-# End underline
-set -gx LESS_TERMCAP_ue $default
-# Begin underline
-set -gx LESS_TERMCAP_us $green
+# set default (tput sgr0)
+# set red (tput setaf 1)
+# set green (tput setaf 2)
+# set purple (tput setaf 5)
+# set orange (tput setaf 9)
+# # "Less" colors for man pages
+# set -gx PAGER less
+# # Begin blinking
+# set -gx LESS_TERMCAP_mb $red
+# # Begin bold
+# set -gx LESS_TERMCAP_md $orange
+# # End mode
+# set -gx LESS_TERMCAP_me $default
+# # End standout-mode
+# set -gx LESS_TERMCAP_se $default
+# # Begin standout-mode - nfo box
+# set -gx LESS_TERMCAP_so $purple
+# # End underline
+# set -gx LESS_TERMCAP_ue $default
+# # Begin underline
+# set -gx LESS_TERMCAP_us $green
 
-# source ~/.cache/wal/colors.fish
-# wal -enqi (cat ~/.cache/wal/wal)
-
-# Use BASE16 for colours (https://browntreelabs.com/base-16-shell-and-why-its-so-awsome/)
 set -gx BASE16_SHELL $HOME/.config/base16-shell/
-if test -s "$BASE16_SHELL/profile_helper.fish"
-    source $BASE16_SHELL/profile_helper.fish
+if string match -q "pywal" $WALLGEN
+    load-pywal
+else if string match -q "base16" $WALLGEN
+    load-base16
+    base16-bright
 end
+
+# Powerline shell
+# function fish_prompt
+#     powerline-shell --shell bare $status
+# end
+source $CONFIGS/fish/theme-bobthefish

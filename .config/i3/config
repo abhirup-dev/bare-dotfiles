@@ -132,20 +132,20 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        bindsym h resize shrink width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym j resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
+# same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
+# back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -155,20 +155,27 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-    font pango:UbuntuMono, FontAwesome 11
-    status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
-    colors {
-        separator #262323
-        background #262323
-        statusline #839496
-        focused_workspace #fdf6e3 #6c71c4 #fdf6e3
-        active_workspace #fdf6e3 #6c71c4 #fdf6e3
-        inactive_workspace #002b36 #586e75 #002b36
-        urgent_workspace #d33682 #d33682 #fdf6e3
-      }
-}
+# bar {
+#     font pango:UbuntuMono, FontAwesome 11
+#     status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
+#     colors {
+#         separator #262323
+#         background #262323
+#         statusline #839496
+#         focused_workspace #fdf6e3 #6c71c4 #fdf6e3
+#         active_workspace #fdf6e3 #6c71c4 #fdf6e3
+#         inactive_workspace #002b36 #586e75 #002b36
+#         urgent_workspace #d33682 #d33682 #fdf6e3
+#       }
+# }
 
+# For window settings
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable
+for_window [window_type="menu"]                         floating enable
 
 # Title bars
 for_window [class="^.*"] border pixel 1
@@ -182,9 +189,6 @@ exec --no-startup-id bash -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-
 bindsym $mod+Shift+x exec --no-startup-id $SCRIPTS/i3-lock-config.sh
 
 # Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 bindsym XF86AudioRaiseVolume exec --no-startup-id $SCRIPTS/volup.sh
 bindsym XF86AudioLowerVolume exec --no-startup-id $SCRIPTS/voldown.sh
 bindsym XF86AudioMute exec --no-startup-id $SCRIPTS/mutetoggle.sh
@@ -195,17 +199,71 @@ bindsym XF86MonBrightnessDown exec light -U 5;
 
 exec --no-startup-id volnoti -a 0.3
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
-# exec --no-startup-id feh --bg-scale $WALLPAPERS/lofi_sunglass_sand.jpg
-# exec --no-startup-id feh --bg-scale (cat $HOME/.cache/wal/wal)
 exec --no-startup-id wal -R
+# exec --no-startup-id feh --bg-scale $WALLPDIR/City-houses-blue-scenery.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id alsactl restore
 
 bindsym $mod+Control+L exec --no-startup-id $SCRIPTS/load_i3layout.sh
 exec --no-startup-id "compton -cbf"
+exec --no-startup-id redshift &
+exec --no-startup-id optimus-manager-qt
 
 # jump to specific windows
 bindsym $mod+t [class="termite"] focus
 bindsym $mod+greater exec "$SCRIPTS/spcl next"
 bindsym $mod+less exec "$SCRIPTS/spcl prev"
 bindsym $mod+slash exec "$SCRIPTS/spcl play"
+## Base16 Default Dark
+# Author: Chris Kempson (http://chriskempson.com)
+#
+# You can use these variables anywhere in the i3 configuration file.
+
+set $base00 #181818
+set $base01 #282828
+set $base02 #383838
+set $base03 #585858
+set $base04 #b8b8b8
+set $base05 #d8d8d8
+set $base06 #e8e8e8
+set $base07 #f8f8f8
+set $base08 #ab4642
+set $base09 #dc9656
+set $base0A #f7ca88
+set $base0B #a1b56c
+set $base0C #86c1b9
+set $base0D #7cafc2
+set $base0E #ba8baf
+set $base0F #a16946
+
+# Basic bar configuration using the Base16 variables.
+bar {
+    status_command i3status
+        font pango:Source Code Pro , FontAwesome 9
+        status_command i3blocks -c ~/.config/i3blocks/i3blocks.conf
+        height 17
+        separator_symbol "/"
+# sep_block_width 5
+
+        colors {
+            background $base00
+                separator  $base01
+                statusline $base04
+
+# State             Border  BG      Text
+                focused_workspace   $base05 $base0D $base00
+                active_workspace    $base05 $base03 $base00
+                inactive_workspace  $base03 $base01 $base05
+                urgent_workspace    $base08 $base08 $base00
+                binding_mode        $base00 $base0A $base00
+        }
+}
+
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+# client.focused          $base05 $base0D $base00 $base0D $base0C
+# client.focused_inactive $base01 $base01 $base05 $base03 $base01
+# client.unfocused        $base01 $base00 $base05 $base01 $base01
+# client.urgent           $base08 $base08 $base00 $base08 $base08
+# client.placeholder      $base00 $base00 $base05 $base00 $base00
+# client.background       $base07

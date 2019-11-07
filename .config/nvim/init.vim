@@ -93,8 +93,8 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-colorscheme base16-gruvbox-dark-hard
-hi Normal guibg=NONE ctermbg=NONE
+colorscheme base16-bright
+" hi Normal guibg=NONE ctermbg=NONE
 " set background=dark
 
 " " Configuring Airline
@@ -275,4 +275,4 @@ nmap <leader>j <C-w>5-
 nmap <leader>h <C-w>5<
 nmap <leader>l <C-w>5>
 nmap <leader>s= <C-w>=
-nmap <leader>RR :so %<CR>
+nmap <leader>RR :so ~/.config/nvim/init.vim<CR>
