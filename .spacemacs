@@ -150,8 +150,8 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         doom-dracula
                          spacemacs-dark
+                         doom-dracula
                          ;; spacemacs-light
                          ;; seti has wierd colour theme in menus, and org-mode is less colorful; contrast is great
                          ;; seti
@@ -328,6 +328,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+(setenv "WORKON_HOME" "/home/abhirup/Software/intelpython3/envs")
   )
 
 (defun dotspacemacs/user-config ()

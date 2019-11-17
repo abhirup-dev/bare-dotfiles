@@ -4,3 +4,15 @@
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = https://github.com/syl20bnr/spacemacs/tree/develop
+[submodule "/home/abhirup/.tmux/plugins/tmux-continuum"]
+	path = /home/abhirup/.tmux/plugins/tmux-continuum
+	url = git@tmux-plugins:tmux-continuum
+[submodule "/home/abhirup/.tmux/plugins/tmux-resurrect"]
+	path = /home/abhirup/.tmux/plugins/tmux-resurrect
+	url = git@tmux-plugins:tmux-resurrect
+[submodule "/home/abhirup/.tmux/plugins/tmux-yank"]
+	path = /home/abhirup/.tmux/plugins/tmux-yank
+	url = git@tmux-plugins:tmux-yank
+[submodule "/home/abhirup/.tmux/plugins/tpm"]
+	path = /home/abhirup/.tmux/plugins/tpm
+	url = git@tmux-plugins:tpm

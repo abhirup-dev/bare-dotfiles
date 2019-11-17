@@ -6,19 +6,24 @@
 #set Emacs mode in bash
 #set -o emacs
 
+# List of important system path shortcuts
+CONFIG=$HOME/.config
+SCRIPTS=$CONFIG/scripts
+WIN="/mnt/c/Users/amit"
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -39,7 +44,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -64,26 +69,32 @@ undl=$(tput smul)
 rmundl=$(tput rmul)
 RED='\033[1;33m'
 
-if [[ ${EUID} == 0 ]] ; then
-		# show root@ when we don't have colors
-		# PS1='\[$yellow\][[\u:\W]]\[$reset\]\[$green\] '
-		PS1='\[$yellow\][[\u:\W]]\[$reset\]\[$green\] '
-	else
-		# PS1='\[$bold\]\[$yellow\][[ \[$yellow\]\[$red\]\u:\[$green\]\w\[$yellow\] ]]\[$reset\] '
-		PS1='\[$bold\]\[$red\]\u:\[$green\]\w>\[$reset\] '
-	fi
-prompt_dir(){
-    PROMPT_DIRTRIM=$1
+if [[ ${EUID} == 0 ]]; then
+  # show root@ when we don't have colors
+  # PS1='\[$yellow\][[\u:\W]]\[$reset\]\[$green\] '
+  PS1='\[$yellow\][[\u:\W]]\[$reset\]\[$green\] '
+else
+  # PS1='\[$bold\]\[$yellow\][[ \[$yellow\]\[$red\]\u:\[$green\]\w\[$yellow\] ]]\[$reset\] '
+  PS1='\[$bold\]\[$red\]\u:\[$green\]\w>\[$reset\] '
+fi
+prompt_dir() {
+  PROMPT_DIRTRIM=$1
 }
+# # Append history across sessions, is Questionable!
+# PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -n"
+## Current version is alias activated
+alias hsync="history -a; history -c; history -r"
+hsync
+
 # Git VCS symbols in bash-prompt
 # if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
 #     GIT_PROMPT_ONLY_IN_REPO=1
 #     source $HOME/.bash-git-prompt/gitprompt.sh
 # fi
 
-alias grep="grep --color"
+alias ..="cd .."
+alias ,="cd -"
 alias open="xdg-open"
-
 alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 alias bt="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak \
@@ -110,7 +121,6 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin
 export DISPLAY=:0
-WIN="/mnt/c/Users/amit"
 
 if [ -d ~/.bash_completion.d ]; then
   for file in ~/.bash_completion.d/*; do
