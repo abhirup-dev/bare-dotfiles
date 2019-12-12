@@ -21,6 +21,8 @@ Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
 " Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'dag/vim-fish', {'for': 'fish'}
+Plug 'jceb/vim-orgmode'
 Plug 'zhimsel/vim-stay'
 Plug 'lervag/vimtex', {'for': 'latex'}
 Plug 'sirver/ultisnips'
@@ -40,16 +42,16 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'elzr/vim-json', {'for': 'json'}
 " Plug 'SidOfc/mkdx'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
-Plug 'dag/vim-fish', {'for': 'fish'}
-Plug 'jceb/vim-orgmode'
 " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 " Plug 'airblade/vim-gitgutter'
 " Plug 'tpope/vim-abolish'
 Plug 'ap/vim-css-color'
+Plug 'sjl/gundo.vim'
 call plug#end()
 
 set incsearch
 set ignorecase
+set smartcase
 set autochdir
 syntax on
 set foldmethod=syntax
@@ -76,6 +78,7 @@ autocmd BufNewFile,BufReadPost *.md.html set filetype=markdownd
 autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd Filetype markdown set conceallevel=0
 autocmd Filetype markdown normal zR
+
 " Enabling vertical indentation guides
 " :set listchars=tab:\|\
 " :set list
@@ -93,12 +96,12 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-colorscheme base16-bright
+colorscheme pencil
 " hi Normal guibg=NONE ctermbg=NONE
-" set background=dark
+set background=dark
 
 " " Configuring Airline
-" let g:airline_theme='luna'
+let g:airline_theme='pencil'
 let g:airline#extensions#ale#enabled = 1
 
 " set noshowmode " Already handled well by powerline/airline/lightline
@@ -231,8 +234,9 @@ nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
 " FZF
-nnoremap <C-o> :Files<CR>
+nnoremap <leader>ff :Files<CR>
 nnoremap <C-f> :Rg<CR>
+nnoremap <leader>bb :Buffers<CR>
 
 nmap <leader>cp :let @" = expand("%:p")<CR>
 
@@ -260,7 +264,7 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 nmap <M-j> ddp
 nmap <M-k> kddpk
 
-nnoremap <leader>bb :ls<CR>
+" nnoremap <leader>bb :ls<CR>
 nnoremap <leader>bo :b<space>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>

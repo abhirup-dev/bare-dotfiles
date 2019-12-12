@@ -1,7 +1,15 @@
 [core]
 	editor = vim
 [alias]
-fza = "!git ls-files -m -o  --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+    fza = "!git ls-files -m -o  --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+    cdiff = diff --color=always
 [diff]
     tool = meld
 [difftool]

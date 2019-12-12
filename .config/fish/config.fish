@@ -7,7 +7,7 @@ set -gx EDITOR nvim
 set -gx BROWSER /usr/bin/google-chrome-stable
 # $TERMINAL made use of by mimeapps for xdg-open
 # set -gx TERMINAL /usr/local/bin/st -f 'Source Code Pro Medium:size=12'
-set -gx TERMINAL /usr/bin/alacritty
+set -gx TERMINAL /usr/bin/termite
 set -gx TALPHA 0.80
 set -gx WALLGEN ""
 set -gx WALLPDIR ~/Pictures/Wallpapers
@@ -95,10 +95,10 @@ function .suffixfzf --description 'Pipe command to fzf'
 end
 bind \ef ".suffixfzf"
 
-function .outputfzf --description 'Use output from (fzf)'
-    commandline -i ' (fzf)'
-end
-bind \eF ".outputfzf"
+# function .outputfzf --description 'Use output from (fzf)'
+#     commandline -i ' (fzf)'
+# end
+# bind \eF ".outputfzf"
 
 function mkcd --description 'Create directory and cd into it'
     mkdir $argv[1]
@@ -117,26 +117,14 @@ function load-pywal
     wal -enqi (cat ~/.cache/wal/wal)
 end
 
-# Generating metadata from video
-# function ffmcreate
-#     ffprobe -v quiet $argv   -print_format json -show_entries stream=index,codec_type:stream_tags=creation_time:format_tags=creation_time >  $argv.txt
-# end
-
-# function -e fish_preexec _run_fasd
-#     fasd --proc (fasd --sanitize "$argv") > "/dev/null" 2>&1
-# end
-# function j
-#     cd (fasd -d -e 'printf %s' "argv")
-# end
-
 function sample
     echo $argv[1]:$argv[2] | awk -F: -v name=$argv[3] '{print $1 " " name " " $2}'
 end
 function fzl
     ls $argv | fzf
 end
+
 # Keybindings
-# bind RR "ranger"
 bind RR "ranger"
 
 alias yuy="yay --answerclean N --answerdiff N -Syyu"
@@ -164,9 +152,6 @@ alias rmpv="mpv --input-ipc-server=/tmp/mpvsocket"
 alias ampv="mpv --no-video"
 alias ympv="mpv --no-config --slang=en -ytdl-raw-options=write-auto-sub=,sub-lang=en"
 alias ytdl="youtube-dl --write-auto-sub --sub-lang en"
-
-# aliases just to avoid Gtk error
-# alias evince="noerr evince"
 
 # Abbreviations
 # if not set -q abbrs_initialized
@@ -217,29 +202,6 @@ function dostuff --on-event fish_prompt
     pwd >/tmp/whereami
 end
 
-# Colors
-# set default (tput sgr0)
-# set red (tput setaf 1)
-# set green (tput setaf 2)
-# set purple (tput setaf 5)
-# set orange (tput setaf 9)
-# # "Less" colors for man pages
-# set -gx PAGER less
-# # Begin blinking
-# set -gx LESS_TERMCAP_mb $red
-# # Begin bold
-# set -gx LESS_TERMCAP_md $orange
-# # End mode
-# set -gx LESS_TERMCAP_me $default
-# # End standout-mode
-# set -gx LESS_TERMCAP_se $default
-# # Begin standout-mode - nfo box
-# set -gx LESS_TERMCAP_so $purple
-# # End underline
-# set -gx LESS_TERMCAP_ue $default
-# # Begin underline
-# set -gx LESS_TERMCAP_us $green
-
 set -gx BASE16_SHELL $HOME/.config/base16-shell/
 if string match -q "pywal" $WALLGEN
     load-pywal
@@ -253,3 +215,5 @@ end
 #     powerline-shell --shell bare $status
 # end
 source $CONFIGS/fish/theme-bobthefish
+
+thefuck --alias | source

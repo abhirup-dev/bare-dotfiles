@@ -1,4 +1,5 @@
-** Features [37%]
+** Todo [33%]
+   - [ ] Neovim config organisation (plugin wise)
    - [ ] Pacman update hook with efficent i3bar blocklet
    - [ ] Make fish config independent of distribution & package manager
    - [ ] Allowances for "gapless" version of i3wm
