@@ -125,10 +125,11 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin
 
 # WSL settings
+KERNEL=`uname -r`
 if [[ $KERNEL == *microsoft* ]]; then
     VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
     export DISPLAY=${VIP/$'\r'/}":0"
-"; fi
+fi
 
 if [ -d ~/.bash_completion.d ]; then
   for file in ~/.bash_completion.d/*; do
