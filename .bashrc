@@ -83,8 +83,8 @@ prompt_dir() {
 # # Append history across sessions, is Questionable!
 # PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -n"
 ## Current version is alias activated
-alias hsync="history -a; history -c; history -r"
-hsync
+# hsync
+# alias hsync="history -a; history -c; history -r"
 
 # Git VCS symbols in bash-prompt
 # if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
@@ -105,11 +105,14 @@ alias aug="sudo apt-get upgrade"
 
 alias logoff="kill -9 -1"
 
+[ -f ~/.config/scripts/z.sh ] && source ~/.config/scripts/z.sh
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # Python environment setup
 alias intelpython="source ~/Software/intelpython3/bin/activate"
-alias deepml="intelpython && conda activate deepml"
+alias deepml="source ~/Software/intelpython3/bin/activate && conda activate deepml"
+alias cac="conda activate"
+alias deac="conda deactivate"
 
 # Tmux configuration
 TMUX_DIR="$HOME/.tmux"
@@ -120,7 +123,8 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin
-export DISPLAY=:0
+VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
+export DISPLAY=${VIP/$'\r'/}":0"
 
 if [ -d ~/.bash_completion.d ]; then
   for file in ~/.bash_completion.d/*; do
