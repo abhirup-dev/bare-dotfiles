@@ -123,8 +123,12 @@ BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin
-VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
-export DISPLAY=${VIP/$'\r'/}":0"
+
+# WSL settings
+if [[ $KERNEL == *microsoft* ]]; then
+    VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
+    export DISPLAY=${VIP/$'\r'/}":0"
+"; fi
 
 if [ -d ~/.bash_completion.d ]; then
   for file in ~/.bash_completion.d/*; do
