@@ -77,6 +77,7 @@ else
   # PS1='\[$bold\]\[$yellow\][[ \[$yellow\]\[$red\]\u:\[$green\]\w\[$yellow\] ]]\[$reset\] '
   PS1='\[$bold\]\[$red\]\u:\[$green\]\w>\[$reset\] '
 fi
+# reduces the Path prompt to specified length
 prompt_dir() {
   PROMPT_DIRTRIM=$1
 }
@@ -102,7 +103,6 @@ alias reflector_update="sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlis
 alias ai="sudo apt-get install"
 alias au="sudo apt-get update"
 alias aug="sudo apt-get upgrade"
-
 alias logoff="kill -9 -1"
 
 [ -f ~/.config/scripts/z.sh ] && source ~/.config/scripts/z.sh
@@ -118,11 +118,12 @@ alias deac="conda deactivate"
 TMUX_DIR="$HOME/.tmux"
 TMUX_CONF="$TMUX_DIR/tmux.conf"
 alias tmux="tmux -f $TMUX_CONF"
+alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin
+PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:$SCRIPTS
 
 # WSL settings
 KERNEL=`uname -r`
@@ -136,3 +137,9 @@ if [ -d ~/.bash_completion.d ]; then
     . $file
   done
 fi
+
+mkcd() {
+    mkdir $1
+    cd $1
+}
+
