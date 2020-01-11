@@ -120,6 +120,7 @@ TMUX_DIR="$HOME/.tmux"
 TMUX_CONF="$TMUX_DIR/tmux.conf"
 alias tmux="tmux -f $TMUX_CONF"
 alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
+alias em='emacs -q -l my-emacs/.emacs'
 
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
