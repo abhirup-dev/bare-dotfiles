@@ -95,6 +95,7 @@ prompt_dir() {
 
 alias ..="cd .."
 alias ,="cd -"
+alias rn="ranger"
 alias open="xdg-open"
 alias baredot="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
 alias bt="git --git-dir=$HOME/mydotfiles --work-tree=$HOME"
@@ -123,7 +124,7 @@ alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-sh
 BASE16_SHELL=$HOME/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:$SCRIPTS
+PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:~/go/bin:$SCRIPTS
 
 # WSL settings
 KERNEL=`uname -r`
