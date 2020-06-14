@@ -7,6 +7,7 @@
 #set -o emacs
 
 # List of important system path shortcuts
+TERM=xterm
 CONFIGS=$HOME/.config
 SCRIPTS=$CONFIGS/scripts
 WIN="/mnt/c/Users/amit"
@@ -126,20 +127,29 @@ alias tmux="tmux -f $TMUX_CONF"
 alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
 
 alias em='emacs -q -l my-emacs/.emacs'
+export EDITOR="/usr/bin/vim"
 
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+#BASE16_SHELL=$HOME/.config/base16-shell/
+#[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 fzbg(){
-    if [ -f "$CONFIGS/BASE16.txt" ]; then
-        eval $(cat "$CONFIGS/BASE16.txt" | fzf)
+    if [ -f ~/.fzf/bin/fzf ]; then
+        if [ -f "$CONFIGS/BASE16.txt" ]; then
+            eval $(cat "$CONFIGS/BASE16.txt" | fzf)
+        else
+            alias | grep --color=none 'base16 ' | awk -F"[ =]" '{print $2}' > "$CONFIGS/BASE16.txt"
+            echo "wrote to $CONFIGS/BASE16.txt"
+        fi
     else
-        alias | grep --color=none 'base16 ' | awk -F"[ =]" '{print $2}' > "$CONFIGS/BASE16.txt"
-        echo "wrote to $CONFIGS/BASE16.txt"
+        echo "fzf not installed."
     fi
+}
+fpchoose(){
+    # MAXDEPTH=$2
+    [ -f ~/.fzf/bin/fzf ] && echo $(find "$1" | fzf -m)
 }
 
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:~/go/bin:$SCRIPTS
-TERMINAL='stterm'
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/
 
 # WSL settings
 KERNEL=`uname -r`
@@ -158,5 +168,10 @@ mkcd() {
     mkdir $1
     cd $1
 }
-
+font-match(){
+    fc-match -s "$1" | grep -i "$1"
+}
 chcaps
+
+#export DISPLAY=192.168.43.30:0.0
+source /home/abhirup/.config/broot/launcher/bash/br

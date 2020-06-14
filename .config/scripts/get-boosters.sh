@@ -20,7 +20,7 @@ reset=$(tput sgr0)
 undl=$(tput smul)
 rmundl=$(tput rmul)
 logger(){
-    echo \[$green\]"$1"\[$reset\]
+    echo $blue"INFO: "$bold$green"$1"$reset
 }
 
 get_fonts(){
@@ -45,4 +45,9 @@ get_media_tools(){
     sudo apt-get install feh sxiv
 }
 
-get_media_tools
+get_dev_tools(){
+    logger "Installing exuberant-ctags"
+    sudo apt-get install exuberant-ctags
+}
+
+get_dev_tools

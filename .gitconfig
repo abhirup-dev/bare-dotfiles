@@ -25,3 +25,5 @@
 [user]
 	name = maverickdas
 	email = abhidash@outlook.com
+[push]
+	default = simple

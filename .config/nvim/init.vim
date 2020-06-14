@@ -6,10 +6,10 @@ let mapleader = " "
 " Load Plugins
 call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}
 Plug 'deathlyfrantic/deoplete-spell'
 " Plug 'Rip-Rip/clang_complete'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'autozimu/LanguageClient-neovim', {
             \ 'branch': 'next',
             \ 'do': 'bash install.sh',
@@ -20,9 +20,9 @@ Plug 'w0rp/ale'
 Plug 'sbdchd/neoformat'
 Plug 'majutsushi/tagbar'
 " Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}
 Plug 'dag/vim-fish', {'for': 'fish'}
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode', {'for': 'org'}
 Plug 'zhimsel/vim-stay'
 Plug 'lervag/vimtex', {'for': 'latex'}
 Plug 'sirver/ultisnips'
@@ -43,6 +43,7 @@ Plug 'ryanoasis/vim-devicons'
 " Plug 'SidOfc/mkdx'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
 " Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'airblade/vim-gitgutter'
 " Plug 'tpope/vim-abolish'
 Plug 'ap/vim-css-color'
@@ -93,31 +94,31 @@ set relativenumber
 set termguicolors     " enable true colors support
 let base16colorspace=256  " Access colors present in 256 colorspace
 let g:gruvbox_italic = 1
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
+colorscheme base16-dracula
 " new colorschemes should be in ~/.config/nvim/colors/
-colorscheme pencil
+" colorscheme pencil
 " hi Normal guibg=NONE ctermbg=NONE
-set background=dark
+" set background=dark
 
 " " Configuring Airline
-let g:airline_theme='pencil'
-let g:airline#extensions#ale#enabled = 1
+" let g:airline_theme='pencil'
+" let g:airline#extensions#ale#enabled = 1
 
 " set noshowmode " Already handled well by powerline/airline/lightline
 
-let g:python3_host_prog = "/usr/bin/python3"
+let g:python3_host_prog = "/home/abhirup/Software/intelpython3/bin/python"
 let g:python_host_prog = "/usr/bin/python2"
 
 " " Configuring deoplete
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {}
-" " let g:deoplete#sources = {'_': ['ale', 'deoplete-jedi', 'clang_complete']}
-" call deoplete#custom#var('omni', 'input_patterns', {
-"             \ 'tex': g:vimtex#re#deoplete
-"             \})
+call deoplete#custom#var('omni', 'input_patterns', {
+            \ 'tex': g:vimtex#re#deoplete
+            \})
 " Pass a dictionary to set multiple options
 call deoplete#custom#option({
             \ 'auto_complete_delay': 20,
@@ -145,6 +146,7 @@ let g:LanguageClient_serverCommands={
 " inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Configuring jedi-vim
+let g:jedi#force_py_version = 3
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#show_call_signatures = "1"
 let g:jedi#goto_command = "<leader>d"
@@ -304,7 +306,7 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_lazy_highlight = 1
 
 
-let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[$]'', ''[:]'')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
+" let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[$]'', ''[:]'')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
 " powerline symbols
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
