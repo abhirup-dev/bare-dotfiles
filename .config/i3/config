@@ -6,7 +6,7 @@ font pango:monospace 8
 
 set_from_resource $fg i3wm.color7 #f0f0f0
 set_from_resource $ubg i3wm.color0 #f0f0f0
-set_from_resource $fbga i3wm.color2 #f0f0f0
+set_from_resource $fbga i3wm.colorUL #f0f0f0
 set_from_resource $fbgi i3wm.color0 #f0f0f0
 
 # class                 border  backgr. text indicator child_border
@@ -35,6 +35,7 @@ bindsym $mod+x exec rofi -show run
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 bindsym $mod+d exec rofi -show drun
+bindsym $mod+Tab exec rofi -show window
 
 # change focus
 bindsym $mod+h focus left
@@ -188,6 +189,10 @@ exec --no-startup-id bash -c "/usr/lib/polkit-gnome/polkit-gnome-authentication-
 # Lockscreen
 bindsym $mod+Shift+x exec --no-startup-id $SCRIPTS/i3-lock-config.sh
 
+# Configure external monitor to left
+exec --no-startup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1-1
+#nitrogen --restore
+
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id $SCRIPTS/volup.sh
 bindsym XF86AudioLowerVolume exec --no-startup-id $SCRIPTS/voldown.sh
@@ -197,16 +202,17 @@ bindsym XF86AudioMute exec --no-startup-id $SCRIPTS/mutetoggle.sh
 bindsym XF86MonBrightnessUp exec light -A 5;
 bindsym XF86MonBrightnessDown exec light -U 5;
 
+# exec_always alttab
 exec --no-startup-id volnoti -a 0.3
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
-exec --no-startup-id wal -R
+exec --no-startup-id nitrogen --restore &
 # exec --no-startup-id feh --bg-scale $WALLPDIR/City-houses-blue-scenery.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id alsactl restore
 
 bindsym $mod+Control+L exec --no-startup-id $SCRIPTS/load_i3layout.sh
-exec --no-startup-id "compton -cbf"
-exec --no-startup-id redshift &
+exec --no-startup-id "picom -cbf"
+# exec --no-startup-id redshift &
 exec --no-startup-id optimus-manager-qt
 
 # jump to specific windows

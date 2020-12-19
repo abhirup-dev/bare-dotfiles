@@ -1,4 +1,9 @@
 ** Todo [33%]
+   - [ ] AltTab functionality for all windows
+      - [X] i3tree perl script
+      - [X] curr_window.fish script to get latest command of any terminal window
+      - [ ] connect latest command to i3tree and display in rofi
+      - [ ] Mechanism to shift focus to selected window from rofi
    - [ ] Neovim config organisation (plugin wise)
    - [ ] Pacman update hook with efficent i3bar blocklet
    - [ ] Make fish config independent of distribution & package manager

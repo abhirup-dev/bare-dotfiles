@@ -20,6 +20,7 @@ set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 # set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
+set -gx JAVA_HOME /usr/lib/jvm/default-runtime/bin/java 
 set -gx GOPATH $HOME/go
 set -gx PATH $PATH $SCRIPTS $HOME/.local/bin $GOPATH/bin
 set -gx megadir $HOME/MEGAsync
