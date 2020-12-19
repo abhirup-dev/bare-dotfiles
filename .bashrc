@@ -2,7 +2,7 @@
 # ~/.bashrc
 
 #set Vim mode in bash
-#set -o vi
+set -o vi
 #set Emacs mode in bash
 #set -o emacs
 
@@ -83,11 +83,16 @@ prompt_dir() {
   PROMPT_DIRTRIM=$1
 }
 
+
+# Avoid duplicates
+HISTCONTROL=ignoredups:erasedups
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+# After each command, append to the history file and reread it
 # # Append history across sessions, is Questionable!
 # PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -n"
 ## Current version is alias activated
-# hsync
-# alias hsync="history -a; history -c; history -r"
+alias hsync="history -a; history -c; history -r"
 
 # Git VCS symbols in bash-prompt
 # if [ -f "$HOME/.bash-git-prompt/gitprompt.sh" ]; then
@@ -120,9 +125,11 @@ alias cac="conda activate"
 alias deac="conda deactivate"
 
 # Tmux configuration
+export TERM="xterm-256color"
 TMUX_DIR="$HOME/.tmux"
 TMUX_CONF="$TMUX_DIR/tmux.conf"
-alias tmux="tmux -f $TMUX_CONF"
+# 'tmux -2' is needed to enforce 256 color support
+alias tmux="tmux -2 -f $TMUX_CONF"
 # Auto-resurrecting Tmux state after boot
 alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
 
@@ -152,11 +159,11 @@ PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:~/go/bin:$SCRIPTS
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/
 
 # WSL settings
-KERNEL=`uname -r`
-if [[ $KERNEL == *microsoft* ]]; then
-    VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
-    export DISPLAY=${VIP/$'\r'/}":0"
-fi
+#KERNEL=`uname -r`
+#if [[ $KERNEL == *microsoft* ]]; then
+#    VIP=`ipconfig.exe | awk -F" : " '/IPv4.*172/{print $2}'`
+#    export DISPLAY=${VIP/$'\r'/}":0"
+#fi
 
 if [ -d ~/.bash_completion.d ]; then
   for file in ~/.bash_completion.d/*; do
@@ -171,7 +178,8 @@ mkcd() {
 font-match(){
     fc-match -s "$1" | grep -i "$1"
 }
-chcaps
+#chcaps
 
-#export DISPLAY=192.168.43.30:0.0
+alias python=python3
+
 source /home/abhirup/.config/broot/launcher/bash/br
