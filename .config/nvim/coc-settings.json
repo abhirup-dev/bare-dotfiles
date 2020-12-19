@@ -1,0 +1,6 @@
+{
+  "suggest.enablePreview": true,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.timeout": 2000,
+  "suggest.minTriggerInputLength": 3
+}
