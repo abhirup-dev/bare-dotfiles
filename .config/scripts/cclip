@@ -1,0 +1,3 @@
+#!/bin/bash
+tee <&0 | clip.exe
+exit 0

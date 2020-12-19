@@ -10,6 +10,7 @@
     type = cat-file -t
     dump = cat-file -p
     cdiff = diff --color=always
+	ls = "!~/.config/scripts/git-ls/git-ls"
 [diff]
     tool = meld
 [difftool]
@@ -25,3 +26,5 @@
 [user]
 	name = maverickdas
 	email = abhidash@outlook.com
+[push]
+	default = simple
