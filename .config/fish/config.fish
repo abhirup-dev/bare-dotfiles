@@ -14,6 +14,7 @@ set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
+set -gx TMUX_DIR $HOME/.tmux
 set -gx TMUX_CONF $HOME/.tmux/tmux.conf
 set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
 set -gx QT_SCALE_FACTOR 1
@@ -155,6 +156,9 @@ alias ampv="mpv --no-video"
 alias ympv="mpv --no-config --slang=en -ytdl-raw-options=write-auto-sub=,sub-lang=en"
 alias ytdl="youtube-dl --write-auto-sub --sub-lang en"
 alias tmux="tmux -2f $TMUX_CONF"
+# Auto-resurrecting Tmux state after boot
+alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
+
 
 # Abbreviations
 # if not set -q abbrs_initialized

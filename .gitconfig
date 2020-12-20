@@ -3,7 +3,7 @@
 [alias]
     fza = "!git ls-files -m -o  --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add"
     co = checkout
-    ci = commit
+    ci = commit -m
     st = status
     br = branch
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
