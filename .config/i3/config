@@ -191,7 +191,6 @@ bindsym $mod+Shift+x exec --no-startup-id $SCRIPTS/i3-lock-config.sh
 
 # Configure external monitor to left
 exec --no-startup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1-1
-#nitrogen --restore
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id $SCRIPTS/volup.sh
@@ -202,11 +201,13 @@ bindsym XF86AudioMute exec --no-startup-id $SCRIPTS/mutetoggle.sh
 bindsym XF86MonBrightnessUp exec light -A 5;
 bindsym XF86MonBrightnessDown exec light -U 5;
 
-# exec_always alttab
 exec --no-startup-id volnoti -a 0.3
 exec --no-startup-id dunst -config $CONFIGS/dunst/dunstrc
 exec --no-startup-id nitrogen --restore &
-# exec --no-startup-id feh --bg-scale $WALLPDIR/City-houses-blue-scenery.jpg
+
+# Starting clipboard manager
+exec --no-startup-id copyq
+
 exec --no-startup-id nm-applet
 exec --no-startup-id alsactl restore
 
