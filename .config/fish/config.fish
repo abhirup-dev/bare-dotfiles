@@ -14,6 +14,7 @@ set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
+set -gx TMUX_CONF $HOME/.tmux/tmux.conf
 set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
 set -gx QT_SCALE_FACTOR 1
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
@@ -153,6 +154,7 @@ alias rmpv="mpv --input-ipc-server=/tmp/mpvsocket"
 alias ampv="mpv --no-video"
 alias ympv="mpv --no-config --slang=en -ytdl-raw-options=write-auto-sub=,sub-lang=en"
 alias ytdl="youtube-dl --write-auto-sub --sub-lang en"
+alias tmux="tmux -2f $TMUX_CONF"
 
 # Abbreviations
 # if not set -q abbrs_initialized
@@ -193,8 +195,8 @@ abbr ytd 'youtube-dl'
 # echo -n 'Done'
 # end
 
-# fish_vi_key_bindings
-fish_default_key_bindings
+fish_vi_key_bindings
+# fish_default_key_bindings
 #Swap CapsLock and Escape
 chcaps
 

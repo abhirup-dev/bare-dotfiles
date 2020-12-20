@@ -7,7 +7,7 @@
 "    -> Files and backups
 "    -> Text, tab and indent related
 "    -> Visual mode related
-"    -> Moving around, tabs and buffers
+"    -> Moving around, tabs, windows and buffers
 "    -> Status line
 "    -> Editing mappings
 "    -> vimgrep searching and cope displaying
@@ -262,6 +262,8 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
+  " Allows buffers to be unsaved when switching
+  set hidden
 catch
 endtry
 

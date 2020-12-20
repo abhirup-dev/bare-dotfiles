@@ -55,6 +55,7 @@ set incsearch
 set ignorecase
 set smartcase
 set autochdir
+set hidden
 syntax on
 set foldmethod=syntax
 set backspace=indent,eol,start                            " Fixes backspace
@@ -111,14 +112,15 @@ colorscheme base16-dracula
 
 " set noshowmode " Already handled well by powerline/airline/lightline
 
-let g:python3_host_prog = "/home/abhirup/Software/intelpython3/bin/python"
-let g:python_host_prog = "/usr/bin/python2"
+" Uncomment when in WSL/ Ubuntu
+"let g:python3_host_prog = "/home/abhirup/Software/intelpython3/bin/python"
+"let g:python_host_prog = "/usr/bin/python2"
 
 " " Configuring deoplete
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#var('omni', 'input_patterns', {
-            \ 'tex': g:vimtex#re#deoplete
-            \})
+"call deoplete#custom#var('omni', 'input_patterns', {
+"            \ 'tex': g:vimtex#re#deoplete
+"            \})
 " Pass a dictionary to set multiple options
 call deoplete#custom#option({
             \ 'auto_complete_delay': 20,
