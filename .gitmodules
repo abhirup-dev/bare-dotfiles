@@ -16,3 +16,6 @@
 [submodule "/home/abhirup/.tmux/plugins/tpm"]
 	path = /home/abhirup/.tmux/plugins/tpm
 	url = git@tmux-plugins:tpm
+[submodule ".config/scripts/git-ls"]
+	path = .config/scripts/git-ls
+	url = https://github.com/stedolan/git-ls

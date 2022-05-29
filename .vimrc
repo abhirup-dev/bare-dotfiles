@@ -42,7 +42,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>W :wq<CR>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
@@ -54,7 +54,7 @@ command W w !sudo tee % > /dev/null
 set so=7
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
@@ -86,23 +86,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -126,7 +126,7 @@ set foldcolumn=1
 " => Colors and Fonts
 """""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
@@ -242,8 +242,13 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+" map <leader>t :tabnext
+" tabnew -> gt; tabprev -> gT
+" function! tabedit(arg)
+"     tabnew a:arg<CR>
+" endfunction
+" command! -nargs=1 Te call tabedit(<f-args>)
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -258,7 +263,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -269,6 +274,9 @@ endtry
 
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" Easy way to exit from Terminal mode to Normal mode
+tnoremap <Esc> <C-\><C-n>
 
 
 """"""""""""""""
@@ -335,7 +343,7 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " " Quickly open a buffer for scribble
 " map <leader>q :e ~/buffer<cr>
-" 
+"
 " " Quickly open a markdown buffer for scribble
 " map <leader>x :e ~/buffer.md<cr>
 
@@ -354,7 +362,7 @@ function! HasPaste()
     return ''
 endfunction
 
-" Don't close window, when deleting a buffer
+" Don't close window, when deleting a buffer -- Needs REDESIGN
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
     let l:currentBufNum = bufnr("%")
@@ -377,7 +385,7 @@ endfunction
 
 function! CmdLine(str)
     call feedkeys(":" . a:str)
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -395,3 +403,30 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+" clear registry
+command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
+
+" yank to Windows clipboard
+if system('uname -r') =~ "Microsoft"
+    augroup WSLYank
+        autocmd!
+        autocmd TextYankPost * :call system('clip.exe ', @")
+    augroup END
+endif
+
+" paste from Windows clipboard -- REDESIGN - use :r !command ...
+noremap "wp :exe 'norm a'.system('/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -Command Get-Clipboard')<CR>
+
+" block cursor support in Windows, WSL, powershell
+if &term == 'win32'
+    let &t_ti.=" \e[1 q"
+    let &t_SI.=" \e[5 q-- INSERT --"
+    let &t_EI.=" \e[1 q"
+    let &t_te.=" \e[0 q"
+else
+    let &t_ti.="\e[1 q"
+    let &t_SI.="\e[5 q"
+    let &t_EI.="\e[1 q"
+    let &t_te.="\e[0 q"
+endif

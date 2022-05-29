@@ -2,9 +2,9 @@
 # ~/.bashrc
 
 #set Vim mode in bash
-set -o vi
+#set -o vi
 #set Emacs mode in bash
-#set -o emacs
+set -o emacs
 
 # List of important system path shortcuts
 TERM=xterm
@@ -156,7 +156,7 @@ fpchoose(){
 }
 
 PATH=$PATH:/home/abhirup/.local/bin:~/.cargo/bin:~/go/bin:$SCRIPTS
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre/
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
 
 # WSL settings
 #KERNEL=`uname -r`
@@ -183,3 +183,7 @@ font-match(){
 alias python=python3
 
 source /home/abhirup/.config/broot/launcher/bash/br
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
