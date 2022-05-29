@@ -14,12 +14,15 @@ set -gx WALLPDIR ~/Pictures/Wallpapers
 set -gx TESTBENCH ~/Dev/Testbench
 set -gx CONFIGS ~/.config
 set -gx SCRIPTS $CONFIGS/scripts
+set -gx TMUX_DIR $HOME/.tmux
+set -gx TMUX_CONF $HOME/.tmux/tmux.conf
 set -gx RANGER_LOAD_DEFAULT_RC "FALSE"
 set -gx QT_SCALE_FACTOR 1
 set -gx MANPATH /usr/local/man:/usr/local/share/man:/usr/share/man:/usr/man
 set -gx MANPAGER less
 # set -gx ANDROID_HOME /home/abhirup/Android/Sdk
 # set FLUTTER_BIN /home/abhirup/Documents/Boost_Codes/Flutter/flutter/bin
+set -gx JAVA_HOME /usr/lib/jvm/default-runtime/bin/java 
 set -gx GOPATH $HOME/go
 set -gx PATH $PATH $SCRIPTS $HOME/.local/bin $GOPATH/bin
 set -gx megadir $HOME/MEGAsync
@@ -152,6 +155,10 @@ alias rmpv="mpv --input-ipc-server=/tmp/mpvsocket"
 alias ampv="mpv --no-video"
 alias ympv="mpv --no-config --slang=en -ytdl-raw-options=write-auto-sub=,sub-lang=en"
 alias ytdl="youtube-dl --write-auto-sub --sub-lang en"
+alias tmux="tmux -2f $TMUX_CONF"
+# Auto-resurrecting Tmux state after boot
+alias mux='pgrep -vx tmux > /dev/null && tmux new -d -s delete-me && tmux run-shell $TMUX_DIR/plugins/tmux-resurrect/scripts/restore.sh && tmux kill-session -t delete-me && tmux attach || tmux attach'
+
 
 # Abbreviations
 # if not set -q abbrs_initialized
@@ -192,8 +199,8 @@ abbr ytd 'youtube-dl'
 # echo -n 'Done'
 # end
 
-# fish_vi_key_bindings
-fish_default_key_bindings
+fish_vi_key_bindings
+# fish_default_key_bindings
 #Swap CapsLock and Escape
 chcaps
 

@@ -59,6 +59,7 @@ set incsearch
 set ignorecase
 set smartcase
 set autochdir
+set hidden
 syntax on
 set foldmethod=expr
 set backspace=indent,eol,start                            " Fixes backspace
@@ -187,6 +188,36 @@ let g:python3_host_prog = "/usr/bin/python3"
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 
 " nnoremap <leader>p :pclose<CR>
+" Uncomment when in WSL/ Ubuntu
+"let g:python3_host_prog = "/home/abhirup/Software/intelpython3/bin/python"
+"let g:python_host_prog = "/usr/bin/python2"
+
+" " Configuring deoplete
+let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#var('omni', 'input_patterns', {
+"            \ 'tex': g:vimtex#re#deoplete
+"            \})
+" Pass a dictionary to set multiple options
+call deoplete#custom#option({
+            \ 'auto_complete_delay': 20,
+            \ 'smart_case': v:true,
+            \ })
+" Disable the candidates in Comment/String syntaxes.
+call deoplete#custom#source('_',
+            \ 'disabled_syntaxes', ['Comment', 'String'])
+call deoplete#custom#source('LanguageClient',
+            \ 'min_pattern_length',
+            \ 2)
+call deoplete#custom#option('sources', {
+            \ 'cpp': ['LanguageClient'],
+            \ 'c': ['LanguageClient'],
+            \ 'python': ['deoplete-jedi', 'ale'],
+            \})
+" Configuring LanguageClient
+let g:LanguageClient_serverCommands={
+            \ 'cpp': ['/usr/bin/ccls'],
+            \ 'c': ['/usr/bin/ccls'],
+            \}
 
 " Configuring Coc.nvim
 source ~/.config/nvim/setup-coc.vim

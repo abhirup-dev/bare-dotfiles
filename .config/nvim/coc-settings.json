@@ -1,5 +1,9 @@
 {
-    "languageserver": {
+  "suggest.enablePreview": true,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.timeout": 2000,
+  "suggest.minTriggerInputLength": 3,
+  "languageserver": {
         "ccls": {
             "command": "ccls",
             "filetypes": [
@@ -29,4 +33,4 @@
         }
     },
     "python.jediPath": "/home/abhirup/.local/lib/python3.5/site-packages"
-    }
+}
