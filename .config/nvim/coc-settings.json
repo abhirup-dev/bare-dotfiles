@@ -18,6 +18,12 @@
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
+                },
+                "clang": {
+                    // make sure you have installed commandLineTools
+                    "extraArgs": [
+                        "-std=c++17"
+                    ]
                 }
             }
         }
