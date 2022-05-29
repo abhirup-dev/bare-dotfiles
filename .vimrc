@@ -430,3 +430,5 @@ else
     let &t_EI.="\e[1 q"
     let &t_te.="\e[0 q"
 endif
+" vimgrep searching and cope displaying
+hi Search cterm=None ctermfg=white ctermbg=green

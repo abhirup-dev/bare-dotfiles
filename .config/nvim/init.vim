@@ -37,11 +37,12 @@ Plug 'tpope/vim-surround'
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
-" Plug 'junegunn/goyo.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
 Plug 'ryanoasis/vim-devicons'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 " Plug 'elzr/vim-json', {'for': 'json'}
 " Plug 'SidOfc/mkdx'
 " Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install', 'for': 'markdown' }
@@ -314,6 +315,10 @@ nmap <leader>Nt :NERDTree
 nmap <leader>nf :NERDTreeFind<CR>| " Open NERDTree to buffer
 nmap <F8> :TagbarToggle<CR>
 nmap <leader>go :Goyo<CR>
+
+" Hexokinase
+let g:Hexokinase_highlighters = ['background']
+
 " FZF
 nnoremap <leader>ff :Files<CR>
 nnoremap <C-f> :Rg<CR>

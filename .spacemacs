@@ -38,7 +38,7 @@ values."
      ;; ----------------------------------------------------------------
      html
      emoji
-     go
+     ;; go
      (c-c++ :variables
             ;; c-c++-backend 'rtags
             ;; c-c++-enable-rtags-completion nil
@@ -46,10 +46,11 @@ values."
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-format-on-save t
             )
-     (gtags :variables gtags-enable-by-default nil)
+     (gtags :variables gtags-enable-by-default t)
+     lsp
      cmake
      python
-     vimscript
+     ;; vimscript
      markdown
      latex
      bibtex
